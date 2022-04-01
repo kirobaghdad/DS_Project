@@ -1,0 +1,20 @@
+Timeline:
+	First Step: Friday and Saturday
+		Cargo Class (Kirollos Baghdad)
+		Truck Class (Mostafa Elsayed)
+		UI Class    (Mohamed Maher)
+	
+	Second Step: Sunday and Monday
+		Event Class (Kirollos Baghdad)
+		Promotion Class (Mohamed Maher)
+		Preparation Class (Mostafa Elsayed)
+		Cancellation Class (Kirollos Bagdad)
+	
+	Third Step: Tuesday
+		Company Class (Kirollos Baghdad & Mostafa Elsayed)
+		
+		
+Topics to search for:
+	1- Naming Conventitions
+	2- Constant Reference vs by value
+	3- Stylish Comments
