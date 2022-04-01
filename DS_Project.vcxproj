@@ -140,12 +140,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Cargo.cpp" />
+    <ClCompile Include="Event.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Preparation.cpp" />
     <ClCompile Include="Time.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cargo.h" />
+    <ClInclude Include="Event.h" />
     <ClInclude Include="NT.h" />
+    <ClInclude Include="Preparation.h" />
     <ClInclude Include="ST.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="Truck.h" />
