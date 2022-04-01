@@ -26,5 +26,11 @@
     <ClInclude Include="VT.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ST.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NT.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

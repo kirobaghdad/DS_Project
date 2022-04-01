@@ -142,6 +142,8 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="NT.h" />
+    <ClInclude Include="ST.h" />
     <ClInclude Include="Truck.h" />
     <ClInclude Include="VT.h" />
   </ItemGroup>
