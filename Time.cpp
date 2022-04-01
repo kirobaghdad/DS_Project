@@ -35,3 +35,15 @@ int Time::getDay() const {
 int Time::getHour() const {
 	return Hour;
 }
+
+void Time::operator = (const char*& time) {
+	int d = time[0] - 52;
+	if (d >= 0)
+		Day = d;
+	else Day = 0;
+
+	int h = time[2] - 52;
+	if (h >= 0)
+		Hour = h;
+	else Hour = 0;
+}

@@ -1,40 +1,56 @@
-#include "Time.h"
+#include "Cargo.h"
+#include <cctype>
 
+Cargo::Cargo(Time pt, int LU, int DD, int C, int id, char CT) {
+	preparationTime = pt;
 
-Time::Time() {
-	Day = 0;
-	Hour = 0;
+	if (LU > 0)
+		LU_Time = LU;
+	else
+		LU_Time = 1;
+
+	if (id > 0)
+		ID = id;
+	else
+		ID = 1;
+
+	if (DD > 0)
+		deliveryDistance = DD;
+	else deliveryDistance = 1;
+
+	if (CT != 'N' && CT != 'S' && CT != 'V')
+		cargoType = 'N';
+	else
+		cargoType = CT;
+
+	if (C > 0)
+		cost = C;
+	else cost = 1;
+
+	isDelivered = false;
+	waitingTime = 0;
+	isWaiting = true;
+	isMoving = false;
+
+	
 }
 
-Time::Time(int D, int H) {
-	if (D >= 0)
-		Day = D;
-	else Day = 0;
-
-	if (H >= 0)
-		Hour = H;
-	else Hour = 0;
+int Cargo::getCost()const {
+	return cost;
 }
 
-void Time::setDay(int D) {
-	if (D >= 0)
-		Day = D;
-	else Day = 0;
+int Cargo::getdeliveryDistance()const {
+	return deliveryDistance;
 }
 
-void Time::setHour(int H) {
-	if (H >= 0)
-		Hour = H;
-	else Hour = 0;
+int Cargo::getLU_Time()const {
+	return LU_Time;
 }
 
-int Time::getDay() const {
-	return Day;
+char Cargo::getCargoType() const {
+	return cargoType;
 }
 
-int Time::getHour() const {
-	return Hour;
+Time Cargo::getPT() const {
+	return preparationTime;
 }
-
-
-

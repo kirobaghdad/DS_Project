@@ -7,6 +7,7 @@ private:
 public:
 	Time();
 	Time(int, int);
+	void operator = (const char*& );
 	void setDay(int D);
 	void setHour(int H);
 	int getDay() const;
