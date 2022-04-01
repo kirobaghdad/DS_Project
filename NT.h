@@ -8,7 +8,9 @@ class NT : public Truck
 	static int Speed;  //  Speed
 
 public:
-
+	//============================== constructor ==============================//
+	NT(int mt) : Truck(mt)
+	{}
 	//============================== Seters ==============================//
 	bool SetTC(int tc)
 	{

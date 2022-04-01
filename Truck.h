@@ -8,11 +8,12 @@ class Truck   // absruct class
 
 public :
 
-	Truck()
+	Truck(int mt)
 	{
+        SetMaintenancetime(mt);
+		SetDI(0);
 		NumofJourneys = 0;
 	}
-
 	//============================== Seters ==============================// 
 	
 	bool  SetMaintenancetime(int mt)

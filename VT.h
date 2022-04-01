@@ -6,7 +6,9 @@ class VT: public Truck
 	static int Speed;  //  Speed
 
 public:
-
+	//============================== constructor ==============================//
+	VT(int mt) : Truck(mt)
+	{}
 	//============================== Seters ==============================//
 	bool SetTC(int tc)
 	{
