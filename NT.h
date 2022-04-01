@@ -1,6 +1,8 @@
 #pragma once
 #include"Truck.h"
-class VT: public Truck
+
+
+class NT : public Truck
 {
 	static int TC;      // Truck Capacity
 	static int Speed;  //  Speed
@@ -15,7 +17,7 @@ public:
 		TC = tc;
 		return true;
 	}
-	bool SetSpeed(int sp) 
+	bool SetSpeed(int sp)
 	{
 		if (sp < 0)
 			return false;
@@ -31,5 +33,12 @@ public:
 	{
 		return Speed;
 	}
+
+
+
+
+
+
+
 
 };
