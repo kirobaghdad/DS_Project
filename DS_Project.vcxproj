@@ -144,6 +144,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Preparation.cpp" />
     <ClCompile Include="Time.cpp" />
+    <ClCompile Include="UI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cargo.h" />
@@ -153,6 +154,7 @@
     <ClInclude Include="ST.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="Truck.h" />
+    <ClInclude Include="UI.h" />
     <ClInclude Include="VT.h" />
   </ItemGroup>
   <ItemGroup>
