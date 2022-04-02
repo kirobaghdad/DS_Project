@@ -132,6 +132,7 @@ bool UI::checkForEvent()
 		case 'R':
 			IN >> cargoTyp;
 			IN >> day;
+			IN.ignore();
 			IN >> hours;
 			eventTime.setDay(day);
 			eventTime.setHour(hours);
@@ -142,6 +143,7 @@ bool UI::checkForEvent()
 			break;
 		case 'X':
 			IN >> day;
+			IN.ignore();
 			IN >> hours;
 			eventTime.setDay(day);
 			eventTime.setHour(hours);
@@ -149,6 +151,7 @@ bool UI::checkForEvent()
 			break;
 		case 'P':
 			IN >> day;
+			IN.ignore();
 			IN >> hours;
 			eventTime.setDay(day);
 			eventTime.setHour(hours);
