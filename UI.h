@@ -9,28 +9,29 @@ using namespace std;
 class UI
 {
 	ifstream IN;
-	int numOfTrucks[3];
-	int truckSpeed[3];
-	int capacity[3];
-	int numOfJourney;
-	int checkupDuration[3];
-	int autoPromotionLimit;
+	int numOfTrucks[3];  //no. of trucks of each type (N, S, V)
+	int truckSpeed[3];   //truck speeds of each type (km/h)
+	int capacity[3];     //Capacity of each truck type (N, S, V)
+	int numOfJourney;    //no. of journeys before checkup
+	int checkupDuration[3];    //checkup durations for each type (N, S, V)
+	int autoPromotionLimit;    //the number of hours after which a normal cargo is automatically promoted to a VIP cargo
 	int maxW;
-	int numOfEvents;
+	int numOfEvents;     
 	int currentNumOfEvents;
 	char eventTyp;
 	char cargoTyp;
 	Time eventTime;
-	int ID;
-	int DIST;
+	int ID;      //is a unique sequence number that identifies each cargo
+	int DIST;    //is the cargo distance
 	int loadTime;
 	int cost;
-	int extraMoney;
+	int extraMoney;   //Extra money for promotion
 
 
 public:
 	UI();
 	~UI();
+	               //============================== Getters ==============================// 
 	int getNumOfNT();
 	int getNumOfST();
 	int getNumOfVT();

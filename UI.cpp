@@ -3,13 +3,6 @@
 UI::UI()
 {
 	IN.open("Input.text");  //Open Input File
-	if (IN.fail())
-	{
-		cout << "the filedid not open" << endl;
-	}
-	else {
-		cout << "the file open" << endl;
-	}
 	IN >> numOfTrucks[0];
 	IN >> numOfTrucks[1];
 	IN >> numOfTrucks[2];
@@ -32,13 +25,6 @@ UI::UI()
 UI::~UI()
 {
 	IN.close();
-	if (IN.fail())
-	{
-		cout << "did not close";
-	}
-	else {
-		cout << "success";
-	}
 }
 
 int UI::getNumOfNT()
