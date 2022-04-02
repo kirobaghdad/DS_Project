@@ -150,6 +150,8 @@
   <ItemGroup>
     <ClInclude Include="Cargo.h" />
     <ClInclude Include="Event.h" />
+    <ClInclude Include="Linked_list.h" />
+    <ClInclude Include="Node.h" />
     <ClInclude Include="NT.h" />
     <ClInclude Include="Preparation.h" />
     <ClInclude Include="Promotion.h" />
