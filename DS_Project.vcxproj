@@ -150,9 +150,12 @@
   <ItemGroup>
     <ClInclude Include="Cargo.h" />
     <ClInclude Include="Event.h" />
+    <ClInclude Include="LinkedQueue.h" />
+    <ClInclude Include="Node.h" />
     <ClInclude Include="NT.h" />
     <ClInclude Include="Preparation.h" />
     <ClInclude Include="Promotion.h" />
+    <ClInclude Include="QueueADT.h" />
     <ClInclude Include="ST.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="Truck.h" />

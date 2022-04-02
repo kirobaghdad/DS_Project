@@ -2,9 +2,11 @@
 #include "Preparation.h"
 #include "Cargo.h"
 using namespace std;
-Preparation::Preparation(Time T, int lu, int d, int c,int id,char Type):Event(T,lu,d,id,c)
+Preparation::Preparation(Time T, int lu, int d, int c,int id,char Type):Event(T,id,c)
 {
 	TYP = Type;
+	LU_Time = lu;
+	deliveryDistance = d;
 }
 
 void Preparation::Execute()
