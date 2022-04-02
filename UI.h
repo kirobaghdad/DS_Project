@@ -3,8 +3,6 @@
 #include <fstream>
 using std::ifstream;
 
-#include <iostream>
-using namespace std;
 
 class UI
 {
@@ -23,7 +21,7 @@ class UI
 	Time eventTime;
 	int ID;      //is a unique sequence number that identifies each cargo
 	int DIST;    //is the cargo distance
-	int loadTime;
+	int LU_Time;
 	int cost;
 	int extraMoney;   //Extra money for promotion
 
@@ -54,7 +52,7 @@ public:
 	Time geteventTime();
 	int getID();
 	int getDIST();
-	int getloadTime();
+	int getLU_Time();
 	int getcost();
 	int getextraMoney();
 };

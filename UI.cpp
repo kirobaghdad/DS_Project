@@ -124,7 +124,7 @@ bool UI::checkForEvent()
 			eventTime.setHour(hours);
 			IN >> ID;
 			IN >> DIST;
-			IN >> loadTime;
+			IN >> LU_Time;
 			IN >> cost;
 			break;
 		case 'X':
@@ -180,9 +180,9 @@ int UI::getDIST()
 	return DIST;
 }
 
-int UI::getloadTime()
+int UI::getLU_Time()
 {
-	return loadTime;
+	return LU_Time;
 }
 
 int UI::getcost()

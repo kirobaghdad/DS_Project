@@ -143,6 +143,7 @@
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Preparation.cpp" />
+    <ClCompile Include="Promotion.cpp" />
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="UI.cpp" />
   </ItemGroup>
@@ -151,6 +152,7 @@
     <ClInclude Include="Event.h" />
     <ClInclude Include="NT.h" />
     <ClInclude Include="Preparation.h" />
+    <ClInclude Include="Promotion.h" />
     <ClInclude Include="ST.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="Truck.h" />
