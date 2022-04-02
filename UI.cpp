@@ -16,6 +16,9 @@ UI::UI()
 	IN >> truckSpeed[0];
 	IN >> truckSpeed[1];
 	IN >> truckSpeed[2];
+	IN >> capacity[0];
+	IN >> capacity[1];
+	IN >> capacity[2];
 	IN >> numOfJourney;
 	IN >> checkupDuration[0];
 	IN >> checkupDuration[1];
@@ -83,12 +86,32 @@ int UI::getVTCapacity()
 	return capacity[2];
 }
 
-int UI::getautoPromotionLimit()
+int UI::getNumOfJourney()
+{
+	return numOfJourney;
+}
+
+int UI::getNTCheckupDuration()
+{
+	return checkupDuration[0];
+}
+
+int UI::getSTCheckupDuration()
+{
+	return checkupDuration[1];
+}
+
+int UI::getVTCheckupDuration()
+{
+	return checkupDuration[2];
+}
+
+int UI::getAutoPromotionLimit()
 {
 	return autoPromotionLimit;
 }
 
-int UI::getmaxW()
+int UI::getMaxW()
 {
 	return maxW;
 }
@@ -98,15 +121,15 @@ int UI::getNumOfEvents()
 	return numOfEvents;
 }
 
-void UI::checkForEvent()
+bool UI::checkForEvent()
 {
 	if (currentNumOfEvents<=numOfEvents)
 	{
+		int day, hours;
 		IN >> eventTyp;
 		switch (eventTyp)
 		{
 		case 'R':
-			int day, hours;
 			IN >> cargoTyp;
 			IN >> day;
 			IN >> hours;
@@ -135,6 +158,11 @@ void UI::checkForEvent()
 		default:
 			break;
 		}
+		return true;
+	}
+	else
+	{
+		return false;
 	}
 }
 

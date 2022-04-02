@@ -40,10 +40,14 @@ public:
 	int getNTCapacity();
 	int getSTCapacity();
 	int getVTCapacity();
-	int getautoPromotionLimit();
-	int getmaxW();
+	int getNumOfJourney();
+	int getNTCheckupDuration();
+	int getSTCheckupDuration();
+	int getVTCheckupDuration();
+	int getAutoPromotionLimit();
+	int getMaxW();
 	int getNumOfEvents();
-	void checkForEvent();
+	bool checkForEvent();
 	char getEventTyp();
 	char getcargoTyp();
 	Time geteventTime();
