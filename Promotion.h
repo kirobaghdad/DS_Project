@@ -4,8 +4,9 @@
 
 class Promotion : public Event
 {
-	int ID;
+	int extraMoney;
 public:
-	Promotion();
+	Promotion(char Typ,Time eventTime,int ID,int extra);
+	void Execute();
 };
 

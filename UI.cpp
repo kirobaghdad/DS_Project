@@ -2,7 +2,9 @@
 
 UI::UI()
 {
-	IN.open("Input.text");  //Open Input File
+	IN.open("Input.txt");  //Open Input File
+	Out.open("Output.txt");  //Open Output File
+	         //============================== Reading Inputs ==============================//
 	IN >> numOfTrucks[0];
 	IN >> numOfTrucks[1];
 	IN >> numOfTrucks[2];
@@ -26,6 +28,8 @@ UI::~UI()
 {
 	IN.close();
 }
+
+                //============================== Getters ==============================// 
 
 int UI::getNumOfNT()
 {
@@ -193,5 +197,21 @@ int UI::getcost()
 int UI::getextraMoney()
 {
 	return extraMoney;
+}
+
+          //============================== Print on Output File ==============================//
+
+void UI::Print()
+{
+	Out << "CDT CID PT WT TID \n";
+
+	//get the number of delivered cargo from cargo list
+	//write info for each cargo  in ascending order by CDT 
+	
+	Out << ".............................. \n";
+	Out << ".............................. \n";
+
+	//get number of each typ of cargo from cagos list and print it
+	//get number of each typ of trucks from trucks list then print it
 }
 

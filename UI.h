@@ -2,10 +2,11 @@
 #include"Time.h"
 #include <fstream>
 using std::ifstream;
-
+using std::ofstream;
 
 class UI
 {
+	ofstream Out;
 	ifstream IN;
 	int numOfTrucks[3];  //no. of trucks of each type (N, S, V)
 	int truckSpeed[3];   //truck speeds of each type (km/h)
@@ -46,7 +47,7 @@ public:
 	int getAutoPromotionLimit();
 	int getMaxW();
 	int getNumOfEvents();
-	bool checkForEvent();
+	bool checkForEvent();         //Check if there more events left and read there information if found
 	char getEventTyp();
 	char getcargoTyp();
 	Time geteventTime();
@@ -55,5 +56,7 @@ public:
 	int getLU_Time();
 	int getcost();
 	int getextraMoney();
+	            //============================== Print on Output File ==============================//
+	void Print();
 };
 
