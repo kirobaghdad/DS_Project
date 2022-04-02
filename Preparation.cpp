@@ -1,7 +1,8 @@
+#include<iostream>
 #include "Preparation.h"
 #include "Cargo.h"
-
-Preparation::Preparation(Time T, int lu, int d, int c,char Type):Event(T,lu,d,c)
+using namespace std;
+Preparation::Preparation(Time T, int lu, int d, int c,int id,char Type):Event(T,lu,d,id,c)
 {
 	TYP = Type;
 }
@@ -9,25 +10,24 @@ Preparation::Preparation(Time T, int lu, int d, int c,char Type):Event(T,lu,d,c)
 void Preparation::Execute()
 {
 	//should create a new cargo and add it to the appropriate list
- 
+	Cargo* prt = NULL;
 	switch (TYP)
 	{
 	case 'N':
-
+		 prt = new Cargo(EventTime, LU_Time, deliveryDistance, cost,ID,'N');
+		//add it to the appropriate list
 		break;
 	case 'S':
-
+		 prt = new Cargo(EventTime, LU_Time, deliveryDistance, cost, ID, 'S');
+		//add it to the appropriate list
 		break;
 	case 'V':
-
+		 prt = new Cargo(EventTime, LU_Time, deliveryDistance, cost, ID, 'V');
+		//add it to the appropriate list
 		break;
 
 	default:
-      
-
+		cout << "Invalid Type Of Cargo" << endl;
 		break;
 	}
-
-
-
 }
