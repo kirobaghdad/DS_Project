@@ -1,6 +1,6 @@
 #include "Promotion.h"
 
-Promotion::Promotion(Time eventTime,int c,int ID, int extra):Event( eventTime ,c , ID)
+Promotion::Promotion(Time eventTime,int ID, int extra):Event( eventTime , ID)
 {
 	extraMoney = extra;
 }
