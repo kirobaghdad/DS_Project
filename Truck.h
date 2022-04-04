@@ -1,28 +1,19 @@
 #pragma once
 
-class Truck   // absruct class 
+class Truck   // abstract class 
 {    
-	int Maintenancetime;  //  in hours 
-	int DI;             //    in hours  The time a truck takes to deliver all its cargos. and com back to the company
-	int NumofJourneys; //     number of Journeys done with this truck  
-
+	int DI;             //    in hours  The time a truck takes to deliver all its cargos and come back to the company
+	int NumofJourneys; //     number of journeys done with this truck  
+	const int j;
 public :
 
-	Truck(int mt)
+	Truck(int J):j(J)
 	{
-        SetMaintenancetime(mt);
 		SetDI(0);
 		NumofJourneys = 0;
 	}
 	//============================== Setters ==============================// 
 	
-	bool  SetMaintenancetime(int mt)
-	{
-		if (mt < 0)
-			return false;
-		Maintenancetime = mt;
-		return true;
-	}
 	bool SetDI(int di)
 	{
 		if (di < 0)
@@ -37,10 +28,6 @@ public :
 	
 	//============================== Getters ==============================// 
 	
-	int GetMaintenancetime()
-	{
-		return Maintenancetime;
-	}
 	int GetDI() 
 	{
 		return DI;

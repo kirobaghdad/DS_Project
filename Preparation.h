@@ -9,7 +9,7 @@ class Preparation : public Event
 	char TYP;
 	int deliveryDistance;
 	int LU_Time;	//Time (in hours) to load/unload the cargo to/from the truck.
-
+	int cost;
 
 public:
 	Preparation(Time T, int lu, int d, int c, int id,char Type);

@@ -6,11 +6,9 @@ class Event
 {
 protected:
 	Time EventTime;
-	//the related cargo info
-	int cost;	 //The cost of delivering the cargo.
 	int ID;
 public:
-	Event(Time,int, int);
+	Event(Time, int);
 	virtual void Execute()=0;
 };
 

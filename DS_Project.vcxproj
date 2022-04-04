@@ -139,7 +139,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CancelEvent.cpp" />
     <ClCompile Include="Cargo.cpp" />
+    <ClCompile Include="Company.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Preparation.cpp" />
@@ -148,7 +150,9 @@
     <ClCompile Include="UI.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CancelEvent.h" />
     <ClInclude Include="Cargo.h" />
+    <ClInclude Include="Company.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="LinkedQueue.h" />
     <ClInclude Include="Node.h" />

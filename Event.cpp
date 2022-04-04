@@ -1,8 +1,7 @@
 #include "Event.h"
 
-Event::Event(Time T, int c, int id)
+Event::Event(Time T, int id)
 {
 	EventTime = T;
-	cost = c;	
 	ID = id;
 }
