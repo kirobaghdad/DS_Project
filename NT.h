@@ -37,8 +37,6 @@ public:
 		return Speed;
 	}
 
-
-
 };
-
-
+int NT::TC;
+int NT::Speed;
