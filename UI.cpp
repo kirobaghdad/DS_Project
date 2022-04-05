@@ -1,10 +1,5 @@
 #include "UI.h"
-#include "LinkedQueue.h"
-#include"Event.h"
-#include"Preparation.h"
-#include"Promotion.h"
-#include"CancelEvent.h"
-#include "Time.h"
+
 
 UI::UI(LinkedQueue<Event*> & E)
 {

@@ -1,6 +1,13 @@
 #pragma once
 #include"Time.h"
 #include <fstream>
+#include "LinkedQueue.h"
+#include"Event.h"
+#include"Preparation.h"
+#include"Promotion.h"
+#include"CancelEvent.h"
+#include "Time.h"
+
 using std::ifstream;
 using std::ofstream;
 
@@ -28,7 +35,7 @@ class UI
 	char x;
 
 public:
-	UI(LinkedQueue<Event*>& E);
+	UI(LinkedQueue <Event*>& E);
 	~UI();
 	               //============================== Getters ==============================// 
 	int getNumOfNT();

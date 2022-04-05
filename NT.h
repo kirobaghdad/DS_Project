@@ -1,13 +1,14 @@
 #pragma once
 #include"Truck.h"
 
-
+ 
 class NT : public Truck
 {
 	static int TC;      // Truck Capacity
 	static int Speed;  //  Speed
 
 public:
+	
 	//============================== constructor ==============================//
 	NT() 
 	{}
@@ -39,3 +40,5 @@ public:
 
 
 };
+
+
