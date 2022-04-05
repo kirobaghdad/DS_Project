@@ -9,17 +9,17 @@ class ST : public Truck
 public:
 
 	//============================== constructor ==============================//
-	ST(int mt):Truck(mt)
+	ST()
 	{}
 	//============================== Setters ==================================//
-	bool SetTC(int tc)
+	static bool SetTC(int tc)
 	{
 		if (tc < 0)
 			return false;
 		TC = tc;
 		return true;
 	}
-	bool SetSpeed(int sp)
+    static bool SetSpeed(int sp)
 	{
 		if (sp < 0)
 			return false;

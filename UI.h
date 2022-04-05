@@ -25,10 +25,10 @@ class UI
 	int LU_Time;
 	int cost;
 	int extraMoney;   //Extra money for promotion
-
+	char x;
 
 public:
-	UI();
+	UI(LinkedQueue<Event*>& E);
 	~UI();
 	               //============================== Getters ==============================// 
 	int getNumOfNT();

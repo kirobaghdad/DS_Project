@@ -12,23 +12,23 @@ Preparation::Preparation(Time T, int lu, int d, int c,int id,char Type):Event(T,
 	else cost = 1;
 }
 
-void Preparation::Execute()
+void Preparation::Execute(LinkedQueue<Cargo>& cn, LinkedQueue<Cargo>& cs, LinkedQueue<Cargo>& cv)
 {
 	//should create a new cargo and add it to the appropriate list
-	Cargo* prt = NULL;
+	Cargo* ptr = NULL;
 	switch (TYP)
 	{
 	case 'N':
-		 prt = new Cargo(EventTime, LU_Time, deliveryDistance, cost,ID,'N');
-		//add it to the appropriate list
-		break;
+		 ptr = new Cargo(EventTime, LU_Time, deliveryDistance, cost,ID,'N');
+		 cn.enqueue(*ptr);
+		 break;
 	case 'S':
-		 prt = new Cargo(EventTime, LU_Time, deliveryDistance, cost, ID, 'S');
-		//add it to the appropriate list
+		 ptr = new Cargo(EventTime, LU_Time, deliveryDistance, cost, ID, 'S');
+		 cs.enqueue(*ptr);
 		break;
 	case 'V':
-		 prt = new Cargo(EventTime, LU_Time, deliveryDistance, cost, ID, 'V');
-		//add it to the appropriate list
+		 ptr = new Cargo(EventTime, LU_Time, deliveryDistance, cost, ID, 'V');
+		 cv.enqueue(*ptr);
 		break;
 
 	default:

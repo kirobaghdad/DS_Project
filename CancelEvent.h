@@ -6,6 +6,6 @@ class CancelEvent :
 private:
 
 public:
-    void Execute(Time, int);
+    void Execute(Time, int, LinkedQueue<Cargo>& cn, LinkedQueue<Cargo>& cs, LinkedQueue<Cargo>& cv);
 };
 

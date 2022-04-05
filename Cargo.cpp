@@ -35,6 +35,10 @@ Cargo::Cargo(Time pt, int LU, int DD, int C, int id, char CT) {
 	
 }
 
+Cargo::Cargo()
+{
+}
+
 int Cargo::getCost()const {
 	return cost;
 }

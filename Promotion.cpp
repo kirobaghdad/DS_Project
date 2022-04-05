@@ -5,7 +5,7 @@ Promotion::Promotion(Time eventTime,int ID, int extra):Event( eventTime , ID)
 	extraMoney = extra;
 }
 
-void Promotion::Execute()
+void Promotion::Execute(LinkedQueue<Cargo>& cn, LinkedQueue<Cargo>& cs, LinkedQueue<Cargo>& cv)
 {
 	//find the cargo in linked list
 	//check if it is loaded or not

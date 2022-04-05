@@ -7,17 +7,17 @@ class VT: public Truck
 
 public:
 	//============================== constructor ==============================//
-	VT(int mt) : Truck(mt)
+	VT() 
 	{}
 	//============================== Setters ==============================//
-	bool SetTC(int tc)
+	static bool SetTC(int tc)
 	{
 		if (tc < 0)
 			return false;
 		TC = tc;
 		return true;
 	}
-	bool SetSpeed(int sp) 
+    static bool SetSpeed(int sp) 
 	{
 		if (sp < 0)
 			return false;

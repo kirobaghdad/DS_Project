@@ -1,6 +1,12 @@
 #include "UI.h"
+#include "LinkedQueue.h"
+#include"Event.h"
+#include"Preparation.h"
+#include"Promotion.h"
+#include"CancelEvent.h"
+#include "Time.h"
 
-UI::UI()
+UI::UI(LinkedQueue<Event*> & E)
 {
 	IN.open("Input.txt");  //Open Input File
 	Out.open("Output.txt");  //Open Output File
@@ -22,6 +28,37 @@ UI::UI()
 	IN >> maxW;
 	IN >> numOfEvents;
 	currentNumOfEvents = 0;
+	
+	Event* ptr = NULL;
+	Time t;
+	int lu,c,id,d,h,day;
+	char typ;
+
+	for (int i = 0; i < numOfEvents; i++)
+	{
+		IN >> x;
+		switch (x)
+		{
+		case 'R':
+			IN >> typ;	IN >> day; IN >> h;	IN >> id; IN >> d; IN >> lu; IN >> c;
+			t.setDay(day); t.setHour(h);
+			ptr = new Preparation(t, lu, d, c, id, typ);
+			E.enqueue(ptr);
+		case 'X':
+
+
+		case'P':
+
+
+		default:
+			break;
+		}
+
+
+
+
+
+	}
 }
 
 UI::~UI()
