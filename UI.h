@@ -23,19 +23,10 @@ class UI
 	int autoPromotionLimit;    //the number of hours after which a normal cargo is automatically promoted to a VIP cargo
 	int maxW;
 	int numOfEvents;     
-	int currentNumOfEvents;
-	char eventTyp;
-	char cargoTyp;
-	Time eventTime;
-	int ID;      //is a unique sequence number that identifies each cargo
-	int DIST;    //is the cargo distance
-	int LU_Time;
-	int cost;
-	int extraMoney;   //Extra money for promotion
-	char x;
+	 
 
 public:
-	UI(LinkedQueue <Event*>& E);
+	UI();
 	~UI();
 	               //============================== Getters ==============================// 
 	int getNumOfNT();
@@ -54,16 +45,9 @@ public:
 	int getAutoPromotionLimit();
 	int getMaxW();
 	int getNumOfEvents();
-	bool checkForEvent();         //Check if there more events left and read there information if found
-	char getEventTyp();
-	char getcargoTyp();
-	Time geteventTime();
-	int getID();
-	int getDIST();
-	int getLU_Time();
-	int getcost();
-	int getextraMoney();
+	void loadEvents(LinkedQueue<Event*>& E);         //Check if there more events left and read there information if found
+
 	            //============================== Print on Output File ==============================//
-	void Print();
+	void Print(LinkedQueue<Cargo>& deliveredCargo);
 };
 

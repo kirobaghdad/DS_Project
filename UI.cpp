@@ -1,7 +1,7 @@
 #include "UI.h"
 
 
-UI::UI(LinkedQueue<Event*> & E)
+UI::UI()
 {
 	IN.open("Input.txt");  //Open Input File
 	Out.open("Output.txt");  //Open Output File
@@ -22,38 +22,6 @@ UI::UI(LinkedQueue<Event*> & E)
 	IN >> autoPromotionLimit;
 	IN >> maxW;
 	IN >> numOfEvents;
-	currentNumOfEvents = 0;
-	
-	Event* ptr = NULL;
-	Time t;
-	int lu,c,id,d,h,day;
-	char typ;
-
-	for (int i = 0; i < numOfEvents; i++)
-	{
-		IN >> x;
-		switch (x)
-		{
-		case 'R':
-			IN >> typ;	IN >> day; IN >> h;	IN >> id; IN >> d; IN >> lu; IN >> c;
-			t.setDay(day); t.setHour(h);
-			ptr = new Preparation(t, lu, d, c, id, typ);
-			E.enqueue(ptr);
-		case 'X':
-
-
-		case'P':
-
-
-		default:
-			break;
-		}
-
-
-
-
-
-	}
 }
 
 UI::~UI()
@@ -143,11 +111,20 @@ int UI::getNumOfEvents()
 	return numOfEvents;
 }
 
-bool UI::checkForEvent()
+void UI::loadEvents(LinkedQueue <Event*>& E)
 {
-	if (currentNumOfEvents<=numOfEvents)
+	Event* ptr = nullptr;
+	int day, hours;
+	for (int i = 0; i < numOfEvents; i++)
 	{
-		int day, hours;
+		char eventTyp;
+		char cargoTyp;
+		Time eventTime;
+		int ID;
+		int DIST;
+		int LU_Time;
+		int cost;
+		int extraMoney;
 		IN >> eventTyp;
 		switch (eventTyp)
 		{
@@ -162,6 +139,8 @@ bool UI::checkForEvent()
 			IN >> DIST;
 			IN >> LU_Time;
 			IN >> cost;
+			ptr = new Preparation(eventTime,LU_Time,DIST,cost,ID,cargoTyp);
+			E.enqueue(ptr);
 			break;
 		case 'X':
 			IN >> day;
@@ -170,6 +149,8 @@ bool UI::checkForEvent()
 			eventTime.setDay(day);
 			eventTime.setHour(hours);
 			IN >> ID;
+			//ptr=new CancelEvent();
+			E.enqueue(ptr);
 			break;
 		case 'P':
 			IN >> day;
@@ -179,71 +160,41 @@ bool UI::checkForEvent()
 			eventTime.setHour(hours);
 			IN >> ID;
 			IN >> extraMoney;
+			ptr = new Promotion(eventTime, ID, extraMoney);
+			E.enqueue(ptr);
 			break;
 		default:
 			break;
 		}
-		return true;
 	}
-	else
-	{
-		return false;
-	}
-}
-
-char UI::getEventTyp()
-{
-	return eventTyp;
-}
-
-char UI::getcargoTyp()
-{
-	return cargoTyp;
-}
-
-Time UI::geteventTime()
-{
-	return eventTime;
-}
-
-int UI::getID()
-{
-	return ID;
-}
-
-int UI::getDIST()
-{
-	return DIST;
-}
-
-int UI::getLU_Time()
-{
-	return LU_Time;
-}
-
-int UI::getcost()
-{
-	return cost;
-}
-
-int UI::getextraMoney()
-{
-	return extraMoney;
 }
 
           //============================== Print on Output File ==============================//
 
-void UI::Print()
+void UI::Print(LinkedQueue<Cargo>& DC)
 {
 	Out << "CDT CID PT WT TID \n";
-
-	//get the number of delivered cargo from cargo list
-	//write info for each cargo  in ascending order by CDT 
-	
-	Out << ".............................. \n";
-	Out << ".............................. \n";
-
+	Cargo temp;
+	Time T;
+	while (DC.dequeue(temp))
+	{
+		//T=temp.getcargoDelivreyTime();
+		Out << T.getDay() << ":" << T.getHour() << " ";
+		Out << temp.getID()<<" ";
+		T = temp.getPT();
+		Out << T.getDay() << ":" << T.getHour() << " ";
+		//T=temp.getWT();
+		Out << T.getDay() << ":" << T.getHour() << " ";
+		// the id of truck that delivered the cargo
+	}
+	Out << "……………………………………………… \n";
+	Out << "……………………………………………… \n";
 	//get number of each typ of cargo from cagos list and print it
+	
+
+
+
+
 	//get number of each typ of trucks from trucks list then print it
 }
 

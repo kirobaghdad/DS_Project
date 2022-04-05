@@ -24,6 +24,7 @@ public:
 
 	
 	LinkedQueue(const LinkedQueue<T>& LQ);
+	Node<T>* getFrontptr() const;
 };
 
 template <typename T>
@@ -121,5 +122,11 @@ LinkedQueue<T>::LinkedQueue(const LinkedQueue<T>& LQ)
 		backPtr = ptr;
 		NodePtr = NodePtr->getNext();
 	}
+}
+
+template<typename T>
+inline Node<T>* LinkedQueue<T>::getFrontptr() const
+{
+	return frontPtr;
 }
 

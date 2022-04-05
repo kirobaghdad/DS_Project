@@ -20,7 +20,11 @@ ST_Checkup_Duration (ST_Checkup_Duration >= 0 ? ST_Checkup_Duration : 0),
 VIPT_Checkup_Duration (VIPT_Checkup_Duration >= 0 ? VIPT_Checkup_Duration : 0)
 
 {   //////////////make UI object///////////////
-	UI userInterface(Events);
+	UI userInterface;
+	//////////////////////////////////////////
+
+	/////////////Load Events List/////////////
+	userInterface.loadEvents(Events);
 	//////////////////////////////////////////
 
 	currentTime.setDay(0);

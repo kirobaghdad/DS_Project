@@ -6,6 +6,7 @@
 #include"Event.h"
 #include"LinkedQueue.h"
 #include "Time.h"
+
 class Company
 {
 private:
@@ -20,13 +21,16 @@ private:
 	LinkedQueue<NT> NTs;
 	LinkedQueue<ST> STs;
 	LinkedQueue<VT> VTs;
-
+//Delivered Cargo
+	LinkedQueue<Cargo> deliveredCargo;
 
 	Time currentTime;
 	// Cargo num
 	const int NC_Num;
 	const int SC_Num;
 	const int VIPC_Num;
+	//Auto-promoted Cargos num
+	int PC_Num;
 	// Trucks num 
 	int NT_Num;
 	int ST_Num;
@@ -39,7 +43,7 @@ private:
 	int NT_Capacity;
 	int ST_Capacity;
 	int VIPT_Capacity;
-
+	//Duration
 	const int NT_Checkup_Duration;
 	const int ST_Checkup_Duration;
 	const int VIPT_Checkup_Duration;

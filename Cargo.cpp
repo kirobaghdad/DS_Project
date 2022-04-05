@@ -58,3 +58,13 @@ char Cargo::getCargoType() const {
 Time Cargo::getPT() const {
 	return preparationTime;
 }
+
+int Cargo::getID() const
+{
+	return ID;
+}
+
+bool Cargo::getIsWaiting() const
+{
+	return isWaiting;
+}

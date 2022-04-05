@@ -33,5 +33,7 @@ public:
 	int getdeliveryDistance() const; //deliveryDistance Getter
 	int getLU_Time() const; // 
 	Time getPT() const;
+	int getID() const;
+	bool getIsWaiting()const;
 
 };
