@@ -1,55 +1,59 @@
 #include "Company.h"
 #include "UI.h"
 
-Company::Company(int NC_Num, int SC_Num,int VIPC_Num, int NT_Speed,int ST_Speed,int VIPT_Speed,int NT_Capacity,int ST_Capacity,int VIPT_Capacity,int NT_Checkup_Duration,int ST_Checkup_Duration,int VIPT_Checkup_Duration)
+Company::Company()
 :
-NC_Num ( NC_Num >= 0 ? NC_Num : 0),
-SC_Num (SC_Num >= 0 ? SC_Num : 0),
-VIPC_Num (VIPC_Num >= 0 ? VIPC_Num : 0),
+NC_Num ( (UI::getNC_Num()) >= 0 ? UI::getNC_Num() : 0),
+SC_Num (UI::getSC_Num() >= 0 ? UI::getSC_Num() : 0),
+VIPC_Num (UI::getVIPC_Num() >= 0 ? UI::getVIPC_Num() : 0),
 
-//NT_Speed ( NT_Speed >= 0 ? NT_Speed : 0),
-//ST_Speed ( ST_Speed >= 0 ? ST_Speed : 0),
-//VIPT_Speed ( VIPT_Speed >= 0 ? VIPT_Speed : 0),
+NT_Num((UI::getNT_Num()) >= 0 ? UI::getNC_Num() : 0),
+ST_Num(UI::getST_Num() >= 0 ? UI::getSC_Num() : 0),
+VIPT_Num(UI::getVIPC_Num() >= 0 ? UI::getVIPC_Num() : 0),
 
-//NT_Capacity ( NT_Capacity >= 0 ? NT_Capacity : 0),
-//ST_Capacity ( ST_Capacity >= 0 ? ST_Capacity : 0),
-//VIPT_Capacity ( VIPT_Capacity >= 0 ? VIPT_Capacity : 0),
+NT_Speed ( UI::getNT_Speed() >= 0 ? UI::getNT_Speed() : 0),
+ST_Speed ( UI::getST_Speed() >= 0 ? UI::getST_Speed() >= 0 : 0),
+VIPT_Speed ( UI::getVIPT_Speed() >= 0 ? UI::getVIPT_Speed() : 0),
 
-NT_Checkup_Duration (NT_Checkup_Duration >= 0 ? NT_Checkup_Duration : 0),
-ST_Checkup_Duration (ST_Checkup_Duration >= 0 ? ST_Checkup_Duration : 0),
-VIPT_Checkup_Duration (VIPT_Checkup_Duration >= 0 ? VIPT_Checkup_Duration : 0)
+NT_Capacity ( UI::getNT_Capacity() >= 0 ? UI::getNT_Capacity() : 0),
+ST_Capacity ( UI::getST_Capacity() >= 0 ? UI::getST_Capacity() : 0),
+VIPT_Capacity ( UI::getVIPT_Capacity() >= 0 ? UI::getVIPT_Capacity() : 0),
 
-{   //////////////make UI object///////////////
-	UI userInterface;
-	//////////////////////////////////////////
+NT_Checkup_Duration (UI::getNT_Checkup_Duration() >= 0 ? UI::getNT_Checkup_Duration() : 0),
+ST_Checkup_Duration (UI::getST_Checkup_Duration() >= 0 ? UI::getST_Checkup_Duration() : 0),
+VIPT_Checkup_Duration (UI::getVIPT_Checkup_Duration() >= 0 ? UI::getVIPT_Checkup_Duration() : 0),
 
-	/////////////Load Events List/////////////
-	userInterface.loadEvents(Events);
+MaxW (UI::getMaxW() >=0 ? UI::getMaxW() : 0),
+
+AutoPromotionLimit (UI::getAutoPromotionLimit() >= 0 ? UI::getAutoPromotionLimit() : 0)
+{  
+	
+	PC_Num = 0;
 	//////////////////////////////////////////
 
 	currentTime.setDay(0);
 	currentTime.setHour(0);
 	//Get the constants of UI 
 	
-	//first: number of Trucks //////////////////
-	NT_Num =userInterface.getNumOfNT();
-	ST_Num =userInterface.getNumOfST();
-	VIPT_Num =userInterface.getNumOfVT();
+	////first: number of Trucks //////////////////
+	//NT_Num =userInterface.getNumOfNT();
+	//ST_Num =userInterface.getNumOfST();
+	//VIPT_Num =userInterface.getNumOfVT();
 	///////////////////////////////////////////
 	
 	//second: Speed //////////////////////////
-	NT_Speed = userInterface.getNTSpeed();
+	/*NT_Speed = userInterface.getNTSpeed();
 	VIPT_Speed = userInterface.getVTSpeed();
-	ST_Speed = userInterface.getSTSpeed();
+	ST_Speed = userInterface.getSTSpeed();*/
 	NT::SetSpeed(NT_Speed);
 	ST::SetSpeed(ST_Speed);
 	VT::SetSpeed(VIPT_Speed);
 	/////////////////////////////////////////////////
 	
 	//Third: Capacity///////////////////////////////
-	NT_Capacity = userInterface.getNTCapacity();
+	/*NT_Capacity = userInterface.getNTCapacity();
 	ST_Capacity = userInterface.getSTCapacity();
-	VIPT_Capacity = userInterface.getVTCapacity();
+	VIPT_Capacity = userInterface.getVTCapacity();*/
 	NT::SetTC(NT_Capacity);
 	ST::SetTC(ST_Capacity);
 	VT::SetTC(VIPT_Capacity);
@@ -72,16 +76,6 @@ VIPT_Checkup_Duration (VIPT_Checkup_Duration >= 0 ? VIPT_Checkup_Duration : 0)
 		VTs.enqueue(*R);
 	}
 	/////////////////////////////
-
-
-
-
-
-
-
-
-
-
 
 
 

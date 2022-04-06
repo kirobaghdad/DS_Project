@@ -1,6 +1,7 @@
 #pragma once
-#include"Time.h"
 #include <fstream>
+#include "Company.h"
+#include"Time.h"
 #include "LinkedQueue.h"
 #include"Event.h"
 #include"Preparation.h"
@@ -13,38 +14,39 @@ using std::ofstream;
 
 class UI
 {
-	ofstream Out;
-	ifstream IN;
-	int numOfTrucks[3];  //no. of trucks of each type (N, S, V)
-	int truckSpeed[3];   //truck speeds of each type (km/h)
-	int capacity[3];     //Capacity of each truck type (N, S, V)
-	int numOfJourney;    //no. of journeys before checkup
-	int checkupDuration[3];    //checkup durations for each type (N, S, V)
-	int autoPromotionLimit;    //the number of hours after which a normal cargo is automatically promoted to a VIP cargo
-	int maxW;
-	int numOfEvents;     
-	 
-
+private:
+	static ofstream Out;
+	static ifstream IN;
+ 	 
 public:
 	UI();
 	~UI();
 	               //============================== Getters ==============================// 
-	int getNumOfNT();
-	int getNumOfST();
-	int getNumOfVT();
-	int getNTSpeed();
-	int getSTSpeed();
-	int getVTSpeed();
-	int getNTCapacity();
-	int getSTCapacity();
-	int getVTCapacity();
-	int getNumOfJourney();
-	int getNTCheckupDuration();
-	int getSTCheckupDuration();
-	int getVTCheckupDuration();
-	int getAutoPromotionLimit();
-	int getMaxW();
-	int getNumOfEvents();
+	static int getNC_Num();
+	static int getSC_Num();
+	static int getVIPC_Num();
+
+	static int getNT_Num();
+	static int getST_Num();
+	static int getVIPT_Num();
+
+	static int getNT_Speed();
+	static int getST_Speed();
+	static int getVIPT_Speed();
+
+	static int getNT_Capacity();
+	static int getST_Capacity();
+	static int getVIPT_Capacity();
+
+	static int getNumOfJourney();
+
+	static int getNT_Checkup_Duration();
+	static int getST_Checkup_Duration();
+	static int getVIPT_Checkup_Duration();
+
+	static int getAutoPromotionLimit();
+	static int getMaxW();
+	static int getNumOfEvents();
 	void loadEvents(LinkedQueue<Event*>& E);         //Check if there more events left and read there information if found
 
 	            //============================== Print on Output File ==============================//

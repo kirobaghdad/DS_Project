@@ -32,25 +32,28 @@ private:
 	//Auto-promoted Cargos num
 	int PC_Num;
 	// Trucks num 
-	int NT_Num;
-	int ST_Num;
-	int VIPT_Num;
+	const int NT_Num;
+	const int ST_Num;
+	const int VIPT_Num;
 	// Truck Speed 
-	int NT_Speed;
-	int ST_Speed;
-	int VIPT_Speed;
+	const int NT_Speed;
+	const int ST_Speed;
+	const int VIPT_Speed;
 	// Capacity
-	int NT_Capacity;
-	int ST_Capacity;
-	int VIPT_Capacity;
+	const int NT_Capacity;
+	const int ST_Capacity;
+	const int VIPT_Capacity;
 	//Duration
 	const int NT_Checkup_Duration;
 	const int ST_Checkup_Duration;
 	const int VIPT_Checkup_Duration;
-
+	//Others_Variables
+	const int AutoPromotionLimit;
+	const int MaxW;
 
 public:
-	Company(int, int, int, int, int, int, int, int, int, int, int, int);
+	static const int NumOfEvents;
+	Company();
 	bool offHours();
 
 };

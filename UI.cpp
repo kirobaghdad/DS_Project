@@ -5,23 +5,7 @@ UI::UI()
 {
 	IN.open("Input.txt");  //Open Input File
 	Out.open("Output.txt");  //Open Output File
-	         //============================== Reading Inputs ==============================//
-	IN >> numOfTrucks[0];
-	IN >> numOfTrucks[1];
-	IN >> numOfTrucks[2];
-	IN >> truckSpeed[0];
-	IN >> truckSpeed[1];
-	IN >> truckSpeed[2];
-	IN >> capacity[0];
-	IN >> capacity[1];
-	IN >> capacity[2];
-	IN >> numOfJourney;
-	IN >> checkupDuration[0];
-	IN >> checkupDuration[1];
-	IN >> checkupDuration[2];
-	IN >> autoPromotionLimit;
-	IN >> maxW;
-	IN >> numOfEvents;
+
 }
 
 UI::~UI()
@@ -29,93 +13,144 @@ UI::~UI()
 	IN.close();
 }
 
-                //============================== Getters ==============================// 
+                //============================== File Readers ==============================// 
 
-int UI::getNumOfNT()
+int UI::getNC_Num()
 {
-	return numOfTrucks[0];
+	int NC_Num;
+	IN >> NC_Num;
+	return NC_Num;
 }
 
-int UI::getNumOfST()
+int UI::getSC_Num()
 {
-	return numOfTrucks[1];
+	int SC_Num;
+	IN >> SC_Num;
+	return SC_Num;
 }
 
-int UI::getNumOfVT()
+int UI::getVIPC_Num()
 {
-	return numOfTrucks[2];
+	int VIPC_Num;
+	IN >> VIPC_Num;
+	return VIPC_Num;
 }
 
-int UI::getNTSpeed()
+
+int UI::getNT_Num()
 {
-	return truckSpeed[0];
+	int NT_Num;
+	IN >> NT_Num;
+	return NT_Num;
 }
 
-int UI::getSTSpeed()
+int UI::getST_Num()
 {
-	return truckSpeed[1];
+	int ST_Num;
+	IN >> ST_Num;
+	return ST_Num;
 }
 
-int UI::getVTSpeed()
+int UI::getVIPT_Num()
 {
-	return truckSpeed[2];
+	int VIPT_Num;
+	IN >> VIPT_Num;
+	return VIPT_Num;
 }
 
-int UI::getNTCapacity()
+int UI::getNT_Speed()
 {
-	return capacity[0];
+	int NT_Speed;
+	IN >> NT_Speed;
+	return NT_Speed;
 }
 
-int UI::getSTCapacity()
+int UI::getST_Speed()
 {
-	return capacity[1];
+	int ST_Speed;
+	IN >> ST_Speed;
+	return ST_Speed;
 }
 
-int UI::getVTCapacity()
+int UI::getVIPT_Speed()
 {
-	return capacity[2];
+	int VIPT_Speed;
+	IN >> VIPT_Speed;
+	return VIPT_Speed;
 }
 
-int UI::getNumOfJourney()
+int UI::getNT_Capacity()
 {
-	return numOfJourney;
+	int NT_Capacity;
+	IN >> NT_Capacity;
+	return NT_Capacity;
 }
 
-int UI::getNTCheckupDuration()
+int UI::getST_Capacity()
 {
-	return checkupDuration[0];
+	int ST_Capacity;
+	IN >> ST_Capacity;
+	return ST_Capacity;
 }
 
-int UI::getSTCheckupDuration()
+int UI::getVIPT_Capacity()
 {
-	return checkupDuration[1];
+	int VIPT_Capacity;
+	IN >> VIPT_Capacity;
+	return VIPT_Capacity;
 }
 
-int UI::getVTCheckupDuration()
+//int UI::getNumOfJourney(int&)
+//{
+//	IN >> NT_Speed;
+//}
+int UI::getNT_Checkup_Duration()
 {
-	return checkupDuration[2];
+	int NT_Checkup_Duration;
+	IN >> NT_Checkup_Duration;
+	return NT_Checkup_Duration;
+}
+
+int UI::getST_Checkup_Duration()
+{
+	int ST_Checkup_Duration;
+	IN >> ST_Checkup_Duration;
+	return ST_Checkup_Duration;
+}
+
+int UI::getVIPT_Checkup_Duration()
+{
+	int VIPT_Checkup_Duration;
+	IN >> VIPT_Checkup_Duration;
+	return VIPT_Checkup_Duration;
 }
 
 int UI::getAutoPromotionLimit()
 {
-	return autoPromotionLimit;
+	int AutoPromotionLimit;
+	IN >> AutoPromotionLimit;
+	return AutoPromotionLimit;
 }
 
 int UI::getMaxW()
 {
-	return maxW;
+	int MaxW;
+	IN >> MaxW;
+	return MaxW;
 }
 
 int UI::getNumOfEvents()
 {
-	return numOfEvents;
+	int NumOfEvents;
+	IN >> NumOfEvents;
+	return NumOfEvents;
 }
 
 void UI::loadEvents(LinkedQueue <Event*>& E)
 {
 	Event* ptr = nullptr;
 	int day, hours;
-	for (int i = 0; i < numOfEvents; i++)
+	for (int i = 0; i < Company::NumOfEvents; i++)
 	{
 		char eventTyp;
 		char cargoTyp;
