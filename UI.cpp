@@ -15,131 +15,110 @@ UI::~UI()
 
                 //============================== File Readers ==============================// 
 
-int UI::getNC_Num()
-{
-	int NC_Num;
-	IN >> NC_Num;
-	return NC_Num;
-}
 
-int UI::getSC_Num()
-{
-	int SC_Num;
-	IN >> SC_Num;
-	return SC_Num;
-}
-
-int UI::getVIPC_Num()
-{
-	int VIPC_Num;
-	IN >> VIPC_Num;
-	return VIPC_Num;
-}
-
-
-int UI::getNT_Num()
+int UI::readNT_Num()
 {
 	int NT_Num;
 	IN >> NT_Num;
 	return NT_Num;
 }
 
-int UI::getST_Num()
+int UI::readST_Num()
 {
 	int ST_Num;
 	IN >> ST_Num;
 	return ST_Num;
 }
 
-int UI::getVIPT_Num()
+int UI::readVIPT_Num()
 {
 	int VIPT_Num;
 	IN >> VIPT_Num;
 	return VIPT_Num;
 }
 
-int UI::getNT_Speed()
+int UI::readNT_Speed()
 {
 	int NT_Speed;
 	IN >> NT_Speed;
 	return NT_Speed;
 }
 
-int UI::getST_Speed()
+int UI::readST_Speed()
 {
 	int ST_Speed;
 	IN >> ST_Speed;
 	return ST_Speed;
 }
 
-int UI::getVIPT_Speed()
+int UI::readVIPT_Speed()
 {
 	int VIPT_Speed;
 	IN >> VIPT_Speed;
 	return VIPT_Speed;
 }
 
-int UI::getNT_Capacity()
+int UI::readNT_Capacity()
 {
 	int NT_Capacity;
 	IN >> NT_Capacity;
 	return NT_Capacity;
 }
 
-int UI::getST_Capacity()
+int UI::readST_Capacity()
 {
 	int ST_Capacity;
 	IN >> ST_Capacity;
 	return ST_Capacity;
 }
 
-int UI::getVIPT_Capacity()
+int UI::readVIPT_Capacity()
 {
 	int VIPT_Capacity;
 	IN >> VIPT_Capacity;
 	return VIPT_Capacity;
 }
 
-//int UI::getNumOfJourney(int&)
+//int UI::readNumOfJourney(int&)
 //{
 //	IN >> NT_Speed;
 //}
-int UI::getNT_Checkup_Duration()
+int UI::readNT_Checkup_Duration()
 {
 	int NT_Checkup_Duration;
 	IN >> NT_Checkup_Duration;
 	return NT_Checkup_Duration;
 }
 
-int UI::getST_Checkup_Duration()
+int UI::readST_Checkup_Duration()
 {
 	int ST_Checkup_Duration;
 	IN >> ST_Checkup_Duration;
 	return ST_Checkup_Duration;
 }
 
-int UI::getVIPT_Checkup_Duration()
+int UI::readVIPT_Checkup_Duration()
 {
 	int VIPT_Checkup_Duration;
 	IN >> VIPT_Checkup_Duration;
 	return VIPT_Checkup_Duration;
 }
 
-int UI::getAutoPromotionLimit()
+int UI::readAutoPromotionLimit()
 {
 	int AutoPromotionLimit;
 	IN >> AutoPromotionLimit;
 	return AutoPromotionLimit;
 }
 
-int UI::getMaxW()
+int UI::readMaxW()
 {
 	int MaxW;
 	IN >> MaxW;
 	return MaxW;
 }
 
-int UI::getNumOfEvents()
+int UI::readNumOfEvents()
 {
 	int NumOfEvents;
 	IN >> NumOfEvents;
@@ -213,7 +192,7 @@ void UI::Print(LinkedQueue<Cargo>& DC)
 	Time T;
 	while (DC.dequeue(temp))
 	{
-		//T=temp.getcargoDelivreyTime();
+		//T=temp.readcargoDelivreyTime();
 		Out << T.getDay() << ":" << T.getHour() << " ";
 		Out << temp.getID()<<" ";
 		T = temp.getPT();

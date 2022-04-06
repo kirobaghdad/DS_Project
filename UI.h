@@ -22,31 +22,28 @@ public:
 	UI();
 	~UI();
 	               //============================== Getters ==============================// 
-	static int getNC_Num();
-	static int getSC_Num();
-	static int getVIPC_Num();
 
-	static int getNT_Num();
-	static int getST_Num();
-	static int getVIPT_Num();
+	static int readNT_Num();
+	static int readST_Num();
+	static int readVIPT_Num();
 
-	static int getNT_Speed();
-	static int getST_Speed();
-	static int getVIPT_Speed();
+	static int readNT_Speed();
+	static int readST_Speed();
+	static int readVIPT_Speed();
 
-	static int getNT_Capacity();
-	static int getST_Capacity();
-	static int getVIPT_Capacity();
+	static int readNT_Capacity();
+	static int readST_Capacity();
+	static int readVIPT_Capacity();
 
-	static int getNumOfJourney();
+	static int readNumOfJourney();
 
-	static int getNT_Checkup_Duration();
-	static int getST_Checkup_Duration();
-	static int getVIPT_Checkup_Duration();
+	static int readNT_Checkup_Duration();
+	static int readST_Checkup_Duration();
+	static int readVIPT_Checkup_Duration();
 
-	static int getAutoPromotionLimit();
-	static int getMaxW();
-	static int getNumOfEvents();
+	static int readAutoPromotionLimit();
+	static int readMaxW();
+	static int readNumOfEvents();
 	void loadEvents(LinkedQueue<Event*>& E);         //Check if there more events left and read there information if found
 
 	            //============================== Print on Output File ==============================//

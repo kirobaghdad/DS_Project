@@ -26,9 +26,9 @@ private:
 
 	Time currentTime;
 	// Cargo num
-	const int NC_Num;
-	const int SC_Num;
-	const int VIPC_Num;
+	int NC_Num;
+	int SC_Num;
+	int VIPC_Num;
 	//Auto-promoted Cargos num
 	int PC_Num;
 	// Trucks num 
