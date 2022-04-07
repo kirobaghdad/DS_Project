@@ -7,23 +7,23 @@ Promotion::Promotion(Time eventTime,int ID, int extra):Event( eventTime , ID)
 
 void Promotion::Execute(LinkedQueue<Cargo>& cn, LinkedQueue<Cargo>& cs, LinkedQueue<Cargo>& cv)
 {
+	bool promoted = false;
 	Node<Cargo>* ptr = cn.getFrontptr();
-	Cargo* temp = nullptr;
-	/*while (ptr)
+	Cargo Item;
+	while (ptr&&!promoted)     //find the cargo in Cargo list
 	{
-		temp = ptr->getItem();
-		if (temp->getID() == ID)
+		Item = ptr->getItem();
+		if (Item.getID()==ID)
 		{
-			if (temp->getIsWaiting())
+			if (Item.getIsWaiting())     //check if it is loaded or not
 			{
-				//temp->setTyp(V);
-				//delete the node from nc and put it in vc
+				char typ = 'v';
+				Item.setCargoTyp(typ);   //changing its typ from normal to vip
+				cn.remove(Item.getID());         //move it from normal list to vip list
+				cv.enqueue(Item);
+				promoted = true;
 			}
 		}
-	}*/
-
-	//find the cargo in linked list
-	//check if it is loaded or not
-	//if not change its typ from normal to vip
-	//and mov it from normal list to vip list
+		ptr = ptr->getNext();
+	}
 }

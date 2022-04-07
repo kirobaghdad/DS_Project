@@ -16,7 +16,7 @@ private:
 	int ID; //The cargo ID
 	char cargoType; //The type of the cargo (Normal, Special, or VIP).
 	bool isDelivered; 
-	int waitingTime; // Waiting Time (WT): The time from the preparation of a cargo until its truck starts to move to deliver it (in minutes).
+	Time waitingTime; // Waiting Time (WT): The time from the preparation of a cargo until its truck starts to move to deliver it.
 	bool isWaiting; 
 	bool isMoving;
 	Time cargoDelivreyTime;
@@ -35,5 +35,7 @@ public:
 	Time getPT() const;
 	int getID() const;
 	bool getIsWaiting()const;
-
+	void setCargoTyp(char typ);
+	Time getCargoDelivreyTime()const;
+	Time getWaitingTime()const;
 };

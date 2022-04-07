@@ -28,7 +28,6 @@ Cargo::Cargo(Time pt, int LU, int DD, int C, int id, char CT) {
 	else cost = 1;
 
 	isDelivered = false;
-	waitingTime = 0;
 	isWaiting = true;
 	isMoving = false;
 
@@ -67,4 +66,19 @@ int Cargo::getID() const
 bool Cargo::getIsWaiting() const
 {
 	return isWaiting;
+}
+
+void Cargo::setCargoTyp(char typ)
+{
+	cargoType = typ;
+}
+
+Time Cargo::getCargoDelivreyTime() const
+{
+	return cargoDelivreyTime;
+}
+
+Time Cargo::getWaitingTime() const
+{
+	return waitingTime;
 }

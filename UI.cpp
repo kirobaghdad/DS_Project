@@ -192,20 +192,23 @@ void UI::Print(LinkedQueue<Cargo>& DC)
 	Time T;
 	while (DC.dequeue(temp))
 	{
-		//T=temp.readcargoDelivreyTime();
+		T=temp.getCargoDelivreyTime();
 		Out << T.getDay() << ":" << T.getHour() << " ";
 		Out << temp.getID()<<" ";
 		T = temp.getPT();
 		Out << T.getDay() << ":" << T.getHour() << " ";
-		//T=temp.getWT();
+		T=temp.getWaitingTime();
 		Out << T.getDay() << ":" << T.getHour() << " ";
 		// the id of truck that delivered the cargo
 	}
 	Out << "……………………………………………… \n";
 	Out << "……………………………………………… \n";
 	//get number of each typ of cargo from cagos list and print it
-	
-
+	Out << "Cargos: " << Company::getNC_Num() + Company::getSC_Num() + Company::getVIPC_Num();
+	Out<<"[N: "<< Company::getNC_Num();
+	Out << ", S: "<< Company::getSC_Num();
+	Out << ", V: "<<Company::getVIPC_Num()<<"] \n";
+	Out << "Cargo Avg Wait = ";
 
 
 

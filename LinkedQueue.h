@@ -1,6 +1,6 @@
 #pragma once
 
-
+#include"Cargo.h"
 #include "Node.h"
 #include "QueueADT.h"
 #include <vector>
@@ -25,6 +25,7 @@ public:
 	
 	LinkedQueue(const LinkedQueue<T>& LQ);
 	Node<T>* getFrontptr() const;
+	bool remove(const int ID);
 };
 
 template <typename T>
@@ -128,5 +129,35 @@ template<typename T>
 inline Node<T>* LinkedQueue<T>::getFrontptr() const
 {
 	return frontPtr;
+}
+
+
+inline bool LinkedQueue<Cargo>::remove(const int ID)
+{
+	if (isEmpty())
+		return false;
+
+	Node<Cargo>* ptr = frontPtr;
+	if (ptr->getItem().getID() == ID)
+	{
+		frontPtr = frontPtr->getNext();
+
+		if (ptr == backPtr)
+			backPtr = nullptr;
+		return true;
+	}
+	ptr = ptr->getNext();
+	Node<Cargo>* prev = frontPtr;
+	while (ptr)
+	{
+		if (ptr->getItem().getID() == ID)
+		{
+			prev->setNext(ptr->getNext());
+			return true;
+		}
+		ptr = ptr->getNext();
+		prev = prev->getNext();
+	}
+	return false;
 }
 

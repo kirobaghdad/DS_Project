@@ -26,9 +26,9 @@ private:
 
 	Time currentTime;
 	// Cargo num
-	int NC_Num;
-	int SC_Num;
-	int VIPC_Num;
+	static int NC_Num;
+	static int SC_Num;
+	static int VIPC_Num;
 	//Auto-promoted Cargos num
 	int PC_Num;
 	// Trucks num 
@@ -55,6 +55,9 @@ public:
 	static const int NumOfEvents;
 	Company();
 	bool offHours();
+	static const int getNC_Num();
+	static int getSC_Num();
+	static int getVIPC_Num();
 
 };
 

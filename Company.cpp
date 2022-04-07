@@ -87,3 +87,18 @@ bool Company::offHours() {
 	}
 	else return false;
 }
+
+const int Company::getNC_Num()
+{
+	return NC_Num;
+}
+
+int Company::getSC_Num() 
+{
+	return SC_Num;
+}
+
+int Company::getVIPC_Num() 
+{
+	return VIPC_Num;
+}
