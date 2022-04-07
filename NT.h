@@ -38,5 +38,4 @@ public:
 	}
 
 };
-int NT::TC;
-int NT::Speed;
+

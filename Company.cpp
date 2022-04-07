@@ -1,6 +1,17 @@
 #include "Company.h"
 #include "UI.h"
 
+int ST::TC;
+int ST::Speed;
+int NT::TC;
+int NT::Speed;
+int VT::TC;
+int VT::Speed;
+
+int Company::NC_Num;
+int Company::VIPC_Num;
+int Company::SC_Num;
+
 Company::Company()
 	:
 NT_Num( UI::readNT_Num()/* >= 0 ? UI::readNT_Num() : 0*/),

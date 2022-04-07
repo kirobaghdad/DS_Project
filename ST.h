@@ -39,5 +39,3 @@ public:
 
 
 };
-int ST::TC;
-int ST::Speed;

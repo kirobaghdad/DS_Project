@@ -131,8 +131,8 @@ inline Node<T>* LinkedQueue<T>::getFrontptr() const
 	return frontPtr;
 }
 
-
-inline bool LinkedQueue<Cargo>::remove(const int ID)
+template <typename T>
+inline bool LinkedQueue<T>::remove(const int ID)
 {
 	if (isEmpty())
 		return false;

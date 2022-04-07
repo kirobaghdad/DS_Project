@@ -35,5 +35,3 @@ public:
 	}
 
 };
-int VT::TC;
-int VT::Speed;
