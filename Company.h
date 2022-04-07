@@ -50,14 +50,16 @@ private:
 	//Others_Variables
 	const int AutoPromotionLimit;
 	const int MaxW;
+	//Num Of Events
+	static int NumOfEvents;
 
 public:
-	static const int NumOfEvents;
 	Company();
 	bool offHours();
 	static const int getNC_Num();
 	static int getSC_Num();
 	static int getVIPC_Num();
+	static int getNumOfEvents();
 
 };
 

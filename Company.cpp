@@ -11,6 +11,7 @@ int VT::Speed;
 int Company::NC_Num;
 int Company::VIPC_Num;
 int Company::SC_Num;
+int Company::NumOfEvents;
 
 Company::Company()
 	:
@@ -112,4 +113,9 @@ int Company::getSC_Num()
 int Company::getVIPC_Num() 
 {
 	return VIPC_Num;
+}
+
+int Company::getNumOfEvents()
+{
+	return NumOfEvents;
 }

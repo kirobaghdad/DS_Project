@@ -1,5 +1,7 @@
 #include "UI.h"
 
+ofstream UI::Out;
+ifstream UI::IN;
 
 UI::UI()
 {
@@ -129,7 +131,7 @@ void UI::loadEvents(LinkedQueue <Event*>& E)
 {
 	Event* ptr = nullptr;
 	int day, hours;
-	for (int i = 0; i < Company::NumOfEvents; i++)
+	for (int i = 0; i < Company::getNumOfEvents(); i++)
 	{
 		char eventTyp;
 		char cargoTyp;
