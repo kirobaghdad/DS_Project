@@ -1,15 +1,19 @@
 #pragma once
-#include"NT.h"
-#include"ST.h"
-#include"VT.h"
 #include"Cargo.h"
 #include"Event.h"
+#include"Truck.h"
 #include"LinkedQueue.h"
 #include "Time.h"
+using std::ifstream;
+using std::ofstream;
+
 
 class Company
 {
 private:
+
+	static ofstream Out;
+	static ifstream IN;
 
 // Event List
 	LinkedQueue<Event*>  Events;
@@ -18,58 +22,70 @@ private:
 	LinkedQueue<Cargo> SC;
 	LinkedQueue<Cargo> VC;
 //Truck List 
-	LinkedQueue<NT> NTs;
-	LinkedQueue<ST> STs;
-	LinkedQueue<VT> VTs;
+	LinkedQueue<Truck> NTs;
+	LinkedQueue<Truck> STs;
+	LinkedQueue<Truck> VTs;
 //Delivered Cargo
 	LinkedQueue<Cargo> deliveredCargo;
 
 	Time currentTime;
 	// Cargo num
-	static int NC_Num;
-	static int SC_Num;
-	static int VIPC_Num;
+	 int NC_Num;
+	 int SC_Num;
+	 int VIPC_Num;
 	//Auto-promoted Cargos num
-	static int PC_Num;
+	 int PC_Num;
 	// Trucks num 
-	static int NT_Num;
-	static int ST_Num;
-	static int VIPT_Num;
+	 int NT_Num;
+	 int ST_Num;
+	 int VIPT_Num;
 	// Truck Speed 
-	const int NT_Speed;
-	const int ST_Speed;
-	const int VIPT_Speed;
+	int NT_Speed;
+	int ST_Speed;
+	int VIPT_Speed;
 	// Capacity
-	const int NT_Capacity;
-	const int ST_Capacity;
-	const int VIPT_Capacity;
+	int NT_Capacity;
+	int ST_Capacity;
+	int VIPT_Capacity;
 	//Duration
-	const int NT_Checkup_Duration;
-	const int ST_Checkup_Duration;
-	const int VIPT_Checkup_Duration;
+	int NT_Checkup_Duration;
+	int ST_Checkup_Duration;
+	int VIPT_Checkup_Duration;
+	int J;
 	//Others_Variables
-	const int AutoPromotionLimit;
-	const int MaxW;
+	int AutoPromotionLimit;
+	int MaxW;
 	//Num Of Events
-	static int NumOfEvents;
+	 int NumOfEvents;
 
-	static Time cargoAvgWait;
-	static int avgActiveTime;
-	static int avgutilization;
+	 Time cargoAvgWait;
+	 int avgActiveTime;
+	 int avgutilization;
 
 public:
 	Company();
+	
+//input and output functions
+	void LoadingFunction();
+	void Print(LinkedQueue<Cargo>& DC);
+//////////////////////////////////////////
 	bool offHours();
-	static const int getNC_Num();
-	static int getSC_Num();
-	static int getVIPC_Num();
-	static int getNumOfEvents();
-	static Time getCargoAvgWait();
-	static int getPC_Num();
-	static int getNT_Num();
-	static int getST_Num();
-	static int getVIPT_Num();
-	static int getAvgActiveTime();
-	static int getAvgutilization();
+	const int getNC_Num();
+	int getSC_Num();
+	int getVIPC_Num();
+	int getNumOfEvents();
+	Time getCargoAvgWait();
+	int getPC_Num();
+	int getNT_Num();
+	int getST_Num();
+	int getVIPT_Num();
+	int getAvgActiveTime();
+	int getAvgutilization();
+
+	//Simulator
+	void Simulatorfunction();
+
+
+
 };
 

@@ -156,15 +156,12 @@
     <ClInclude Include="Event.h" />
     <ClInclude Include="LinkedQueue.h" />
     <ClInclude Include="Node.h" />
-    <ClInclude Include="NT.h" />
     <ClInclude Include="Preparation.h" />
     <ClInclude Include="Promotion.h" />
     <ClInclude Include="QueueADT.h" />
-    <ClInclude Include="ST.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="Truck.h" />
     <ClInclude Include="UI.h" />
-    <ClInclude Include="VT.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Input.txt" />

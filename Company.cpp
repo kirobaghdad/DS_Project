@@ -1,104 +1,13 @@
 #include "Company.h"
 #include "UI.h"
 
-int ST::TC;
-int ST::Speed;
-int NT::TC;
-int NT::Speed;
-int VT::TC;
-int VT::Speed;
 
-int Company::NC_Num;
-int Company::VIPC_Num;
-int Company::SC_Num;
-int Company::NumOfEvents;
-int Company::PC_Num;
-int Company::avgActiveTime;
-int Company::NT_Num;
-int Company::ST_Num;
-int Company::VIPT_Num;
-int Company::avgutilization;
-Time Company::cargoAvgWait;
+
 
 Company::Company()
-	:
-NT_Speed ( UI::readNT_Speed()/* >= 0 ? UI::readNT_Speed() : 0*/),
-ST_Speed ( UI::readST_Speed()/* >= 0 ? UI::readST_Speed() >= 0 : 0*/),
-VIPT_Speed ( UI::readVIPT_Speed()/* >= 0 ? UI::readVIPT_Speed() : 0*/),
-
-NT_Capacity ( UI::readNT_Capacity()/* >= 0 ? UI::readNT_Capacity() : 0*/),
-ST_Capacity ( UI::readST_Capacity()/* >= 0 ? UI::readST_Capacity() : 0*/),
-VIPT_Capacity ( UI::readVIPT_Capacity()/* >= 0 ? UI::readVIPT_Capacity() : 0*/),
-
-NT_Checkup_Duration (UI::readNT_Checkup_Duration()/* >= 0 ? UI::readNT_Checkup_Duration() : 0*/),
-ST_Checkup_Duration (UI::readST_Checkup_Duration()/* >= 0 ? UI::readST_Checkup_Duration() : 0*/),
-VIPT_Checkup_Duration (UI::readVIPT_Checkup_Duration()/* >= 0 ? UI::readVIPT_Checkup_Duration() : 0*/),
-
-MaxW (UI::readMaxW() >=0 ? UI::readMaxW() : 0),
-
-AutoPromotionLimit (UI::readAutoPromotionLimit() >= 0 ? UI::readAutoPromotionLimit() : 0)
 {  
-	NT_Num = UI::readNT_Num()/* >= 0 ? UI::readNT_Num() : 0*/;
-	ST_Num = UI::readST_Num()/* >= 0 ? UI::readST_Num() : 0*/;
-	VIPT_Num = UI::readVIPT_Num()/* >= 0 ? UI::readVIPT_Num() : 0*/;
-
-
-
-
-	PC_Num = 0;
-	//////////////////////////////////////////
-	NC_Num = 0;
-	SC_Num = 0;
-	VIPC_Num = 0;
-
 	currentTime.setDay(0);
 	currentTime.setHour(0);
-	//Get the constants of UI 
-	
-	////first: number of Trucks //////////////////
-	//NT_Num =userInterface.getNumOfNT();
-	//ST_Num =userInterface.getNumOfST();
-	//VIPT_Num =userInterface.getNumOfVT();
-	///////////////////////////////////////////
-	
-	//second: Speed //////////////////////////
-	/*NT_Speed = userInterface.getNTSpeed();
-	VIPT_Speed = userInterface.getVTSpeed();
-	ST_Speed = userInterface.getSTSpeed();*/
-	NT::SetSpeed(NT_Speed);
-	ST::SetSpeed(ST_Speed);
-	VT::SetSpeed(VIPT_Speed);
-	/////////////////////////////////////////////////
-	
-	//Third: Capacity///////////////////////////////
-	/*NT_Capacity = userInterface.getNTCapacity();
-	ST_Capacity = userInterface.getSTCapacity();
-	VIPT_Capacity = userInterface.getVTCapacity();*/
-	NT::SetTC(NT_Capacity);
-	ST::SetTC(ST_Capacity);
-	VT::SetTC(VIPT_Capacity);
-   //////////////////////////////////////////////////
-	
-	//create Trucks //////////////////
-	for (int i = 0; i < NT_Num; i++)
-	{
-		NT * R = new NT;
-		NTs.enqueue(*R);
-	}
-	for (int i = 0; i < ST_Num; i++)
-	{
-		ST* R = new ST;
-		STs.enqueue(*R);
-	}
-	for (int i = 0; i < VIPT_Num; i++)
-	{
-		VT* R = new VT;
-		VTs.enqueue(*R);
-	}
-	/////////////////////////////
-
-
-
 }
 
 bool Company::offHours() {
@@ -162,4 +71,153 @@ int Company::getAvgutilization()
 {
 	return avgutilization;
 }
+
+void Company::Simulatorfunction()
+{
+}
+
+//============================== Get from Input File ==============================//
+void Company::LoadingFunction()
+{
+	IN.open("Input.txt");  //Open Input File
+	Out.open("Output.txt");  //Open Output File
+	// Trucks num 
+	IN >> NT_Num;
+	IN >> ST_Num;
+	IN >> VIPT_Num;
+
+	// Truck Speed 
+	IN >> NT_Speed;
+	IN >> ST_Speed;
+	IN >> VIPT_Speed;
+	// Capacity
+	IN >> NT_Capacity;
+	IN >> ST_Capacity;
+	IN >> VIPT_Capacity;
+
+	//===========================================//
+	//create Trucks //////////////////
+	for (int i = 0; i < NT_Num; i++)
+	{
+		Truck*R = new Truck('N', NT_Capacity, NT_Speed);
+		NTs.enqueue(*R);
+	}
+	for (int i = 0; i < ST_Num; i++)
+	{
+		Truck* R = new Truck('S', ST_Capacity,ST_Speed);
+		STs.enqueue(*R);
+	}
+	for (int i = 0; i < VIPT_Num; i++)
+	{
+		Truck* R = new Truck('V', VIPT_Capacity, VIPT_Speed);
+		VTs.enqueue(*R);
+	}
+	//===========================================//
+	//Duration
+	IN >> NT_Checkup_Duration;
+	IN >> ST_Checkup_Duration;
+	IN >> VIPT_Checkup_Duration;
+	IN >> J;
+	//Others_Variables
+	IN >> AutoPromotionLimit;
+	IN >> MaxW;
+
+    //Events
+	IN >> NumOfEvents;
+
+	//create event 
+	Event* ptr = nullptr;
+	int day, hours;
+	for (int i = 0; i < Company::getNumOfEvents(); i++)
+	{
+		char eventTyp;
+		char cargoTyp;
+		Time eventTime;
+		int ID;
+		int DIST;
+		int LU_Time;
+		int cost;
+		int extraMoney;
+		IN >> eventTyp;
+		switch (eventTyp)
+		{
+		case 'R':
+			IN >> cargoTyp;
+			IN >> day;
+			IN.ignore();
+			IN >> hours;
+			eventTime.setDay(day);
+			eventTime.setHour(hours);
+			IN >> ID;
+			IN >> DIST;
+			IN >> LU_Time;
+			IN >> cost;
+			ptr = new Preparation(eventTime, LU_Time, DIST, cost, ID, cargoTyp);
+			Events.enqueue(ptr);
+			break;
+		case 'X':
+			IN >> day;
+			IN.ignore();
+			IN >> hours;
+			eventTime.setDay(day);
+			eventTime.setHour(hours);
+			IN >> ID;
+			//ptr=new CancelEvent();
+			Events.enqueue(ptr);
+			break;
+		case 'P':
+			IN >> day;
+			IN.ignore();
+			IN >> hours;
+			eventTime.setDay(day);
+			eventTime.setHour(hours);
+			IN >> ID;
+			IN >> extraMoney;
+			ptr = new Promotion(eventTime, ID, extraMoney);
+			Events.enqueue(ptr);
+			break;
+		default:
+			break;
+		}
+	}
+}
+
+//============================== Print on Output File ==============================//
+
+void Company::Print(LinkedQueue<Cargo>& DC)
+{
+	Out << "CDT CID PT WT TID \n";
+	Cargo temp;
+	Time T;
+	while (DC.dequeue(temp))
+	{
+		T = temp.getCargoDelivreyTime();
+		Out << T.getDay() << ":" << T.getHour() << " ";
+		Out << temp.getID() << " ";
+		T = temp.getPT();
+		Out << T.getDay() << ":" << T.getHour() << " ";
+		T = temp.getWaitingTime();
+		Out << T.getDay() << ":" << T.getHour() << " ";
+		// the id of truck that delivered the cargo
+		Out << endl;
+	}
+	Out << "……………………………………………… \n";
+	Out << "……………………………………………… \n";
+	//get number of each typ of cargo and print it
+	Out << "Cargos: " << Company::getNC_Num() + Company::getSC_Num() + Company::getVIPC_Num();
+	Out << "[N: " << Company::getNC_Num();
+	Out << ", S: " << Company::getSC_Num();
+	Out << ", V: " << Company::getVIPC_Num() << "] \n";
+	Out << "Cargo Avg Wait = " << Company::getCargoAvgWait().getDay() << ":" << Company::getCargoAvgWait().getHour() << endl;
+	Out << "Auto-promoted Cargos:" << Company::getNC_Num() / Company::getPC_Num() << "% \n";
+
+	//get number of each typ of trucks and print it
+	Out << "Trucks: " << Company::getNT_Num() + Company::getST_Num() + Company::getVIPT_Num();
+	Out << "[N: " << Company::getNT_Num();
+	Out << ", S: " << Company::getST_Num();
+	Out << ", V: " << Company::getVIPT_Num() << "] \n";
+	Out << "Avg Active time = " << Company::getAvgActiveTime() << endl;
+	Out << "Avg utilization = " << Company::getAvgutilization() << "% \n";
+}
+
 

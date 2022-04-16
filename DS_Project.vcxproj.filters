@@ -50,15 +50,6 @@
     <ClInclude Include="Truck.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="VT.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ST.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NT.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Time.h">
       <Filter>Header Files</Filter>
     </ClInclude>
