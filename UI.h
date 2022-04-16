@@ -44,7 +44,7 @@ public:
 	static int readAutoPromotionLimit();
 	static int readMaxW();
 	static int readNumOfEvents();
-	void loadEvents(LinkedQueue<Event*>& E);         //Check if there more events left and read there information if found
+	void loadEvents(LinkedQueue<Event*>& E);         //load the events to events list
 
 	            //============================== Print on Output File ==============================//
 	void Print(LinkedQueue<Cargo>& deliveredCargo);

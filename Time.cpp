@@ -47,3 +47,21 @@ void Time::operator = (const char*& time) {
 		Hour = h;
 	else Hour = 0;
 }
+
+Time Time::operator+(const Time& T)
+{
+	int d = Day + T.Day;
+	int h = Hour + T.Hour;
+	if (h > 23)
+	{
+		h = h - 24;
+		d++;
+	}
+	return Time(d, h);
+}
+
+void Time::operator=(const Time& T)
+{
+	Day = T.Day;
+	Hour = T.Hour;
+}

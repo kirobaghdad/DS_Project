@@ -30,11 +30,11 @@ private:
 	static int SC_Num;
 	static int VIPC_Num;
 	//Auto-promoted Cargos num
-	int PC_Num;
+	static int PC_Num;
 	// Trucks num 
-	const int NT_Num;
-	const int ST_Num;
-	const int VIPT_Num;
+	static int NT_Num;
+	static int ST_Num;
+	static int VIPT_Num;
 	// Truck Speed 
 	const int NT_Speed;
 	const int ST_Speed;
@@ -53,6 +53,10 @@ private:
 	//Num Of Events
 	static int NumOfEvents;
 
+	static Time cargoAvgWait;
+	static int avgActiveTime;
+	static int avgutilization;
+
 public:
 	Company();
 	bool offHours();
@@ -60,6 +64,12 @@ public:
 	static int getSC_Num();
 	static int getVIPC_Num();
 	static int getNumOfEvents();
-
+	static Time getCargoAvgWait();
+	static int getPC_Num();
+	static int getNT_Num();
+	static int getST_Num();
+	static int getVIPT_Num();
+	static int getAvgActiveTime();
+	static int getAvgutilization();
 };
 

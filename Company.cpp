@@ -12,13 +12,16 @@ int Company::NC_Num;
 int Company::VIPC_Num;
 int Company::SC_Num;
 int Company::NumOfEvents;
+int Company::PC_Num;
+int Company::avgActiveTime;
+int Company::NT_Num;
+int Company::ST_Num;
+int Company::VIPT_Num;
+int Company::avgutilization;
+Time Company::cargoAvgWait;
 
 Company::Company()
 	:
-NT_Num( UI::readNT_Num()/* >= 0 ? UI::readNT_Num() : 0*/),
-ST_Num( UI::readST_Num()/* >= 0 ? UI::readST_Num() : 0*/),
-VIPT_Num( UI::readVIPT_Num()/* >= 0 ? UI::readVIPT_Num() : 0*/),
-
 NT_Speed ( UI::readNT_Speed()/* >= 0 ? UI::readNT_Speed() : 0*/),
 ST_Speed ( UI::readST_Speed()/* >= 0 ? UI::readST_Speed() >= 0 : 0*/),
 VIPT_Speed ( UI::readVIPT_Speed()/* >= 0 ? UI::readVIPT_Speed() : 0*/),
@@ -35,13 +38,18 @@ MaxW (UI::readMaxW() >=0 ? UI::readMaxW() : 0),
 
 AutoPromotionLimit (UI::readAutoPromotionLimit() >= 0 ? UI::readAutoPromotionLimit() : 0)
 {  
-	
+	NT_Num = UI::readNT_Num()/* >= 0 ? UI::readNT_Num() : 0*/;
+	ST_Num = UI::readST_Num()/* >= 0 ? UI::readST_Num() : 0*/;
+	VIPT_Num = UI::readVIPT_Num()/* >= 0 ? UI::readVIPT_Num() : 0*/;
+
+
+
+
 	PC_Num = 0;
 	//////////////////////////////////////////
 	NC_Num = 0;
 	SC_Num = 0;
 	VIPC_Num = 0;
-
 
 	currentTime.setDay(0);
 	currentTime.setHour(0);
@@ -119,3 +127,39 @@ int Company::getNumOfEvents()
 {
 	return NumOfEvents;
 }
+
+Time Company::getCargoAvgWait()
+{
+	return cargoAvgWait;
+}
+
+int Company::getPC_Num()
+{
+	return PC_Num;
+}
+
+int Company::getNT_Num()
+{
+	return NT_Num;
+}
+
+int Company::getST_Num()
+{
+	return ST_Num;
+}
+
+int Company::getVIPT_Num()
+{
+	return VIPT_Num;
+}
+
+int Company::getAvgActiveTime()
+{
+	return avgActiveTime;
+}
+
+int Company::getAvgutilization()
+{
+	return avgutilization;
+}
+
