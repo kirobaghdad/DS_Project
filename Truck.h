@@ -12,7 +12,7 @@ class Truck
 
 
 public:
-
+	Truck() {};
 	Truck(char type,int tc,int speed )
 	{
 		SetDI(0);

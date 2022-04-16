@@ -2,8 +2,6 @@
 #include "UI.h"
 
 
-
-
 Company::Company()
 {  
 	currentTime.setDay(0);
@@ -80,7 +78,7 @@ void Company::Simulatorfunction()
 void Company::LoadingFunction()
 {
 	IN.open("Input.txt");  //Open Input File
-	Out.open("Output.txt");  //Open Output File
+
 	// Trucks num 
 	IN >> NT_Num;
 	IN >> ST_Num;
@@ -186,6 +184,8 @@ void Company::LoadingFunction()
 
 void Company::Print(LinkedQueue<Cargo>& DC)
 {
+	Out.open("Output.txt");  //Open Output File
+
 	Out << "CDT CID PT WT TID \n";
 	Cargo temp;
 	Time T;

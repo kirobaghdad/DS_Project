@@ -1,4 +1,5 @@
 #pragma once
+#include<fstream>
 #include"Cargo.h"
 #include"Event.h"
 #include"Truck.h"
@@ -8,12 +9,14 @@ using std::ifstream;
 using std::ofstream;
 
 
+
+
 class Company
 {
 private:
 
-	static ofstream Out;
-	static ifstream IN;
+	ofstream Out;
+	ifstream IN;
 
 // Event List
 	LinkedQueue<Event*>  Events;
@@ -29,21 +32,21 @@ private:
 	LinkedQueue<Cargo> deliveredCargo;
 
 	Time currentTime;
-	// Cargo num
+// Cargo num
 	 int NC_Num;
 	 int SC_Num;
 	 int VIPC_Num;
-	//Auto-promoted Cargos num
+//Auto-promoted Cargos num
 	 int PC_Num;
-	// Trucks num 
+// Trucks num 
 	 int NT_Num;
 	 int ST_Num;
 	 int VIPT_Num;
-	// Truck Speed 
+// Truck Speed 
 	int NT_Speed;
 	int ST_Speed;
 	int VIPT_Speed;
-	// Capacity
+// Capacity
 	int NT_Capacity;
 	int ST_Capacity;
 	int VIPT_Capacity;
@@ -52,10 +55,10 @@ private:
 	int ST_Checkup_Duration;
 	int VIPT_Checkup_Duration;
 	int J;
-	//Others_Variables
+//Others_Variables
 	int AutoPromotionLimit;
 	int MaxW;
-	//Num Of Events
+//Num Of Events
 	 int NumOfEvents;
 
 	 Time cargoAvgWait;
