@@ -69,16 +69,16 @@ private:
 //Num Of Events
 	 int NumOfEvents;
 
-	 Time cargoAvgWait;
-	 int avgActiveTime;
-	 int avgutilization;
+	 Time CargoAvgWait;
+	 int AvgActiveTime;
+	 int Avgutilization;
 
 public:
 	Company();
 	
 //input and output functions
 	void LoadingFunction();
-	void Print(LinkedQueue<Cargo>& DC);
+	void Print();
 //////////////////////////////////////////
 	bool offHours();
 	const int getNC_Num();

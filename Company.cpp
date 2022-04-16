@@ -36,7 +36,7 @@ int Company::getNumOfEvents()
 
 Time Company::getCargoAvgWait()
 {
-	return cargoAvgWait;
+	return CargoAvgWait;
 }
 
 int Company::getPC_Num()
@@ -61,12 +61,12 @@ int Company::getVIPT_Num()
 
 int Company::getAvgActiveTime()
 {
-	return avgActiveTime;
+	return AvgActiveTime;
 }
 
 int Company::getAvgutilization()
 {
-	return avgutilization;
+	return Avgutilization;
 }
 
 //============================== Get from Input File ==============================//
@@ -107,10 +107,10 @@ void Company::LoadingFunction()
 	}
 	//===========================================//
 	//Duration
+	IN >> J;
 	IN >> NT_Checkup_Duration;
 	IN >> ST_Checkup_Duration;
 	IN >> VIPT_Checkup_Duration;
-	IN >> J;
 	//Others_Variables
 	IN >> AutoPromotionLimit;
 	IN >> MaxW;
@@ -121,7 +121,7 @@ void Company::LoadingFunction()
 	//create event 
 	Event* ptr = nullptr;
 	int day, hours;
-	for (int i = 0; i < Company::getNumOfEvents(); i++)
+	for (int i = 0; i < NumOfEvents; i++)
 	{
 		char eventTyp;
 		char cargoTyp;
@@ -177,14 +177,14 @@ void Company::LoadingFunction()
 
 //============================== Print on Output File ==============================//
 
-void Company::Print(LinkedQueue<Cargo>& DC)
+void Company::Print()
 {
 	Out.open("Output.txt");  //Open Output File
 
 	Out << "CDT CID PT WT TID \n";
 	Cargo temp;
 	Time T;
-	while (DC.dequeue(temp))
+	while (deliveredCargo.dequeue(temp))
 	{
 		T = temp.getCargoDelivreyTime();
 		Out << T.getDay() << ":" << T.getHour() << " ";
@@ -199,20 +199,20 @@ void Company::Print(LinkedQueue<Cargo>& DC)
 	Out << "……………………………………………… \n";
 	Out << "……………………………………………… \n";
 	//get number of each typ of cargo and print it
-	Out << "Cargos: " << Company::getNC_Num() + Company::getSC_Num() + Company::getVIPC_Num();
-	Out << "[N: " << Company::getNC_Num();
-	Out << ", S: " << Company::getSC_Num();
-	Out << ", V: " << Company::getVIPC_Num() << "] \n";
-	Out << "Cargo Avg Wait = " << Company::getCargoAvgWait().getDay() << ":" << Company::getCargoAvgWait().getHour() << endl;
-	Out << "Auto-promoted Cargos:" << Company::getNC_Num() / Company::getPC_Num() << "% \n";
+	Out << "Cargos: " << NC_Num + SC_Num + VIPC_Num;
+	Out << "[N: " << NC_Num;
+	Out << ", S: " << SC_Num;
+	Out << ", V: " << VIPC_Num << "] \n";
+	Out << "Cargo Avg Wait = " << CargoAvgWait.getDay() << ":" << CargoAvgWait.getHour() << endl;
+	Out << "Auto-promoted Cargos:" << NC_Num / PC_Num << "% \n";
 
 	//get number of each typ of trucks and print it
-	Out << "Trucks: " << Company::getNT_Num() + Company::getST_Num() + Company::getVIPT_Num();
-	Out << "[N: " << Company::getNT_Num();
-	Out << ", S: " << Company::getST_Num();
-	Out << ", V: " << Company::getVIPT_Num() << "] \n";
-	Out << "Avg Active time = " << Company::getAvgActiveTime() << endl;
-	Out << "Avg utilization = " << Company::getAvgutilization() << "% \n";
+	Out << "Trucks: " << NT_Num + ST_Num + VIPT_Num;
+	Out << "[N: " << NT_Num;
+	Out << ", S: " << ST_Num;
+	Out << ", V: " << VIPT_Num << "] \n";
+	Out << "Avg Active time = " << AvgActiveTime << endl;
+	Out << "Avg utilization = " << Avgutilization<< "% \n";
 }
 
 //==================================Simulatorfunction===================================//
