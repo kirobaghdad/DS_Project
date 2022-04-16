@@ -1,8 +1,10 @@
 #include<iostream>
 #include "Preparation.h"
 #include "Cargo.h"
+
 using namespace std;
-Preparation::Preparation(Time T, int lu, int d, int c,int id,char Type):Event(T,id)
+
+Preparation::Preparation(Time T, int lu, int d, int c, int id, char Type) :Event(T, id)
 {
 	TYP = Type;
 	LU_Time = lu;
@@ -19,16 +21,16 @@ void Preparation::Execute(LinkedQueue<Cargo>& cn, LinkedQueue<Cargo>& cs, Priori
 	switch (TYP)
 	{
 	case 'N':
-		 ptr = new Cargo(EventTime, LU_Time, deliveryDistance, cost,ID,'N');
-		 cn.enqueue(*ptr);
-		 break;
+		ptr = new Cargo(EventTime, LU_Time, deliveryDistance, cost, ID, 'N');
+		cn.enqueue(*ptr);
+		break;
 	case 'S':
-		 ptr = new Cargo(EventTime, LU_Time, deliveryDistance, cost, ID, 'S');
-		 cs.enqueue(*ptr);
+		ptr = new Cargo(EventTime, LU_Time, deliveryDistance, cost, ID, 'S');
+		cs.enqueue(*ptr);
 		break;
 	case 'V':
-		 ptr = new Cargo(EventTime, LU_Time, deliveryDistance, cost, ID, 'V');
-		 cv.enqueue(*ptr, deliveryDistance* cost);
+		ptr = new Cargo(EventTime, LU_Time, deliveryDistance, cost, ID, 'V');
+		cv.enqueue(*ptr, deliveryDistance * cost);
 		break;
 
 	default:

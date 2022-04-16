@@ -150,6 +150,7 @@
     <ClCompile Include="UI.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CancelEvent.h" />
     <ClInclude Include="Cargo.h" />
     <ClInclude Include="Company.h" />
     <ClInclude Include="Event.h" />

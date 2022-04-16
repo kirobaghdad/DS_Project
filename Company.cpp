@@ -2,9 +2,10 @@
 
 
 Company::Company()
-{  
+{
 	currentTime.setDay(0);
 	currentTime.setHour(0);
+	Loading();
 }
 
 bool Company::offHours() {
@@ -19,12 +20,12 @@ const int Company::getNC_Num()
 	return NC_Num;
 }
 
-int Company::getSC_Num() 
+int Company::getSC_Num()
 {
 	return SC_Num;
 }
 
-int Company::getVIPC_Num() 
+int Company::getVIPC_Num()
 {
 	return VIPC_Num;
 }
@@ -61,16 +62,16 @@ int Company::getVIPT_Num()
 
 int Company::getAvgActiveTime()
 {
-	return AvgActiveTime;
+	return avgActiveTime;
 }
 
 int Company::getAvgutilization()
 {
-	return Avgutilization;
+	return avgutilization;
 }
 
 //============================== Get from Input File ==============================//
-void Company::LoadingFunction()
+void Company::Loading()
 {
 	IN.open("Input.txt");  //Open Input File
 
@@ -92,12 +93,12 @@ void Company::LoadingFunction()
 	//create Trucks //////////////////
 	for (int i = 0; i < NT_Num; i++)
 	{
-		Truck*R = new Truck('N', NT_Capacity, NT_Speed);
+		Truck* R = new Truck('N', NT_Capacity, NT_Speed);
 		NTs.enqueue(*R);
 	}
 	for (int i = 0; i < ST_Num; i++)
 	{
-		Truck* R = new Truck('S', ST_Capacity,ST_Speed);
+		Truck* R = new Truck('S', ST_Capacity, ST_Speed);
 		STs.enqueue(*R);
 	}
 	for (int i = 0; i < VIPT_Num; i++)
@@ -107,21 +108,21 @@ void Company::LoadingFunction()
 	}
 	//===========================================//
 	//Duration
-	IN >> J;
 	IN >> NT_Checkup_Duration;
 	IN >> ST_Checkup_Duration;
 	IN >> VIPT_Checkup_Duration;
+	IN >> J;
 	//Others_Variables
 	IN >> AutoPromotionLimit;
 	IN >> MaxW;
 
-    //Events
+	//Events
 	IN >> NumOfEvents;
 
 	//create event 
 	Event* ptr = nullptr;
 	int day, hours;
-	for (int i = 0; i < NumOfEvents; i++)
+	for (int i = 0; i < Company::getNumOfEvents(); i++)
 	{
 		char eventTyp;
 		char cargoTyp;
@@ -155,7 +156,7 @@ void Company::LoadingFunction()
 			eventTime.setDay(day);
 			eventTime.setHour(hours);
 			IN >> ID;
-			//ptr=new CancelEvent();
+			ptr = new CancelEvent(eventTime, ID);
 			Events.enqueue(ptr);
 			break;
 		case 'P':
@@ -177,14 +178,14 @@ void Company::LoadingFunction()
 
 //============================== Print on Output File ==============================//
 
-void Company::Print()
+void Company::Print(LinkedQueue<Cargo>& DC)
 {
 	Out.open("Output.txt");  //Open Output File
 
 	Out << "CDT CID PT WT TID \n";
 	Cargo temp;
 	Time T;
-	while (deliveredCargo.dequeue(temp))
+	while (DC.dequeue(temp))
 	{
 		T = temp.getCargoDelivreyTime();
 		Out << T.getDay() << ":" << T.getHour() << " ";
@@ -199,30 +200,31 @@ void Company::Print()
 	Out << "……………………………………………… \n";
 	Out << "……………………………………………… \n";
 	//get number of each typ of cargo and print it
-	Out << "Cargos: " << NC_Num + SC_Num + VIPC_Num;
-	Out << "[N: " << NC_Num;
-	Out << ", S: " << SC_Num;
-	Out << ", V: " << VIPC_Num << "] \n";
-	Out << "Cargo Avg Wait = " << CargoAvgWait.getDay() << ":" << CargoAvgWait.getHour() << endl;
-	Out << "Auto-promoted Cargos:" << NC_Num / PC_Num << "% \n";
+	Out << "Cargos: " << Company::getNC_Num() + Company::getSC_Num() + Company::getVIPC_Num();
+	Out << "[N: " << Company::getNC_Num();
+	Out << ", S: " << Company::getSC_Num();
+	Out << ", V: " << Company::getVIPC_Num() << "] \n";
+	Out << "Cargo Avg Wait = " << Company::getCargoAvgWait().getDay() << ":" << Company::getCargoAvgWait().getHour() << endl;
+	Out << "Auto-promoted Cargos:" << Company::getNC_Num() / Company::getPC_Num() << "% \n";
 
 	//get number of each typ of trucks and print it
-	Out << "Trucks: " << NT_Num + ST_Num + VIPT_Num;
-	Out << "[N: " << NT_Num;
-	Out << ", S: " << ST_Num;
-	Out << ", V: " << VIPT_Num << "] \n";
-	Out << "Avg Active time = " << AvgActiveTime << endl;
-	Out << "Avg utilization = " << Avgutilization<< "% \n";
+	Out << "Trucks: " << Company::getNT_Num() + Company::getST_Num() + Company::getVIPT_Num();
+	Out << "[N: " << Company::getNT_Num();
+	Out << ", S: " << Company::getST_Num();
+	Out << ", V: " << Company::getVIPT_Num() << "] \n";
+	Out << "Avg Active time = " << Company::getAvgActiveTime() << endl;
+	Out << "Avg utilization = " << Company::getAvgutilization() << "% \n";
 }
 
-//==================================Simulatorfunction===================================//
-void Company::Simulatorfunction()
+//==================================Simulator===================================//
+void Company::Simulator()
 {
+
 	int i = 1;
-	Event* e=NULL;
-	while (!Events.isEmpty() || !NC.isEmpty() || !SC.isEmpty() || !VC.isEmpty()||!Moving.isEmpty())
+	Event* e = NULL;
+	while (!Events.isEmpty() || !NC.isEmpty() || !SC.isEmpty() || !VC.isEmpty() || !Moving.isEmpty())
 	{
-		if (!Events.isEmpty()) 
+		if (!Events.isEmpty())
 		{
 			Events.peek(e);
 			if (e->GetTime() == currentTime)
@@ -231,8 +233,7 @@ void Company::Simulatorfunction()
 				Events.dequeue(e);
 			}
 		}
-		currentTime.increase();
-		//Pick one cargo from each cargo typeand move it to moving cargo list(s)
+		//Pick one cargo from each cargo type and move it to moving cargo list(s)
 		Cargo c;
 		NC.dequeue(c);
 		Moving.enqueue(c);
@@ -241,7 +242,7 @@ void Company::Simulatorfunction()
 		VC.dequeue(c);
 		Moving.enqueue(c);
 		//////////////////////////////////////////////
-		
+
 		if (i % 5 == 0)
 		{
 			Moving.dequeue(c);
@@ -251,15 +252,11 @@ void Company::Simulatorfunction()
 			Moving.dequeue(c);
 			deliveredCargo.enqueue(c);
 		}
+
 		i++;
 
 	}
-
-
-
-
-
-
+	currentTime.increase();
 
 }
 

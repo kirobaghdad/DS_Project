@@ -39,7 +39,10 @@ int Time::getHour() const {
 void Time::increase()
 {
 	if (Hour + 1 == 24)
+	{
 		Day++;
+		Hour = 0;
+	}
 	else
 		Hour++;
 
@@ -78,6 +81,13 @@ void Time::operator=(const Time& T)
 bool Time::operator==(const Time T)
 {
 	if (T.Day == Day && T.Hour == Hour)
+		return true;
+	return false;
+}
+
+
+bool Time::isValid() {
+	if (Hour >= 0 && Day >= 0)
 		return true;
 	return false;
 }

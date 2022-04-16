@@ -22,39 +22,43 @@ private:
 	ofstream Out;
 	ifstream IN;
 
-// Event List
+	// Event List
 	LinkedQueue<Event*>  Events;
-//Cargo List 
+	//Cargo List 
 	LinkedQueue<Cargo> NC;
 	LinkedQueue<Cargo> SC;
 
 	PriorityQueue<Cargo> VC;
-//Truck List 
+	//Truck List 
 	LinkedQueue<Truck> NTs;
 	LinkedQueue<Truck> STs;
 	LinkedQueue<Truck> VTs;
-// Moving cargo list 	 
+
+	//Waiting Cargos List
+	LinkedQueue<Cargo> Waiting;
+
+	// Moving Cargos List 	 
 	LinkedQueue<Cargo> Moving;
 
-//Delivered Cargo
+	//Delivered Cargos List
 	LinkedQueue<Cargo> deliveredCargo;
 
 	Time currentTime;
-// Cargo num
-	 int NC_Num;
-	 int SC_Num;
-	 int VIPC_Num;
-//Auto-promoted Cargos num
-	 int PC_Num;
-// Trucks num 
-	 int NT_Num;
-	 int ST_Num;
-	 int VIPT_Num;
-// Truck Speed 
+	// Cargo num
+	int NC_Num;
+	int SC_Num;
+	int VIPC_Num;
+	//Auto-promoted Cargos num
+	int PC_Num;
+	// Trucks num 
+	int NT_Num;
+	int ST_Num;
+	int VIPT_Num;
+	// Truck Speed 
 	int NT_Speed;
 	int ST_Speed;
 	int VIPT_Speed;
-// Capacity
+	// Capacity
 	int NT_Capacity;
 	int ST_Capacity;
 	int VIPT_Capacity;
@@ -63,23 +67,23 @@ private:
 	int ST_Checkup_Duration;
 	int VIPT_Checkup_Duration;
 	int J;
-//Others_Variables
+	//Others_Variables
 	int AutoPromotionLimit;
 	int MaxW;
-//Num Of Events
-	 int NumOfEvents;
+	//Num Of Events
+	int NumOfEvents;
 
-	 Time CargoAvgWait;
-	 int AvgActiveTime;
-	 int Avgutilization;
+	Time CargoAvgWait;
+	int avgActiveTime;
+	int avgutilization;
 
 public:
 	Company();
-	
-//input and output functions
-	void LoadingFunction();
-	void Print();
-//////////////////////////////////////////
+
+	//input and output functions
+	void Loading();
+	void Print(LinkedQueue<Cargo>& DC);
+	//////////////////////////////////////////
 	bool offHours();
 	const int getNC_Num();
 	int getSC_Num();
@@ -94,7 +98,7 @@ public:
 	int getAvgutilization();
 
 	//Simulator
-	void Simulatorfunction();
+	void Simulator();
 
 
 

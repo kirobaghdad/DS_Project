@@ -3,7 +3,6 @@
 #include"Cargo.h"
 #include "Node.h"
 #include "QueueADT.h"
-#include <vector>
 using namespace std;
 
 
@@ -22,10 +21,12 @@ public:
 	bool peek(T& frntEntry)  const;
 	~LinkedQueue();
 
-	
+
 	LinkedQueue(const LinkedQueue<T>& LQ);
 	Node<T>* getFrontptr() const;
-	bool remove(const int ID);
+	void setFrontPtr(Node<T>*);
+	Node<T>* getBackPtr() const;
+	void setBackPtr(Node<T>*);
 };
 
 template <typename T>
@@ -48,18 +49,18 @@ template <typename T>
 bool LinkedQueue<T>::enqueue(const T& newEntry)
 {
 	Node<T>* newNodePtr = new Node<T>(newEntry);
-	
-	if (isEmpty())	
-		frontPtr = newNodePtr; 
+
+	if (isEmpty())
+		frontPtr = newNodePtr;
 	else
-		backPtr->setNext(newNodePtr); 
+		backPtr->setNext(newNodePtr);
 
-	backPtr = newNodePtr; 
+	backPtr = newNodePtr;
 	return true;
-} 
+}
 
 
- 
+
 
 template <typename T>
 bool LinkedQueue<T>::dequeue(T& frntEntry)
@@ -70,11 +71,11 @@ bool LinkedQueue<T>::dequeue(T& frntEntry)
 	Node<T>* nodeToDeletePtr = frontPtr;
 	frntEntry = frontPtr->getItem();
 	frontPtr = frontPtr->getNext();
-	
-	if (nodeToDeletePtr == backPtr)	
+
+	if (nodeToDeletePtr == backPtr)
 		backPtr = nullptr;
 
-	
+
 	delete nodeToDeletePtr;
 
 	return true;
@@ -131,33 +132,18 @@ inline Node<T>* LinkedQueue<T>::getFrontptr() const
 	return frontPtr;
 }
 
-template <typename T>
-inline bool LinkedQueue<T>::remove(const int ID)
-{
-	if (isEmpty())
-		return false;
 
-	Node<Cargo>* ptr = frontPtr;
-	if (ptr->getItem().getID() == ID)
-	{
-		frontPtr = frontPtr->getNext();
-
-		if (ptr == backPtr)
-			backPtr = nullptr;
-		return true;
-	}
-	ptr = ptr->getNext();
-	Node<Cargo>* prev = frontPtr;
-	while (ptr)
-	{
-		if (ptr->getItem().getID() == ID)
-		{
-			prev->setNext(ptr->getNext());
-			return true;
-		}
-		ptr = ptr->getNext();
-		prev = prev->getNext();
-	}
-	return false;
+template<typename T>
+inline void LinkedQueue<T>::setFrontPtr(Node<T>* ptr) {
+	frontPtr = ptr;
 }
 
+template<typename T>
+inline Node<T>* LinkedQueue<T>::getBackPtr() const {
+	return backPtr;
+}
+
+template<typename T>
+inline void LinkedQueue<T>::setBackPtr(Node<T>* ptr) {
+	backPtr = ptr;
+}

@@ -86,6 +86,9 @@
     <ClInclude Include="PriorityNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CancelEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Input.txt">

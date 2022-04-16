@@ -1,12 +1,11 @@
 #pragma once
 #include"PriorityNode.h"
-#include <vector>
 using namespace std;
 
 
 
 template <typename T>
-class PriorityQueue 
+class PriorityQueue
 {
 private:
 
@@ -15,7 +14,7 @@ private:
 public:
 	PriorityQueue();
 	bool isEmpty() const;
-	bool enqueue(const T& newEntry,int p);
+	bool enqueue(const T& newEntry, int p);
 	bool dequeue(T& frntEntry);
 	bool peek(T& frntEntry)  const;
 	~PriorityQueue();
@@ -43,9 +42,9 @@ bool PriorityQueue<T>::isEmpty() const
 
 
 template <typename T>
-bool PriorityQueue<T>::enqueue(const T& newEntry,int p)
+bool PriorityQueue<T>::enqueue(const T& newEntry, int p)
 {
-	
+
 	PriorityNode<T>* start = frontPtr;
 
 	// Create new Node
@@ -58,10 +57,10 @@ bool PriorityQueue<T>::enqueue(const T& newEntry,int p)
 	// insert newnode before head node
 	// and change head node.
 
-	if (frontPtr->priority >p)
+	if (frontPtr->priority > p)
 	{
 		// Insert New Node before head
-		temp->setNext(frontPtr) ;
+		temp->setNext(frontPtr);
 		frontPtr = temp;
 	}
 	else
@@ -126,7 +125,7 @@ template <typename T>
 PriorityQueue<T>::PriorityQueue(const PriorityQueue<T>& LQ)
 {
 	PriorityNode<T>* NodePtr = LQ.frontPtr;
-	if (!NodePtr) 
+	if (!NodePtr)
 	{
 		frontPtr = backPtr = nullptr;
 		return;
@@ -159,7 +158,7 @@ inline bool PriorityQueue<T>::remove(const int ID)
 		return false;
 
 	PriorityNode<Cargo>* ptr = frontPtr;
-   if (ptr->getItem().getID() == ID)
+	if (ptr->getItem().getID() == ID)
 	{
 		frontPtr = frontPtr->getNext();
 
