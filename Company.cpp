@@ -220,7 +220,7 @@ void Company::Simulatorfunction()
 {
 	int i = 1;
 	Event* e=NULL;
-	while (!Events.isEmpty() || !NC.isEmpty() || !SC.isEmpty() || !VC.isEmpty())
+	while (!Events.isEmpty() || !NC.isEmpty() || !SC.isEmpty() || !VC.isEmpty()||!Moving.isEmpty())
 	{
 		if (!Events.isEmpty()) 
 		{
