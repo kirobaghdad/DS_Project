@@ -10,6 +10,9 @@ using namespace std;
 int DS_Project()
 {
 	Company C;
+	C.LoadingFunction();
+	C.Simulatorfunction();
+
 
 	return 0;
 }

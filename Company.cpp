@@ -1,5 +1,4 @@
 #include "Company.h"
-#include "UI.h"
 
 
 Company::Company()
@@ -68,10 +67,6 @@ int Company::getAvgActiveTime()
 int Company::getAvgutilization()
 {
 	return avgutilization;
-}
-
-void Company::Simulatorfunction()
-{
 }
 
 //============================== Get from Input File ==============================//
@@ -218,6 +213,54 @@ void Company::Print(LinkedQueue<Cargo>& DC)
 	Out << ", V: " << Company::getVIPT_Num() << "] \n";
 	Out << "Avg Active time = " << Company::getAvgActiveTime() << endl;
 	Out << "Avg utilization = " << Company::getAvgutilization() << "% \n";
+}
+
+//==================================Simulatorfunction===================================//
+void Company::Simulatorfunction()
+{
+	int i = 1;
+	Event* e=NULL;
+	while (!Events.isEmpty() || !NC.isEmpty() || !SC.isEmpty() || !VC.isEmpty())
+	{
+		if (!Events.isEmpty()) 
+		{
+			Events.peek(e);
+			if (e->GetTime() == currentTime)
+			{
+				e->Execute(NC, SC, VC);
+				Events.dequeue(e);
+			}
+		}
+		currentTime.increase();
+		//Pick one cargo from each cargo typeand move it to moving cargo list(s)
+		Cargo c;
+		NC.dequeue(c);
+		Moving.enqueue(c);
+		SC.dequeue(c);
+		Moving.enqueue(c);
+		VC.dequeue(c);
+		Moving.enqueue(c);
+		//////////////////////////////////////////////
+		
+		if (i % 5 == 0)
+		{
+			Moving.dequeue(c);
+			deliveredCargo.enqueue(c);
+			Moving.dequeue(c);
+			deliveredCargo.enqueue(c);
+			Moving.dequeue(c);
+			deliveredCargo.enqueue(c);
+		}
+		i++;
+
+	}
+
+
+
+
+
+
+
 }
 
 

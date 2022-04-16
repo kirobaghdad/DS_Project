@@ -5,7 +5,7 @@ Promotion::Promotion(Time eventTime,int ID, int extra):Event( eventTime , ID)
 	extraMoney = extra;
 }
 
-void Promotion::Execute(LinkedQueue<Cargo>& cn, LinkedQueue<Cargo>& cs, LinkedQueue<Cargo>& cv)
+void Promotion::Execute(LinkedQueue<Cargo>& cn, LinkedQueue<Cargo>& cs, PriorityQueue<Cargo>& cv)
 {
 	bool promoted = false;
 	Node<Cargo>* ptr = cn.getFrontptr();
@@ -20,7 +20,7 @@ void Promotion::Execute(LinkedQueue<Cargo>& cn, LinkedQueue<Cargo>& cs, LinkedQu
 				char typ = 'v';
 				Item.setCargoTyp(typ);   //changing its typ from normal to vip
 				cn.remove(Item.getID());         //move it from normal list to vip list
-				cv.enqueue(Item);
+				cv.enqueue(Item,Item.getCost()*Item.getdeliveryDistance());
 				promoted = true;
 			}
 		}

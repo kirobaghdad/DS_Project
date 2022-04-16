@@ -20,7 +20,7 @@ private:
 	bool isWaiting; 
 	bool isMoving;
 	Time cargoDelivreyTime;
-
+	int Priority;
 public:
 	Cargo(Time, int, int, int, int, char); //Non_Default Constructor for the Cargo Class
 	Cargo(); // default Constructor we need it in DS 

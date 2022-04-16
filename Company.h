@@ -3,7 +3,11 @@
 #include"Cargo.h"
 #include"Event.h"
 #include"Truck.h"
+#include"Preparation.h"
+#include"Promotion.h"
+#include"CancelEvent.h"
 #include"LinkedQueue.h"
+#include"PriorityQueue.h"
 #include "Time.h"
 using std::ifstream;
 using std::ofstream;
@@ -23,11 +27,15 @@ private:
 //Cargo List 
 	LinkedQueue<Cargo> NC;
 	LinkedQueue<Cargo> SC;
-	LinkedQueue<Cargo> VC;
+
+	PriorityQueue<Cargo> VC;
 //Truck List 
 	LinkedQueue<Truck> NTs;
 	LinkedQueue<Truck> STs;
 	LinkedQueue<Truck> VTs;
+// Moving cargo list 	 
+	LinkedQueue<Cargo> Moving;
+
 //Delivered Cargo
 	LinkedQueue<Cargo> deliveredCargo;
 

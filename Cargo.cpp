@@ -1,7 +1,7 @@
 #include "Cargo.h"
 #include <cctype>
 
-Cargo::Cargo(Time pt, int LU, int DD, int C, int id, char CT) {
+Cargo::Cargo(Time pt, int LU, int DD, int C, int id, char CT){
 	preparationTime = pt;
 
 	if (LU > 0)
