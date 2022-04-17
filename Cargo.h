@@ -38,4 +38,6 @@ public:
 	void setCargoTyp(char typ);
 	Time getCargoDelivreyTime()const;
 	Time getWaitingTime()const;
+	bool operator==(int x);
+
 };

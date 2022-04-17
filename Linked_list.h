@@ -66,13 +66,14 @@ bool Linked_list<T>::add(const T& newItem)
 	return true;
 }
 
-bool Linked_list<Cargo>::removeID(const int ID)
+template<typename T>
+bool Linked_list<T>::removeID(const int ID)
 {
 	if (isEmpty())
 	{
 		return false;
 	}
-	if (Head->getItem().getID()==ID)
+	if (Head->getItem()==ID)
 	{
 		Node<Cargo>* todelete = Head;
 		Head = Head->getNext();
@@ -81,8 +82,8 @@ bool Linked_list<Cargo>::removeID(const int ID)
 		return true;
 	}
 	bool found = false;
-	Node<Cargo>* ptr = Head->getNext();
-	Node<Cargo>* prev = Head;
+	Node<T>* ptr = Head->getNext();
+	Node<T>* prev = Head;
 	while (ptr&&!found)
 	{
 		if (ptr->getItem().getID() == ID)

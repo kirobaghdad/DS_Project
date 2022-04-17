@@ -122,7 +122,7 @@ void Company::Loading()
 	//create event 
 	Event* ptr = nullptr;
 	int day, hours;
-	for (int i = 0; i < Company::getNumOfEvents(); i++)
+	for (int i = 0; i < NumOfEvents; i++)
 	{
 		char eventTyp;
 		char cargoTyp;
@@ -149,7 +149,7 @@ void Company::Loading()
 			ptr = new Preparation(eventTime, LU_Time, DIST, cost, ID, cargoTyp);
 			Events.enqueue(ptr);
 			break;
-		case 'X':
+		/*case 'X':
 			IN >> day;
 			IN.ignore();
 			IN >> hours;
@@ -158,7 +158,7 @@ void Company::Loading()
 			IN >> ID;
 			ptr = new CancelEvent(eventTime, ID);
 			Events.enqueue(ptr);
-			break;
+			break;*/
 		case 'P':
 			IN >> day;
 			IN.ignore();
@@ -254,10 +254,9 @@ void Company::Simulator()
 		}
 
 		i++;
-
+		currentTime.increase();
 	}
-	currentTime.increase();
-
+	
 }
 
 

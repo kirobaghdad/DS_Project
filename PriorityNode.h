@@ -4,7 +4,6 @@ template <typename T>
 class PriorityNode
 {
 	T item;
-	
 	PriorityNode<T>* next;
 public:
 	int priority;
