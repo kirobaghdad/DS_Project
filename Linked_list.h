@@ -57,6 +57,11 @@ bool Linked_list<T>::add(const T& newItem)
 	temp->setItem(newItem);
 	temp->setNext(nullptr);
 	Node<T>* ptr = Head;
+	if (isEmpty())
+	{
+		Head = temp;
+		return true;
+	}
 	while (ptr->getNext())
 	{
 		ptr = ptr->getNext();

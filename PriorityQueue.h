@@ -57,12 +57,19 @@ bool PriorityQueue<T>::enqueue(const T& newEntry, int p)
 	// insert newnode before head node
 	// and change head node.
 
-	if (frontPtr->priority > p)
+	if (isEmpty())
 	{
-		// Insert New Node before head
-		temp->setNext(frontPtr);
 		frontPtr = temp;
+		return true;
 	}
+	
+		if (frontPtr->priority > p)
+		{
+			// Insert New Node before head
+			temp->setNext(frontPtr);
+			frontPtr = temp;
+		}
+	
 	else
 	{
 		// Traverse the list and find a

@@ -2,7 +2,8 @@
 
 
 Company::Company()
-{
+{ 
+	PC_Num = 1;
 	currentTime.setDay(0);
 	currentTime.setHour(0);
 	Loading();
@@ -235,22 +236,45 @@ void Company::Simulator()
 		}
 		//Pick one cargo from each cargo type and move it to moving cargo list(s)
 		Cargo c;
-		NC.removeBeg(c);
-		Moving.enqueue(c);
-		SC.dequeue(c);
-		Moving.enqueue(c);
-		VC.dequeue(c);
-		Moving.enqueue(c);
+		if (!NC.isEmpty())
+		{
+			NC.removeBeg(c);
+			Moving.enqueue(c);
+		}
+		if (!SC.isEmpty())
+		{
+			SC.dequeue(c);
+			Moving.enqueue(c);
+		}
+	
+		if (!VC.isEmpty())
+		{
+			VC.dequeue(c);
+			Moving.enqueue(c);
+		}
+
+		
 		//////////////////////////////////////////////
 
 		if (i % 5 == 0)
 		{
-			Moving.dequeue(c);
-			deliveredCargo.enqueue(c);
-			Moving.dequeue(c);
-			deliveredCargo.enqueue(c);
-			Moving.dequeue(c);
-			deliveredCargo.enqueue(c);
+
+			if (!Moving.isEmpty())
+			{
+				Moving.dequeue(c);
+				deliveredCargo.enqueue(c);
+			}
+			if (!Moving.isEmpty())
+			{
+				Moving.dequeue(c);
+				deliveredCargo.enqueue(c);
+			}
+
+			if (!Moving.isEmpty())
+			{
+				Moving.dequeue(c);
+				deliveredCargo.enqueue(c);
+			}
 		}
 
 		i++;

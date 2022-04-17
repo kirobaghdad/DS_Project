@@ -2,14 +2,14 @@
 
 
 Time::Time() {
-	Day = 0;
+	Day = 1;
 	Hour = 0;
 }
 
 Time::Time(int D, int H) {
-	if (D >= 0)
+	if (D > 0)
 		Day = D;
-	else Day = 0;
+	else Day = 1;
 
 	if (H >= 0)
 		Hour = H;
@@ -17,9 +17,9 @@ Time::Time(int D, int H) {
 }
 
 void Time::setDay(int D) {
-	if (D >= 0)
+	if (D > 0)
 		Day = D;
-	else Day = 0;
+	else Day = 1;
 }
 
 void Time::setHour(int H) {
