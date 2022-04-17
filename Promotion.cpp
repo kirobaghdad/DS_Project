@@ -5,10 +5,10 @@ Promotion::Promotion(Time eventTime, int ID, int extra) :Event(eventTime, ID)
 	extraMoney = extra;
 }
 
-void Promotion::Execute(LinkedQueue<Cargo>& cn, LinkedQueue<Cargo>& cs, PriorityQueue<Cargo>& cv)
+void Promotion::Execute(Linked_list<Cargo>& cn, LinkedQueue<Cargo>& cs, PriorityQueue<Cargo>& cv)
 {
 	bool promoted = false;
-	Node<Cargo>* ptr = cn.getFrontptr();
+	Node<Cargo>* ptr = cn.getHead();
 	Cargo Item;
 	while (ptr && !promoted)     //find the cargo in Cargo list
 	{
@@ -17,9 +17,9 @@ void Promotion::Execute(LinkedQueue<Cargo>& cn, LinkedQueue<Cargo>& cs, Priority
 		{
 			if (Item.getIsWaiting())     //check if it is loaded or not
 			{
-				char typ = 'v';
+				char typ = 'V';
 				Item.setCargoTyp(typ);   //changing its typ from normal to vip
-				cn.remove(Item.getID());         //move it from normal list to vip list
+				cn.removeID(Item.getID());         //move it from normal list to vip list
 				cv.enqueue(Item, Item.getCost() * Item.getdeliveryDistance());
 				promoted = true;
 			}

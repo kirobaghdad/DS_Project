@@ -154,6 +154,7 @@
     <ClInclude Include="Cargo.h" />
     <ClInclude Include="Company.h" />
     <ClInclude Include="Event.h" />
+    <ClInclude Include="Linked_list.h" />
     <ClInclude Include="PriorityNode.h" />
     <ClInclude Include="PriorityQueue.h" />
     <ClInclude Include="LinkedQueue.h" />

@@ -7,6 +7,6 @@ class CancelEvent :
 public:
     CancelEvent(Time, int); //Constructor
 
-    virtual void Execute(LinkedQueue<Cargo>&);
+    virtual void Execute(Linked_list<Cargo>& cn, LinkedQueue<Cargo>& cs, PriorityQueue<Cargo>& cv);
 };
 

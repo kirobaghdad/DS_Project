@@ -13,7 +13,7 @@ class Preparation : public Event
 
 public:
 	Preparation(Time T, int lu, int d, int c, int id,char Type);
-	virtual void Execute(LinkedQueue<Cargo>& cn, LinkedQueue<Cargo>& cs, PriorityQueue<Cargo>& cv);
+	virtual void Execute(Linked_list<Cargo>& cn, LinkedQueue<Cargo>& cs, PriorityQueue<Cargo>& cv);
 
 };
 

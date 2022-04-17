@@ -10,7 +10,7 @@ CancelEvent::CancelEvent(Time T, int ID)
 
 }
 
-void CancelEvent::Execute(LinkedQueue<Cargo>& cn) {
+void CancelEvent::Execute(Linked_list<Cargo>& cn, LinkedQueue<Cargo>& cs, PriorityQueue<Cargo>& cv) {
 	if (cn.isEmpty())
 		return;
 

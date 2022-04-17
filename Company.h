@@ -9,6 +9,7 @@
 #include"LinkedQueue.h"
 #include"PriorityQueue.h"
 #include "Time.h"
+#include "Linked_list.h"
 using std::ifstream;
 using std::ofstream;
 
@@ -25,7 +26,7 @@ private:
 	// Event List
 	LinkedQueue<Event*>  Events;
 	//Cargo List 
-	LinkedQueue<Cargo> NC;
+	Linked_list<Cargo> NC;
 	LinkedQueue<Cargo> SC;
 
 	PriorityQueue<Cargo> VC;
@@ -74,15 +75,15 @@ private:
 	int NumOfEvents;
 
 	Time CargoAvgWait;
-	int avgActiveTime;
-	int avgutilization;
+	int AvgActiveTime;
+	int Avgutilization;
 
 public:
 	Company();
 
 	//input and output functions
 	void Loading();
-	void Print(LinkedQueue<Cargo>& DC);
+	void Print();
 	//////////////////////////////////////////
 	bool offHours();
 	const int getNC_Num();
