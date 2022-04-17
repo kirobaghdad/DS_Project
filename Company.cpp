@@ -262,17 +262,20 @@ void Company::Simulator()
 			if (!Moving.isEmpty())
 			{
 				Moving.dequeue(c);
+				c.setCargoDelivreyTime(currentTime);
 				deliveredCargo.enqueue(c);
 			}
 			if (!Moving.isEmpty())
 			{
 				Moving.dequeue(c);
+				c.setCargoDelivreyTime(currentTime);
 				deliveredCargo.enqueue(c);
 			}
 
 			if (!Moving.isEmpty())
 			{
 				Moving.dequeue(c);
+				c.setCargoDelivreyTime(currentTime);
 				deliveredCargo.enqueue(c);
 			}
 		}

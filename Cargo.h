@@ -39,5 +39,5 @@ public:
 	Time getCargoDelivreyTime()const;
 	Time getWaitingTime()const;
 	bool operator==(int x);
-
+	void setCargoDelivreyTime(Time T);
 };

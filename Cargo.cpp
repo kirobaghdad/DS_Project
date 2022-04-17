@@ -89,3 +89,8 @@ bool Cargo::operator==(int x)
 		return true;
 	return false;
 }
+
+void Cargo::setCargoDelivreyTime(Time T)
+{
+	cargoDelivreyTime = T;
+}
