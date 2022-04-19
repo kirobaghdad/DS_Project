@@ -15,7 +15,7 @@ using namespace std;
 
 class UI
 {	
-	static  char mode;
+	static char mode;
 public:
 	UI();
 	~UI();

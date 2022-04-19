@@ -79,9 +79,11 @@ public:
 		return Speed;
 	}
 
+
+	friend std::ostream& operator<<(std::ostream& os, const Truck& T) {
+		os << T.GetID();
+		return os;
+	}
 };
-
-
-
 
 

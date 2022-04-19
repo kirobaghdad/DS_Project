@@ -8,18 +8,6 @@ using namespace std;
 
 
 
-ostream& operator<<(ostream& os, const Truck& T)
-{
-	os << T.GetID();
-	return os;
-}
-
-ostream& operator<<(ostream& os, const Cargo& c)
-{
-	os << c.getID();
-	return os;
-}
-
 
 
 int DS_Project()

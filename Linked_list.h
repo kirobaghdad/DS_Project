@@ -35,13 +35,6 @@ void Linked_list <T>::print()
 }
 
 
-template<typename T>
-void setHead(const T*& ptr) {
-	Head = ptr;
-}
-
-
-
 
 template<typename T>
 inline Linked_list<T>::Linked_list()

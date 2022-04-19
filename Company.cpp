@@ -153,7 +153,7 @@ void Company::Loading()
 			ptr = new Preparation(eventTime, LU_Time, DIST, cost, ID, cargoTyp);
 			Events.enqueue(ptr);
 			break;
-		/*case 'X':
+		case 'X':
 			IN >> day;
 			IN.ignore();
 			IN >> hours;
@@ -162,7 +162,7 @@ void Company::Loading()
 			IN >> ID;
 			ptr = new CancelEvent(eventTime, ID);
 			Events.enqueue(ptr);
-			break;*/
+			break;
 		case 'P':
 			IN >> day;
 			IN.ignore();

@@ -32,9 +32,6 @@ void UI::printnow(Time t , Linked_list<Cargo>& cn, LinkedQueue<Cargo>& cs, Prior
 	cout << sum << "Delivered Cargos::["; cn.print(); cout << "]  ("; cs.print(); cout << ")   {"; cv.print(); cout << "}" << endl;
 
 
-
-
-
 }
 
 
@@ -45,14 +42,12 @@ void UI::print(Time t, Linked_list<Cargo>& cn, LinkedQueue<Cargo>& cs, PriorityQ
 
 	case'I':
 		std::cin.ignore();
-		printnow(t,cn,cs,cv,Tcn,Tcs,Tcv, Mcn, Mcs, Mcv, Dcn, Dcs, Dcv);
+		printnow(t, cn, cs, cv, Tcn, Tcs, Tcv, Mcn, Mcs, Mcv, Dcn, Dcs, Dcv);
 
 	case 'S':
 
 		Sleep(1000);
 		printnow(t, cn, cs, cv, Tcn, Tcs, Tcv, Mcn, Mcs, Mcv, Dcn, Dcs, Dcv);
-
-
 	}
 }
 
