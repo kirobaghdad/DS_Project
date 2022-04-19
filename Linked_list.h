@@ -18,7 +18,25 @@ public:
 	int getfrequencyof(const T& Item);
 	bool contain(const T& Item);
 	Node<T>* getHead()const;
+	void print();
 };
+
+
+template<typename T>
+void Linked_list <T>::print()
+{
+	Node<T>* ptr = Head;
+	while (ptr)
+	{
+		
+		cout << ptr->getItem() << ",";
+		ptr = ptr->getNext();
+	}
+}
+
+
+
+
 
 template<typename T>
 inline Linked_list<T>::Linked_list()

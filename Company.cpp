@@ -1,5 +1,8 @@
 #include "Company.h"
 
+int  Truck::id = 0;
+
+int Cargo::numberofcargos = 0;
 
 Company::Company()
 { 
@@ -186,7 +189,7 @@ void Company::Print()
 	Out << "CDT CID PT WT TID \n";
 	Cargo temp;
 	Time T;
-	while (deliveredCargo.dequeue(temp))
+	while (deliveredCargoNC.dequeue(temp))
 	{
 		T = temp.getCargoDelivreyTime();
 		Out << T.getDay() << ":" << T.getHour() << " ";
@@ -223,7 +226,7 @@ void Company::Simulator()
 
 	int i = 1;
 	Event* e = NULL;
-	while (!Events.isEmpty() || !NC.isEmpty() || !SC.isEmpty() || !VC.isEmpty() || !Moving.isEmpty())
+	while (!Events.isEmpty() || !NC.isEmpty() || !SC.isEmpty() || !VC.isEmpty() || !MovingNC.isEmpty()|| !MovingSC.isEmpty()|| !MovingVC.isEmpty())
 	{
 		if (!Events.isEmpty())
 		{
@@ -240,18 +243,18 @@ void Company::Simulator()
 		if (!NC.isEmpty())
 		{
 			NC.removeBeg(c);
-			Moving.enqueue(c);
+			MovingNC.enqueue(c);
 		}
 		if (!SC.isEmpty())
 		{
 			SC.dequeue(c);
-			Moving.enqueue(c);
+			MovingSC.enqueue(c);
 		}
 	
 		if (!VC.isEmpty())
 		{
 			VC.dequeue(c);
-			Moving.enqueue(c);
+			MovingSC.enqueue(c);
 		}
 
 		
@@ -260,26 +263,33 @@ void Company::Simulator()
 		if (i % 5 == 0)
 		{
 
-			if (!Moving.isEmpty())
+			if (!MovingNC.isEmpty())
 			{
-				Moving.dequeue(c);
+				MovingNC.dequeue(c);
 				c.setCargoDelivreyTime(currentTime);
-				deliveredCargo.enqueue(c);
+				deliveredCargoNC.enqueue(c);
 			}
-			if (!Moving.isEmpty())
+			if (!MovingSC.isEmpty())
 			{
-				Moving.dequeue(c);
+				MovingSC.dequeue(c);
 				c.setCargoDelivreyTime(currentTime);
-				deliveredCargo.enqueue(c);
+				deliveredCargoSC.enqueue(c);
 			}
 
-			if (!Moving.isEmpty())
+			if (!MovingVC.isEmpty())
 			{
-				Moving.dequeue(c);
+				MovingVC.dequeue(c);
 				c.setCargoDelivreyTime(currentTime);
-				deliveredCargo.enqueue(c);
+				deliveredCargoVC.enqueue(c);
 			}
 		}
+
+		
+		
+
+
+		userinterface.print(currentTime, NC, SC, VC, NTs, STs, VTs, MovingNC,MovingSC, MovingVC, deliveredCargoNC, deliveredCargoSC, deliveredCargoVC);
+
 
 		i++;
 		currentTime.increase();

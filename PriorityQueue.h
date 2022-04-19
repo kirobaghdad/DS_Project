@@ -8,7 +8,7 @@ template <typename T>
 class PriorityQueue
 {
 private:
-
+	int count;
 	PriorityNode<T>* backPtr;
 	PriorityNode<T>* frontPtr;
 public:
@@ -18,16 +18,35 @@ public:
 	bool dequeue(T& frntEntry);
 	bool peek(T& frntEntry)  const;
 	~PriorityQueue();
-
-
+	int GetCount();
 	PriorityQueue(const PriorityQueue<T>& LQ);
-	PriorityNode<T>* getFrontptr() const;
-	bool remove(const int ID);
+	void print();
+
 };
+
+template<typename T>
+void PriorityQueue<T>::print()
+{
+	PriorityNode<T>* ptr = frontPtr;
+	while (ptr)
+	{
+		cout << ptr->getItem() << ",";
+		ptr = ptr->getNext();
+	}
+}
+
+template <typename T>
+int PriorityQueue<T>::GetCount()
+{
+	return count;
+}
+
+
 
 template <typename T>
 PriorityQueue<T>::PriorityQueue()
-{
+{ 
+	count = 0;
 	backPtr = nullptr;
 	frontPtr = nullptr;
 
@@ -60,6 +79,7 @@ bool PriorityQueue<T>::enqueue(const T& newEntry, int p)
 	if (isEmpty())
 	{
 		frontPtr = temp;
+		count++;
 		return true;
 	}
 	
@@ -83,6 +103,7 @@ bool PriorityQueue<T>::enqueue(const T& newEntry, int p)
 		temp->setNext(start->getNext());
 		start->setNext(temp);
 	}
+		count++;
 	return true;
 }
 
@@ -103,7 +124,7 @@ bool PriorityQueue<T>::dequeue(T& frntEntry)
 
 
 	delete nodeToDeletePtr;
-
+	count--;
 	return true;
 
 }
@@ -128,6 +149,7 @@ PriorityQueue<T>::~PriorityQueue()
 }
 
 
+
 template <typename T>
 PriorityQueue<T>::PriorityQueue(const PriorityQueue<T>& LQ)
 {
@@ -142,7 +164,6 @@ PriorityQueue<T>::PriorityQueue(const PriorityQueue<T>& LQ)
 	frontPtr = backPtr = ptr;
 	NodePtr = NodePtr->getNext();
 
-
 	while (NodePtr)
 	{
 		PriorityNode<T>* ptr = new Node<T>(NodePtr->getItem());
@@ -152,39 +173,5 @@ PriorityQueue<T>::PriorityQueue(const PriorityQueue<T>& LQ)
 	}
 }
 
-template<typename T>
-inline PriorityNode<T>* PriorityQueue<T>::getFrontptr() const
-{
-	return frontPtr;
-}
 
-template <typename T>
-inline bool PriorityQueue<T>::remove(const int ID)
-{
-	if (isEmpty())
-		return false;
-
-	PriorityNode<Cargo>* ptr = frontPtr;
-	if (ptr->getItem().getID() == ID)
-	{
-		frontPtr = frontPtr->getNext();
-
-		if (ptr == backPtr)
-			backPtr = nullptr;
-		return true;
-	}
-	ptr = ptr->getNext();
-	PriorityNode<Cargo>* prev = frontPtr;
-	while (ptr)
-	{
-		if (ptr->getItem().getID() == ID)
-		{
-			prev->setNext(ptr->getNext());
-			return true;
-		}
-		ptr = ptr->getNext();
-		prev = prev->getNext();
-	}
-	return false;
-}
 

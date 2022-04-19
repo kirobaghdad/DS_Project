@@ -1,14 +1,21 @@
 #pragma once
 #include "Time.h"
-
+#include<iostream>
 /*
 *	Cargo Class
 *	This is the Cargo Class. Each Cargo has its unique ID, cost, Load/Unload time, delivery distance, type, and preparation time.
 */
 
+
+
+
+
 class Cargo
 {
 private:
+
+	static int numberofcargos;
+
 	Time preparationTime;	//The Time (day:hour) when the cargo is ready to be assigned to a truck.
 	int LU_Time;	//Time (in hours) to load/unload the cargo to/from the truck.
 	int deliveryDistance;	//The distance (in kilometers) from the company to the delivery location of the cargo.
@@ -40,4 +47,8 @@ public:
 	Time getWaitingTime()const;
 	bool operator==(int x);
 	void setCargoDelivreyTime(Time T);
+	static int GetNumber();
 };
+
+
+ 

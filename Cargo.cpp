@@ -2,6 +2,9 @@
 #include <cctype>
 
 Cargo::Cargo(Time pt, int LU, int DD, int C, int id, char CT){
+
+	numberofcargos++;
+
 	preparationTime = pt;
 
 	if (LU > 0)
@@ -93,4 +96,9 @@ bool Cargo::operator==(int x)
 void Cargo::setCargoDelivreyTime(Time T)
 {
 	cargoDelivreyTime = T;
+}
+
+int Cargo::GetNumber()
+{
+	return numberofcargos;
 }

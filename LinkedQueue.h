@@ -3,6 +3,7 @@
 #include"Cargo.h"
 #include "Node.h"
 #include "QueueADT.h"
+#include<iostream>
 using namespace std;
 
 
@@ -10,7 +11,7 @@ template <typename T>
 class LinkedQueue :public QueueADT<T>
 {
 private:
-
+	int count;
 	Node<T>* backPtr;
 	Node<T>* frontPtr;
 public:
@@ -20,23 +21,46 @@ public:
 	bool dequeue(T& frntEntry);
 	bool peek(T& frntEntry)  const;
 	~LinkedQueue();
-
+	int GetCount();
 
 	LinkedQueue(const LinkedQueue<T>& LQ);
 	Node<T>* getFrontptr() const;
 	void setFrontPtr(Node<T>*);
 	Node<T>* getBackPtr() const;
 	void setBackPtr(Node<T>*);
+	void print();
 };
 
 template <typename T>
 LinkedQueue<T>::LinkedQueue()
 {
+	count = 0;
 	backPtr = nullptr;
 	frontPtr = nullptr;
 
 }
 /////////////////////////////////////////////////////////////////////////////////////////
+
+template <typename T>
+int LinkedQueue<T>::GetCount() 
+{
+	return count;
+}
+
+template<typename T>
+void LinkedQueue<T>::print()
+{
+	Node<T>* ptr = frontPtr;
+	while (ptr)
+	{
+		cout << ptr->getItem() << ",";
+		ptr = ptr->getNext();
+	}
+}
+
+
+
+
 
 template <typename T>
 bool LinkedQueue<T>::isEmpty() const
@@ -56,7 +80,9 @@ bool LinkedQueue<T>::enqueue(const T& newEntry)
 		backPtr->setNext(newNodePtr);
 
 	backPtr = newNodePtr;
+	count++;
 	return true;
+
 }
 
 
@@ -77,7 +103,7 @@ bool LinkedQueue<T>::dequeue(T& frntEntry)
 
 
 	delete nodeToDeletePtr;
-
+	count--;
 	return true;
 
 }

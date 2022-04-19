@@ -10,6 +10,7 @@
 #include"PriorityQueue.h"
 #include "Time.h"
 #include "Linked_list.h"
+#include"UI.h"
 using std::ifstream;
 using std::ofstream;
 
@@ -23,26 +24,31 @@ private:
 	ofstream Out;
 	ifstream IN;
 
+	//
+	UI userinterface;
 	// Event List
 	LinkedQueue<Event*>  Events;
-	//Cargo List 
-	Linked_list<Cargo> NC;
-	LinkedQueue<Cargo> SC;
-
+	// Waiting  Cargo List 
+	Linked_list<Cargo>   NC;
+	LinkedQueue<Cargo>   SC;
 	PriorityQueue<Cargo> VC;
+
 	//Truck List 
 	LinkedQueue<Truck> NTs;
 	LinkedQueue<Truck> STs;
 	LinkedQueue<Truck> VTs;
 
-	//Waiting Cargos List
-	LinkedQueue<Cargo> Waiting;
 
 	// Moving Cargos List 	 
-	LinkedQueue<Cargo> Moving;
+	LinkedQueue<Cargo> MovingNC;
+	LinkedQueue<Cargo> MovingSC;
+	LinkedQueue<Cargo> MovingVC;
 
 	//Delivered Cargos List
-	LinkedQueue<Cargo> deliveredCargo;
+	LinkedQueue<Cargo> deliveredCargoNC;
+	LinkedQueue<Cargo> deliveredCargoSC;
+	LinkedQueue<Cargo> deliveredCargoVC;
+
 
 	Time currentTime;
 	// Cargo num

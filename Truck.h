@@ -9,12 +9,14 @@ class Truck
 	int TC;      // Truck Capacity
 	int Speed;  //  Speed
 	int waitingTime;
-
+	static int id;
+	int ID;
 
 public:
 	Truck() {};
 	Truck(char type, int tc, int speed)
 	{
+		ID = ++id;
 		SetDI(0);
 		NumofJourneys = 0;
 		SetTC(tc);
@@ -56,9 +58,13 @@ public:
 	}
 	//============================== Getters ==============================// 
 
-	int GetDI()
+	int GetDI() const
 	{
 		return DI;
+	}
+	int GetID() const
+	{
+		return ID;
 	}
 	int GetNumofJourneys()
 	{
@@ -73,6 +79,9 @@ public:
 		return Speed;
 	}
 
-
-
 };
+
+
+
+
+
