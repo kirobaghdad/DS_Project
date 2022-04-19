@@ -28,7 +28,6 @@ void Linked_list <T>::print()
 	Node<T>* ptr = Head;
 	while (ptr)
 	{
-		
 		cout << ptr->getItem() << ",";
 		ptr = ptr->getNext();
 	}
@@ -76,6 +75,7 @@ bool Linked_list<T>::add(const T& newItem)
 	if (isEmpty())
 	{
 		Head = temp;
+		count++;
 		return true;
 	}
 	while (ptr->getNext())

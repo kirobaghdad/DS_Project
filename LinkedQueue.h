@@ -24,10 +24,6 @@ public:
 	int GetCount();
 
 	LinkedQueue(const LinkedQueue<T>& LQ);
-	Node<T>* getFrontptr() const;
-	void setFrontPtr(Node<T>*);
-	Node<T>* getBackPtr() const;
-	void setBackPtr(Node<T>*);
 	void print();
 };
 
@@ -57,9 +53,6 @@ void LinkedQueue<T>::print()
 		ptr = ptr->getNext();
 	}
 }
-
-
-
 
 
 template <typename T>
@@ -100,7 +93,6 @@ bool LinkedQueue<T>::dequeue(T& frntEntry)
 
 	if (nodeToDeletePtr == backPtr)
 		backPtr = nullptr;
-
 
 	delete nodeToDeletePtr;
 	count--;
@@ -152,24 +144,3 @@ LinkedQueue<T>::LinkedQueue(const LinkedQueue<T>& LQ)
 	}
 }
 
-template<typename T>
-inline Node<T>* LinkedQueue<T>::getFrontptr() const
-{
-	return frontPtr;
-}
-
-
-template<typename T>
-inline void LinkedQueue<T>::setFrontPtr(Node<T>* ptr) {
-	frontPtr = ptr;
-}
-
-template<typename T>
-inline Node<T>* LinkedQueue<T>::getBackPtr() const {
-	return backPtr;
-}
-
-template<typename T>
-inline void LinkedQueue<T>::setBackPtr(Node<T>* ptr) {
-	backPtr = ptr;
-}

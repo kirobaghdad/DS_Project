@@ -49,10 +49,7 @@ public:
 	void setCargoDelivreyTime(Time T);
 	static int GetNumber();
 
-	friend std::ostream& operator<<(std::ostream& os, const Cargo& c) {
-		os << c.getID();
-		return os;
-	}
+	friend std::ostream& operator<<(std::ostream& os, const Cargo& c);
 };
 
 

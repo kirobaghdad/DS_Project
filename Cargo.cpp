@@ -102,3 +102,9 @@ int Cargo::GetNumber()
 {
 	return numberofcargos;
 }
+
+std::ostream& operator<<(std::ostream& os, const Cargo& c)
+{
+	os << c.getID();
+	return os;
+}
