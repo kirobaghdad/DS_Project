@@ -1,7 +1,7 @@
 #include "UI.h"
 #include<Windows.h>
 
-char UI ::mode;
+
 UI::UI()
 {
 	cout << "Press I for Interactive Mode or S for Step-By-Step Mode" << endl;
@@ -43,11 +43,11 @@ void UI::print(Time t, Linked_list<Cargo>& cn, LinkedQueue<Cargo>& cs, PriorityQ
 	case'I':
 		std::cin.ignore();
 		printnow(t, cn, cs, cv, Tcn, Tcs, Tcv, Mcn, Mcs, Mcv, Dcn, Dcs, Dcv);
-
+		break;
 	case 'S':
 		Sleep(1);
 		printnow(t, cn, cs, cv, Tcn, Tcs, Tcv, Mcn, Mcs, Mcv, Dcn, Dcs, Dcv);
-	
+		break;
 
 	}
 }
