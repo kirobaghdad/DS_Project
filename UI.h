@@ -1,27 +1,15 @@
 #pragma once
-#include <fstream>
-#include "Company.h"
-#include"Time.h"
-#include "LinkedQueue.h"
-#include"Event.h"
-#include"Preparation.h"
-#include"Promotion.h"
-#include"CancelEvent.h"
-#include "Time.h"
-#pragma once
-
+#include <iostream>
+using namespace std;
 
 class UI
-{
-
-private:
-	
- 	 
+{	
+	char mode;
 public:
 	UI();
 	~UI();
-	              
-
+	void printInteractive();
+	void printStep_By_Step();
 	
 	
 

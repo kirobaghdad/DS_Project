@@ -228,10 +228,11 @@ void Company::Simulator()
 		if (!Events.isEmpty())
 		{
 			Events.peek(e);
-			if (e->GetTime() == currentTime)
+			while (e->GetTime() == currentTime && !Events.isEmpty())
 			{
 				e->Execute(NC, SC, VC);
 				Events.dequeue(e);
+				Events.peek(e);
 			}
 		}
 		//Pick one cargo from each cargo type and move it to moving cargo list(s)
