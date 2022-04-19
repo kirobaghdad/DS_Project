@@ -35,6 +35,11 @@ void Linked_list <T>::print()
 }
 
 
+template<typename T>
+void setHead(const T*& ptr) {
+	Head = ptr;
+}
+
 
 
 
@@ -96,7 +101,8 @@ bool Linked_list<T>::removeID(const int ID)
 	{
 		return false;
 	}
-	if (Head->getItem()==ID)
+
+	if (Head->getItem() == ID)
 	{
 		Node<Cargo>* todelete = Head;
 		Head = Head->getNext();
@@ -104,10 +110,12 @@ bool Linked_list<T>::removeID(const int ID)
 		count--;
 		return true;
 	}
+
 	bool found = false;
+
 	Node<T>* ptr = Head->getNext();
 	Node<T>* prev = Head;
-	while (ptr&&!found)
+	while (ptr && !found)
 	{
 		if (ptr->getItem().getID() == ID)
 		{
