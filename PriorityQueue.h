@@ -67,7 +67,6 @@ bool PriorityQueue<T>::enqueue(const T& newEntry, int p)
 {
 
 	PriorityNode<T>* start = frontPtr;
-
 	// Create new Node
 	PriorityNode<T>* temp = new PriorityNode<T>;
 	temp->setItem(newEntry);
@@ -85,18 +84,17 @@ bool PriorityQueue<T>::enqueue(const T& newEntry, int p)
 		return true;
 	}
 	
-		if (frontPtr->priority > p)
+		if (frontPtr->priority < p)
 		{
 			// Insert New Node before head
 			temp->setNext(frontPtr);
 			frontPtr = temp;
 		}
-	
 	else
 	{
 		// Traverse the list and find a
 		// position to insert new node
-		while (start->getNext() != nullptr && start->getNext()->priority < p)
+		while (start->getNext() != nullptr && start->getNext()->priority >= p)
 		{
 			start = start->getNext();
 		}
@@ -108,7 +106,6 @@ bool PriorityQueue<T>::enqueue(const T& newEntry, int p)
 		count++;
 	return true;
 }
-
 
 
 template <typename T>

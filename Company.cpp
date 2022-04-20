@@ -226,7 +226,7 @@ void Company::Simulator()
 
 	int i = 1;
 	Event* e = NULL;
-	while (!Events.isEmpty() || !NC.isEmpty() || !SC.isEmpty() || !VC.isEmpty() || !MovingNC.isEmpty()|| !MovingSC.isEmpty()|| !MovingVC.isEmpty())
+	while (!Events.isEmpty() || !NC.isEmpty() || !SC.isEmpty() || !VC.isEmpty() || !MovingNC.isEmpty() || !MovingSC.isEmpty() || !MovingVC.isEmpty())
 	{
 		if (!Events.isEmpty())
 		{
