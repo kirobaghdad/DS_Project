@@ -254,9 +254,9 @@ void Company::Simulator()
 		if (!VC.isEmpty())
 		{
 			VC.dequeue(c);
-			MovingSC.enqueue(c);
+			MovingVC.enqueue(c);
 		}
-
+		
 		
 		//////////////////////////////////////////////
 
@@ -285,12 +285,7 @@ void Company::Simulator()
 		}
 
 		
-		
-
-
-		userinterface.print(currentTime, NC, SC, VC, NTs, STs, VTs, MovingNC,MovingSC, MovingVC, deliveredCargoNC, deliveredCargoSC, deliveredCargoVC);
-
-
+		userinterface.print(currentTime, NC, SC, VC, NTs, STs, VTs, MovingNC , MovingSC, MovingVC, deliveredCargoNC, deliveredCargoSC, deliveredCargoVC);
 		i++;
 		currentTime.increase();
 	}

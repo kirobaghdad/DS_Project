@@ -31,6 +31,8 @@ void PriorityQueue<T>::print()
 	while (ptr)
 	{
 		cout << ptr->getItem() << ",";
+		if (ptr->getNext() != NULL)
+			cout << ",";
 		ptr = ptr->getNext();
 	}
 }

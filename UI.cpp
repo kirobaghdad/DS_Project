@@ -26,7 +26,7 @@ void UI::printnow(Time t , Linked_list<Cargo>& cn, LinkedQueue<Cargo>& cs, Prior
 	cout << sum << " Empty Trucks:  ["; Tcn.print(); cout << "] , ("; Tcs.print(); cout << ") , {"; Tcv.print(); cout << "}" << endl;;
 	cout << "---------------------------------------------------------------------------" << endl;
 	sum = Mcs.GetCount() + Mcv.GetCount() + Mcn.GetCount();
-	cout << sum << " Moving Cargos::["; Mcn.print(); cout << "]  ("; Mcs.print(); cout << ")   {"; Mcv.print(); cout << "}" << endl;
+	cout << sum << " Moving Cargos::["; Mcn.print(); cout << "]  ("; Mcs.print(); cout << ")   {";  Mcv.print(); cout << "}" << endl;
 	cout << "---------------------------------------------------------------------------" << endl;
 	sum = Dcs.GetCount() + Dcv.GetCount() + Dcn.GetCount();
 	cout << sum << " Delivered Cargos::["; Dcn.print(); cout << "]  ("; Dcs.print(); cout << ")   {"; Dcv.print(); cout << "}" << endl;
