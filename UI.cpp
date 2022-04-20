@@ -14,13 +14,15 @@ UI::~UI()
 	
 }
 
-void UI::printnow(Time t , Linked_list<Cargo>& cn, LinkedQueue<Cargo>& cs, PriorityQueue<Cargo>& cv , LinkedQueue<Truck>& Tcn, LinkedQueue<Truck>& Tcs, LinkedQueue<Truck>& Tcv, LinkedQueue<Cargo>& Mcn, LinkedQueue<Cargo>& Mcs, LinkedQueue<Cargo>& Mcv, LinkedQueue<Cargo>& Dcn, LinkedQueue<Cargo>& Dcs, LinkedQueue<Cargo>& Dcv)
+void UI::printNow(Time t, Linked_list<Cargo>& cn, LinkedQueue<Cargo>& cs, PriorityQueue<Cargo>& cv, LinkedQueue<Truck>& Tcn, LinkedQueue<Truck>& Tcs, LinkedQueue<Truck>& Tcv, LinkedQueue<Cargo>& Mcn, LinkedQueue<Cargo>& Mcs, LinkedQueue<Cargo>& Mcv, LinkedQueue<Cargo>& Dcn, LinkedQueue<Cargo>& Dcs, LinkedQueue<Cargo>& Dcv)
 {
-	cout << "Current Time(Day:Hour) :" << t.getDay() << ":" << t.getHour()<<endl; 
+
+
+	cout << "Current Time(Day:Hour) :" << t.getDay() << ":" << t.getHour() << endl;
 	//Waiting Cargos :
 	int sum = cs.GetCount() + cv.GetCount() + cn.getcurrentsize();
 
-	cout << sum << " Waiting Cargos:["; cn.print(); cout << "]  ("; cs.print(); cout << ")   {"; cv.print();cout<< "}" << endl;
+	cout << sum << " Waiting Cargos:["; cn.print(); cout << "]  ("; cs.print(); cout << ")   {"; cv.print(); cout << "}" << endl;
 	cout << "---------------------------------------------------------------------------" << endl;
 	sum = Tcn.GetCount() + Tcs.GetCount() + Tcv.GetCount();
 	cout << sum << " Empty Trucks:  ["; Tcn.print(); cout << "] , ("; Tcs.print(); cout << ") , {"; Tcv.print(); cout << "}" << endl;;
@@ -32,7 +34,14 @@ void UI::printnow(Time t , Linked_list<Cargo>& cn, LinkedQueue<Cargo>& cs, Prior
 	cout << sum << " Delivered Cargos::["; Dcn.print(); cout << "]  ("; Dcs.print(); cout << ")   {"; Dcv.print(); cout << "}" << endl;
 
 
+
+
+
+
+
 }
+
+
 
 
 void UI::print(Time t, Linked_list<Cargo>& cn, LinkedQueue<Cargo>& cs, PriorityQueue<Cargo>& cv, LinkedQueue<Truck>& Tcn, LinkedQueue<Truck>& Tcs, LinkedQueue<Truck>& Tcv, LinkedQueue<Cargo>& Mcn, LinkedQueue<Cargo>& Mcs, LinkedQueue<Cargo>& Mcv, LinkedQueue<Cargo>& Dcn, LinkedQueue<Cargo>& Dcs, LinkedQueue<Cargo>& Dcv)
@@ -42,11 +51,11 @@ void UI::print(Time t, Linked_list<Cargo>& cn, LinkedQueue<Cargo>& cs, PriorityQ
 
 	case'I':
 		std::cin.ignore();
-		printnow(t, cn, cs, cv, Tcn, Tcs, Tcv, Mcn, Mcs, Mcv, Dcn, Dcs, Dcv);
+		printNow(t, cn, cs, cv, Tcn, Tcs, Tcv, Mcn, Mcs, Mcv, Dcn, Dcs, Dcv);
 		break;
 	case 'S':
 		Sleep(1);
-		printnow(t, cn, cs, cv, Tcn, Tcs, Tcv, Mcn, Mcs, Mcv, Dcn, Dcs, Dcv);
+		printNow(t, cn, cs, cv, Tcn, Tcs, Tcv, Mcn, Mcs, Mcv, Dcn, Dcs, Dcv);
 		break;
 
 	}
