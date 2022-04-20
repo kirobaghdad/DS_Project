@@ -32,7 +32,7 @@ void UI::printNow(Time t, Linked_list<Cargo>& cn, LinkedQueue<Cargo>& cs, Priori
 	cout << "---------------------------------------------------------------------------" << endl;
 	sum = Dcs.GetCount() + Dcv.GetCount() + Dcn.GetCount();
 	cout << sum << " Delivered Cargos::["; Dcn.print(); cout << "]  ("; Dcs.print(); cout << ")   {"; Dcv.print(); cout << "}" << endl;
-
+	cout << endl;
 
 
 

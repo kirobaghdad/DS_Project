@@ -30,7 +30,7 @@ void PriorityQueue<T>::print()
 	PriorityNode<T>* ptr = frontPtr;
 	while (ptr)
 	{
-		cout << ptr->getItem() << ",";
+		cout << ptr->getItem() ;
 		if (ptr->getNext() != NULL)
 			cout << ",";
 		ptr = ptr->getNext();

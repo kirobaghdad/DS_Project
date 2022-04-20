@@ -28,7 +28,7 @@ void Linked_list <T>::print()
 	Node<T>* ptr = Head;
 	while (ptr)
 	{
-		cout << ptr->getItem() << ",";
+		cout << ptr->getItem() ;
 		if (ptr->getNext() != NULL)
 			cout << ",";
 		ptr = ptr->getNext();
