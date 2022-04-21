@@ -54,7 +54,7 @@ void UI::print(Time t, Linked_list<Cargo>& cn, LinkedQueue<Cargo>& cs, PriorityQ
 		printNow(t, cn, cs, cv, Tcn, Tcs, Tcv, Mcn, Mcs, Mcv, Dcn, Dcs, Dcv);
 		break;
 	case 'S':
-		Sleep(1);
+		Sleep(1000);
 		printNow(t, cn, cs, cv, Tcn, Tcs, Tcv, Mcn, Mcs, Mcv, Dcn, Dcs, Dcv);
 		break;
 
