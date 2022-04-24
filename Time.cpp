@@ -78,11 +78,23 @@ void Time::operator=(const Time& T)
 	Hour = T.Hour;
 }
 
-bool Time::operator==(const Time T)
+bool Time::operator==(const Time& T)
 {
 	if (T.Day == Day && T.Hour == Hour)
 		return true;
 	return false;
+}
+
+Time Time::operator - (const Time& T)
+{
+	int d = Day - T.Day;
+	int h = Hour - T.Hour;
+	if (h<0)
+	{
+		d--;
+		h = 24 + h;
+	}
+	return Time(d, h);
 }
 
 

@@ -23,14 +23,17 @@ void Preparation::Execute(Linked_list<Cargo>& cn, LinkedQueue<Cargo>& cs, Priori
 	case 'N':
 		ptr = new Cargo(EventTime, LU_Time, deliveryDistance, cost, ID, 'N');
 		cn.add(*ptr);
+		Company::increaseNC_Num();
 		break;
 	case 'S':
 		ptr = new Cargo(EventTime, LU_Time, deliveryDistance, cost, ID, 'S');
 		cs.enqueue(*ptr);
+		Company::increaseSC_Num();
 		break;
 	case 'V':
 		ptr = new Cargo(EventTime, LU_Time, deliveryDistance, cost, ID, 'V');
 		cv.enqueue(*ptr, deliveryDistance * cost);
+		Company::increaseVIPC_Num();
 		break;
 
 	default:

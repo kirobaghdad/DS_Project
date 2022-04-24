@@ -3,6 +3,9 @@
 int  Truck::id = 0;
 
 int Cargo::numberofcargos = 0;
+int Company::NC_Num = 0;
+int Company::SC_Num = 0;
+int Company::VIPC_Num = 0;
 
 Company::Company()
 { 
@@ -72,6 +75,21 @@ int Company::getAvgActiveTime()
 int Company::getAvgutilization()
 {
 	return Avgutilization;
+}
+
+void Company::increaseNC_Num()
+{
+	NC_Num++;
+}
+
+void Company::increaseSC_Num()
+{
+	SC_Num++;
+}
+
+void Company::increaseVIPC_Num()
+{
+	VIPC_Num++;
 }
 
 //============================== Get from Input File ==============================//
@@ -186,7 +204,7 @@ void Company::Print()
 {
 	Out.open("Output.txt");  //Open Output File
 
-	Out << "CDT CID PT WT TID \n";
+	Out << "CDT ID PT WT TID \n";
 	Cargo temp;
 	Time T;
 	while (deliveredCargoNC.dequeue(temp))
@@ -267,6 +285,7 @@ void Company::Simulator()
 			{
 				MovingNC.dequeue(c);
 				c.setCargoDelivreyTime(currentTime);
+				
 				deliveredCargoNC.enqueue(c);
 			}
 			if (!MovingSC.isEmpty())
