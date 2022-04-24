@@ -8,8 +8,6 @@ using namespace std;
 
 
 
-
-
 int DS_Project()
 {
 	Company C;

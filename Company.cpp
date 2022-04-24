@@ -244,7 +244,7 @@ void Company::Simulator()
 
 	int i = 1;
 	Event* e = NULL;
-	while (!Events.isEmpty() || !NC.isEmpty() || !SC.isEmpty() || !VC.isEmpty() || !MovingNC.isEmpty() || !MovingSC.isEmpty() || !MovingVC.isEmpty())
+	while (!Events.isEmpty() || !NC.isEmpty() || !SC.isEmpty() || !VC.isEmpty() /*|| !MovingNC.isEmpty() || !MovingSC.isEmpty() || !MovingVC.isEmpty() */ )
 	{
 		if (!Events.isEmpty())
 		{
@@ -258,7 +258,7 @@ void Company::Simulator()
 		}
 		//Pick one cargo from each cargo type and move it to moving cargo list(s)
 		Cargo c;
-		if (!NC.isEmpty())
+	/*	if (!NC.isEmpty())
 		{
 			NC.removeBeg(c);
 			MovingNC.enqueue(c);
@@ -273,37 +273,34 @@ void Company::Simulator()
 		{
 			VC.dequeue(c);
 			MovingVC.enqueue(c);
-		}
-		
-		
+		}*/
 		//////////////////////////////////////////////
 
 		if (i % 5 == 0)
 		{
 
-			if (!MovingNC.isEmpty())
+			if (!NC.isEmpty())
 			{
-				MovingNC.dequeue(c);
+				NC.removeBeg(c);
 				c.setCargoDelivreyTime(currentTime);
 				
 				deliveredCargoNC.enqueue(c);
 			}
-			if (!MovingSC.isEmpty())
+			if (!SC.isEmpty())
 			{
-				MovingSC.dequeue(c);
+				SC.dequeue(c);
 				c.setCargoDelivreyTime(currentTime);
 				deliveredCargoSC.enqueue(c);
 			}
 
-			if (!MovingVC.isEmpty())
+			if (!VC.isEmpty())
 			{
-				MovingVC.dequeue(c);
+				VC.dequeue(c);
 				c.setCargoDelivreyTime(currentTime);
 				deliveredCargoVC.enqueue(c);
 			}
 		}
 
-		
 		userinterface.print(currentTime, NC, SC, VC, NTs, STs, VTs, MovingNC , MovingSC, MovingVC, deliveredCargoNC, deliveredCargoSC, deliveredCargoVC);
 		i++;
 		currentTime.increase();
