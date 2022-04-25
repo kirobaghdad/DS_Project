@@ -48,7 +48,6 @@ void UI::print(Time t, Linked_list<Cargo>& cn, LinkedQueue<Cargo>& cs, PriorityQ
 {
 	switch (mode)
 	{
-
 	case'I':
 		std::cin.ignore();
 		printNow(t, cn, cs, cv, Tcn, Tcs, Tcv, Mcn, Mcs, Mcv, Dcn, Dcs, Dcv);
