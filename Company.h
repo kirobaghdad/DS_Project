@@ -48,6 +48,7 @@ private:
 	LinkedQueue<Cargo> deliveredCargoNC;
 	LinkedQueue<Cargo> deliveredCargoSC;
 	LinkedQueue<Cargo> deliveredCargoVC;
+	LinkedQueue<Cargo> totalDeliveredCargo;
 
 
 	Time currentTime;
@@ -56,7 +57,7 @@ private:
 	static int SC_Num;
 	static int VIPC_Num;
 	//Auto-promoted Cargos num
-	int PC_Num;
+	static int PC_Num;
 	// Trucks num 
 	int NT_Num;
 	int ST_Num;
@@ -106,6 +107,7 @@ public:
 	static void increaseNC_Num();
 	static void increaseSC_Num();
 	static void increaseVIPC_Num();
+	static void increasePC_Num();
 	//Simulator
 	void Simulator();
 

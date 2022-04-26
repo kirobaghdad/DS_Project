@@ -1,6 +1,7 @@
 #pragma once
 #include "Cargo.h"
 #include "Event.h"
+#include "Company.h"
 
 class Promotion : public Event
 {

@@ -22,6 +22,7 @@ void Promotion::Execute(Linked_list<Cargo>& cn, LinkedQueue<Cargo>& cs, Priority
 				cn.removeID(Item.getID());         //move it from normal list to vip list
 				cv.enqueue(Item, Item.getCost() * Item.getdeliveryDistance());
 				promoted = true;
+				Company::increasePC_Num();
 			}
 		}
 		ptr = ptr->getNext();

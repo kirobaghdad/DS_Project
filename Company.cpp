@@ -6,10 +6,10 @@ int Cargo::numberofcargos = 0;
 int Company::NC_Num = 0;
 int Company::SC_Num = 0;
 int Company::VIPC_Num = 0;
+int Company::PC_Num = 0;
 
 Company::Company()
 { 
-	PC_Num = 1;
 	currentTime.setDay(0);
 	currentTime.setHour(0);
 	Loading();
@@ -90,6 +90,11 @@ void Company::increaseSC_Num()
 void Company::increaseVIPC_Num()
 {
 	VIPC_Num++;
+}
+
+void Company::increasePC_Num()
+{
+	PC_Num++;
 }
 
 //============================== Get from Input File ==============================//
@@ -207,7 +212,7 @@ void Company::Print()
 	Out << "CDT ID PT WT TID \n";
 	Cargo temp;
 	Time T;
-	while (deliveredCargoNC.dequeue(temp))
+	while (totalDeliveredCargo.dequeue(temp))
 	{
 		T = temp.getCargoDelivreyTime();
 		Out << T.getDay() << ":" << T.getHour() << " ";
@@ -227,7 +232,7 @@ void Company::Print()
 	Out << ", S: " << SC_Num;
 	Out << ", V: " << VIPC_Num << "] \n";
 	Out << "Cargo Avg Wait = " << CargoAvgWait.getDay() << ":" << CargoAvgWait.getHour() << endl;
-	Out << "Auto-promoted Cargos:" << NC_Num / PC_Num << "% \n";
+	Out << "Auto-promoted Cargos:" << (100*PC_Num )/NC_Num << "% \n";
 
 	//get number of each typ of trucks and print it
 	Out << "Trucks: " << NT_Num + ST_Num + VIPT_Num;
@@ -283,14 +288,15 @@ void Company::Simulator()
 			{
 				NC.removeBeg(c);
 				c.setCargoDelivreyTime(currentTime);
-				
 				deliveredCargoNC.enqueue(c);
+				totalDeliveredCargo.enqueue(c);
 			}
 			if (!SC.isEmpty())
 			{
 				SC.dequeue(c);
 				c.setCargoDelivreyTime(currentTime);
 				deliveredCargoSC.enqueue(c);
+				totalDeliveredCargo.enqueue(c);
 			}
 
 			if (!VC.isEmpty())
@@ -298,6 +304,7 @@ void Company::Simulator()
 				VC.dequeue(c);
 				c.setCargoDelivreyTime(currentTime);
 				deliveredCargoVC.enqueue(c);
+				totalDeliveredCargo.enqueue(c);
 			}
 		}
 
