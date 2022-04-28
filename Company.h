@@ -50,6 +50,7 @@ private:
 	LinkedQueue<Cargo> deliveredCargoVC;
 	LinkedQueue<Cargo> totalDeliveredCargo;
 
+	LinkedQueue<Truck> assignedTrucks;
 
 	Time currentTime;
 	// Cargo num
@@ -89,7 +90,7 @@ public:
 	Company();
 
 	//input and output functions
-	void Loading();
+	void LoadFile();
 	void Print();
 	//////////////////////////////////////////
 	bool offHours();
@@ -110,7 +111,7 @@ public:
 	static void increasePC_Num();
 	//Simulator
 	void Simulator();
-
+	bool assigningCargos();
 
 
 };

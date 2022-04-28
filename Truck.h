@@ -12,8 +12,12 @@ class Truck
 	static int id;
 	int ID;
 
+	LinkedQueue<Cargo> assignedCargos;
+	bool isAssigned;
+
 public:
-	Truck() {};
+	Truck() {
+	};
 	Truck(char type, int tc, int speed)
 	{
 		ID = ++id;
@@ -22,10 +26,26 @@ public:
 		SetTC(tc);
 		SetSpeed(speed);
 		waitingTime = 0;
-
+		isAssigned = false;
 	}
 	//============================== Setters ==============================// 
 
+	void setIsAssigned(bool assign) {
+		isAssigned = assign;
+	}
+
+	int getWaitingTime()const {
+		return waitingTime;
+	}
+	
+	bool assignCargo(Cargo& newCargo) {
+
+		return assignedCargos.enqueue(newCargo);
+	}
+
+	void increaseWaitingTime() {
+		waitingTime++;
+	}
 	bool SetDI(int di)
 	{
 		if (di < 0)

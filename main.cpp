@@ -11,7 +11,7 @@ using namespace std;
 int DS_Project()
 {
 	Company C;
-	C.Loading();
+	C.LoadFile();
 	C.Simulator();
 	C.Print();
 	return 0;

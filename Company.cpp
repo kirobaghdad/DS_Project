@@ -12,10 +12,13 @@ Company::Company()
 { 
 	currentTime.setDay(0);
 	currentTime.setHour(0);
-	Loading();
+	LoadFile();
 }
 
-bool Company::offHours() {
+/**
+Returns true if it is off - hours
+**/
+bool Company::offHours() { 
 	if (currentTime.getHour() < 5 || currentTime.getHour() > 23) {
 		return true;
 	}
@@ -98,7 +101,7 @@ void Company::increasePC_Num()
 }
 
 //============================== Get from Input File ==============================//
-void Company::Loading()
+void Company::LoadFile()
 {
 	IN.open("Input.txt");  //Open Input File
 
@@ -316,3 +319,50 @@ void Company::Simulator()
 }
 
 
+bool Company::assigningCargos() {
+	Cargo* newCargo = NULL;
+	Truck* newTruck = NULL;
+
+	if (!offHours()) {
+		if (VTs.GetCount() != 0) {
+			VTs.peek(*newTruck);
+			if (VC.GetCount() >= VIPT_Capacity || newTruck->getWaitingTime() >= MaxW) {
+				VTs.dequeue(*newTruck);
+
+				for (int i = 0; i < VIPT_Capacity; i++) { //Assigning the cargos to the Truck
+					VC.dequeue(*newCargo);
+					newTruck->assignCargo(*newCargo);
+				}
+				assignedTrucks.enqueue(*newTruck);
+			}
+		}
+
+		if (NTs.GetCount() != 0) {
+			NTs.peek(*newTruck);
+			if (NC.getcurrentsize() >= NT_Capacity || newTruck->getWaitingTime() >= MaxW) {
+				NTs.dequeue(*newTruck);
+
+				for (int i = 0; i < NT_Capacity; i++) { //Assigning the cargos to the Truck
+					NC.removeBeg(*newCargo);
+					newTruck->assignCargo(*newCargo);
+				}
+				assignedTrucks.enqueue(*newTruck);
+			}
+		}
+
+		if (STs.GetCount() != 0) {
+			STs.peek(*newTruck);
+			if (SC.GetCount() >= ST_Capacity || newTruck->getWaitingTime() >= MaxW) {
+				STs.dequeue(*newTruck);
+
+				for (int i = 0; i < ST_Capacity; i++) { //Assigning the cargos to the Truck
+					SC.dequeue(*newCargo);
+					newTruck->assignCargo(*newCargo);
+				}
+				assignedTrucks.enqueue(*newTruck);
+			}
+		}
+	}
+
+
+}
