@@ -250,7 +250,7 @@ void Company::Print()
 void Company::Simulator()
 {   
 
-	while (!NC.isEmpty()&& !SC.isEmpty()&& !VC.isEmpty()) //On each hour
+	while (!Events.isEmpty()||!NC.isEmpty()|| !SC.isEmpty()|| !VC.isEmpty()) //On each hour
 	{
 		Event* e = NULL;                      // a. Execute the events that should be executed at that hour
 		if (!Events.isEmpty())
@@ -329,6 +329,7 @@ void Company::AssigningVipCargos(PriorityQueue<Cargo>& VC, LinkedQueue<Truck>& T
 					{ 
 						VC.dequeue(*newCargo);
 						newTruck->assignCargo(*newCargo);
+						MovingVC.enqueue(*newCargo);
 					}
 					assignedTrucks.enqueue(*newTruck);
 				//|| newTruck->getWaitingTime() >= MaxW
@@ -350,8 +351,10 @@ void Company::AssigningSpecialCargos(LinkedQueue<Cargo>& SC, LinkedQueue<Truck>&
 			{
 				SC.dequeue(*newCargo);
 				newTruck->assignCargo(*newCargo);
+				MovingSC.enqueue(*newCargo);
 			}
 			assignedTrucks.enqueue(*newTruck);
+
 			//|| newTruck->getWaitingTime() >= MaxW
 		}
 	}
@@ -371,6 +374,7 @@ void Company::AssigningNormalCargos(Linked_list<Cargo>& NC, LinkedQueue<Truck>& 
 			{
 				NC.removeBeg(*newCargo);
 				newTruck->assignCargo(*newCargo);
+				MovingNC.enqueue(*newCargo);
 			}
 			assignedTrucks.enqueue(*newTruck);
 			//|| newTruck->getWaitingTime() >= MaxW
