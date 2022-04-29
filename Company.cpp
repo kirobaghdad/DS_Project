@@ -318,20 +318,20 @@ void Company::AssignmentOrder()
 
 void Company::AssigningVipCargos(PriorityQueue<Cargo>& VC, LinkedQueue<Truck>& Tr)
 {
-	Cargo* newCargo = NULL;
-	Truck* newTruck = NULL;
+	Cargo newCargo  ;
+	Truck newTruck  ;
 	if (!offHours())
 	{
-	    while (VC.GetCount() >= VIPT_Capacity&&!VTs.isEmpty())
+	    while (VC.GetCount() >= VIPT_Capacity&&!Tr.isEmpty())
 	    {
-				 VTs.dequeue(*newTruck);
+				 Tr.dequeue(newTruck);
 					for (int i = 0; i < VIPT_Capacity; i++) //Assigning the cargos to the Truck
 					{ 
-						VC.dequeue(*newCargo);
-						newTruck->assignCargo(*newCargo);
-						MovingVC.enqueue(*newCargo);
+						VC.dequeue(newCargo);
+						newTruck.assignCargo(newCargo);
+						MovingVC.enqueue(newCargo);
 					}
-					assignedTrucks.enqueue(*newTruck);
+					assignedTrucks.enqueue(newTruck);
 				//|| newTruck->getWaitingTime() >= MaxW
 	    }
 	}
@@ -340,20 +340,20 @@ void Company::AssigningVipCargos(PriorityQueue<Cargo>& VC, LinkedQueue<Truck>& T
 
 void Company::AssigningSpecialCargos(LinkedQueue<Cargo>& SC, LinkedQueue<Truck>& Tr)
 {
-	Cargo* newCargo = NULL;
-	Truck* newTruck = NULL;
+	Cargo newCargo ;
+	Truck newTruck ;
 	if (!offHours())
 	{
-		while (SC.GetCount() >= ST_Capacity && !STs.isEmpty())
+		while (SC.GetCount() >= ST_Capacity && !Tr.isEmpty())
 		{
-			STs.dequeue(*newTruck);
+			Tr.dequeue(newTruck);
 			for (int i = 0; i < ST_Capacity; i++) //Assigning the cargos to the Truck
 			{
-				SC.dequeue(*newCargo);
-				newTruck->assignCargo(*newCargo);
-				MovingSC.enqueue(*newCargo);
+				SC.dequeue(newCargo);
+				newTruck.assignCargo(newCargo);
+				MovingSC.enqueue(newCargo);
 			}
-			assignedTrucks.enqueue(*newTruck);
+			assignedTrucks.enqueue(newTruck);
 
 			//|| newTruck->getWaitingTime() >= MaxW
 		}
@@ -363,20 +363,21 @@ void Company::AssigningSpecialCargos(LinkedQueue<Cargo>& SC, LinkedQueue<Truck>&
 
 void Company::AssigningNormalCargos(Linked_list<Cargo>& NC, LinkedQueue<Truck>& Tr)
 {
-	Cargo* newCargo = NULL;
-	Truck* newTruck = NULL;
+	Cargo newCargo ;
+	Truck newTruck ;
 	if (!offHours())
 	{
-		while (NC.getcurrentsize() >= NT_Capacity && !NTs.isEmpty())
+		while (NC.getcurrentsize() >= NT_Capacity && !Tr.isEmpty())
 		{
-			NTs.dequeue(*newTruck);
+			Tr.dequeue(newTruck);
 			for (int i = 0; i < NT_Capacity; i++) //Assigning the cargos to the Truck
 			{
-				NC.removeBeg(*newCargo);
-				newTruck->assignCargo(*newCargo);
-				MovingNC.enqueue(*newCargo);
+				NC.removeBeg(newCargo);
+				newTruck.assignCargo(newCargo);
+				MovingNC.enqueue(newCargo);
+
 			}
-			assignedTrucks.enqueue(*newTruck);
+			assignedTrucks.enqueue(newTruck);
 			//|| newTruck->getWaitingTime() >= MaxW
 		}
 	}
