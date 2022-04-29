@@ -235,7 +235,7 @@ void Company::Print()
 	Out << ", S: " << SC_Num;
 	Out << ", V: " << VIPC_Num << "] \n";
 	Out << "Cargo Avg Wait = " << CargoAvgWait.getDay() << ":" << CargoAvgWait.getHour() << endl;
-	Out << "Auto-promoted Cargos:" << (100*PC_Num )/NC_Num << "% \n";
+	//Out << "Auto-promoted Cargos:" << (100*PC_Num )/NC_Num << "% \n";
 
 	//get number of each typ of trucks and print it
 	Out << "Trucks: " << NT_Num + ST_Num + VIPT_Num;
@@ -264,7 +264,8 @@ void Company::Simulator()
 			}
 		}
 		AssignmentOrder();
-
+		userinterface.print(currentTime, NC, SC, VC, NTs, STs, VTs, MovingNC, MovingSC, MovingVC, deliveredCargoNC, deliveredCargoSC, deliveredCargoVC);
+		currentTime.increase();
 	}
 }
 
