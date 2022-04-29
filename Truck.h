@@ -106,6 +106,25 @@ public:
 		os << T.GetID();
 		return os;
 	}
+
+	bool LoadingRule(int num)
+	{
+		if (num >= TC)
+			return true;
+		return false;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
 };
 
 

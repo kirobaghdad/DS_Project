@@ -248,12 +248,11 @@ void Company::Print()
 
 //==================================Simulator===================================//
 void Company::Simulator()
-{
+{   
 
-	int i = 1;
-	Event* e = NULL;
-	while (!Events.isEmpty() || !NC.isEmpty() || !SC.isEmpty() || !VC.isEmpty() /*|| !MovingNC.isEmpty() || !MovingSC.isEmpty() || !MovingVC.isEmpty() */ )
+	while (!NC.isEmpty()&& !SC.isEmpty()&& !VC.isEmpty()) //On each hour
 	{
+		Event* e = NULL;                      // a. Execute the events that should be executed at that hour
 		if (!Events.isEmpty())
 		{
 			Events.peek(e);
@@ -264,62 +263,137 @@ void Company::Simulator()
 				Events.peek(e);
 			}
 		}
-		//Pick one cargo from each cargo type and move it to moving cargo list(s)
-		Cargo c;
-	/*	if (!NC.isEmpty())
-		{
-			NC.removeBeg(c);
-			MovingNC.enqueue(c);
-		}
-		if (!SC.isEmpty())
-		{
-			SC.dequeue(c);
-			MovingSC.enqueue(c);
-		}
-	
-		if (!VC.isEmpty())
-		{
-			VC.dequeue(c);
-			MovingVC.enqueue(c);
-		}*/
-		//////////////////////////////////////////////
+		AssignmentOrder();
 
-		if (i % 5 == 0)
-		{
-
-			if (!NC.isEmpty())
-			{
-				NC.removeBeg(c);
-				c.setCargoDelivreyTime(currentTime);
-				deliveredCargoNC.enqueue(c);
-				totalDeliveredCargo.enqueue(c);
-			}
-			if (!SC.isEmpty())
-			{
-				SC.dequeue(c);
-				c.setCargoDelivreyTime(currentTime);
-				deliveredCargoSC.enqueue(c);
-				totalDeliveredCargo.enqueue(c);
-			}
-
-			if (!VC.isEmpty())
-			{
-				VC.dequeue(c);
-				c.setCargoDelivreyTime(currentTime);
-				deliveredCargoVC.enqueue(c);
-				totalDeliveredCargo.enqueue(c);
-			}
-		}
-
-		userinterface.print(currentTime, NC, SC, VC, NTs, STs, VTs, MovingNC , MovingSC, MovingVC, deliveredCargoNC, deliveredCargoSC, deliveredCargoVC);
-		i++;
-		currentTime.increase();
 	}
-	
 }
 
 
-void Company::assigningCargos() {
+
+void Company::AssignmentOrder()
+{
+	//=================================== First, assign VIP cargos ======================================//
+	if (!VC.isEmpty()) 
+	{
+		if (!VTs.isEmpty())
+		{
+			AssigningVipCargos(VC, VTs);
+		}
+		if (!NTs.isEmpty())
+		{
+			AssigningVipCargos(VC,NTs);
+		}
+		if (!STs.isEmpty())
+		{
+					AssigningVipCargos(VC, STs);
+		}
+	}
+
+
+	//=================================== Second, assign special cargos ======================================//
+    if (!SC.isEmpty())
+	{
+		if (!STs.isEmpty())
+		{
+		AssigningSpecialCargos(SC,STs);
+		}
+	}
+	//================================== Third, assign normal cargos =======================================//
+
+    if (NC.isEmpty()) //NC
+		{
+			if (!NTs.isEmpty())
+			{
+				AssigningNormalCargos(NC,NTs);
+			}
+			
+			if (!VTs.isEmpty())
+			{
+				AssigningNormalCargos(NC, VTs);
+			}	
+		}
+	//=========================================================================//
+}
+
+void Company::AssigningVipCargos(PriorityQueue<Cargo>& VC, LinkedQueue<Truck>& Tr)
+{
+	Cargo* newCargo = NULL;
+	Truck* newTruck = NULL;
+	if (!offHours())
+	{
+	    while (VC.GetCount() >= VIPT_Capacity&&!VTs.isEmpty())
+	    {
+				 VTs.dequeue(*newTruck);
+					for (int i = 0; i < VIPT_Capacity; i++) //Assigning the cargos to the Truck
+					{ 
+						VC.dequeue(*newCargo);
+						newTruck->assignCargo(*newCargo);
+					}
+					assignedTrucks.enqueue(*newTruck);
+				//|| newTruck->getWaitingTime() >= MaxW
+	    }
+	}
+
+}
+
+void Company::AssigningSpecialCargos(LinkedQueue<Cargo>& SC, LinkedQueue<Truck>& Tr)
+{
+	Cargo* newCargo = NULL;
+	Truck* newTruck = NULL;
+	if (!offHours())
+	{
+		while (SC.GetCount() >= ST_Capacity && !STs.isEmpty())
+		{
+			STs.dequeue(*newTruck);
+			for (int i = 0; i < ST_Capacity; i++) //Assigning the cargos to the Truck
+			{
+				SC.dequeue(*newCargo);
+				newTruck->assignCargo(*newCargo);
+			}
+			assignedTrucks.enqueue(*newTruck);
+			//|| newTruck->getWaitingTime() >= MaxW
+		}
+	}
+}
+
+
+void Company::AssigningNormalCargos(Linked_list<Cargo>& NC, LinkedQueue<Truck>& Tr)
+{
+	Cargo* newCargo = NULL;
+	Truck* newTruck = NULL;
+	if (!offHours())
+	{
+		while (NC.getcurrentsize() >= NT_Capacity && !NTs.isEmpty())
+		{
+			NTs.dequeue(*newTruck);
+			for (int i = 0; i < NT_Capacity; i++) //Assigning the cargos to the Truck
+			{
+				NC.removeBeg(*newCargo);
+				newTruck->assignCargo(*newCargo);
+			}
+			assignedTrucks.enqueue(*newTruck);
+			//|| newTruck->getWaitingTime() >= MaxW
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*void Company::assigningCargos()
+{
 	Cargo* newCargo = NULL;
 	Truck* newTruck = NULL;
 
@@ -366,4 +440,87 @@ void Company::assigningCargos() {
 	}
 
 
-}
+}*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//int i = 1;
+//Event* e = NULL;
+//while (!Events.isEmpty() || !NC.isEmpty() || !SC.isEmpty() || !VC.isEmpty() /*|| !MovingNC.isEmpty() || !MovingSC.isEmpty() || !MovingVC.isEmpty() */ )
+//{
+//	if (!Events.isEmpty())
+//	{
+//		Events.peek(e);
+//		while (e->GetTime() == currentTime && !Events.isEmpty())
+//		{
+//			e->Execute(NC, SC, VC);
+//			Events.dequeue(e);
+//			Events.peek(e);
+//		}
+//	}
+//	//Pick one cargo from each cargo type and move it to moving cargo list(s)
+//	Cargo c;
+///*	if (!NC.isEmpty())
+//	{
+//		NC.removeBeg(c);
+//		MovingNC.enqueue(c);
+//	}
+//	if (!SC.isEmpty())
+//	{
+//		SC.dequeue(c);
+//		MovingSC.enqueue(c);
+//	}
+//
+//	if (!VC.isEmpty())
+//	{
+//		VC.dequeue(c);
+//		MovingVC.enqueue(c);
+//	}*/
+//	//////////////////////////////////////////////
+
+//	if (i % 5 == 0)
+//	{
+
+//		if (!NC.isEmpty())
+//		{
+//			NC.removeBeg(c);
+//			c.setCargoDelivreyTime(currentTime);
+//			deliveredCargoNC.enqueue(c);
+//			totalDeliveredCargo.enqueue(c);
+//		}
+//		if (!SC.isEmpty())
+//		{
+//			SC.dequeue(c);
+//			c.setCargoDelivreyTime(currentTime);
+//			deliveredCargoSC.enqueue(c);
+//			totalDeliveredCargo.enqueue(c);
+//		}
+
+//		if (!VC.isEmpty())
+//		{
+//			VC.dequeue(c);
+//			c.setCargoDelivreyTime(currentTime);
+//			deliveredCargoVC.enqueue(c);
+//			totalDeliveredCargo.enqueue(c);
+//		}
+//	}
+
+//	userinterface.print(currentTime, NC, SC, VC, NTs, STs, VTs, MovingNC , MovingSC, MovingVC, deliveredCargoNC, deliveredCargoSC, deliveredCargoVC);
+//	i++;
+//	currentTime.increase();
+//}
+//
