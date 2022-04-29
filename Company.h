@@ -111,7 +111,7 @@ public:
 	static void increasePC_Num();
 	//Simulator
 	void Simulator();
-	bool assigningCargos();
+	void assigningCargos();
 
 
 };

@@ -319,7 +319,7 @@ void Company::Simulator()
 }
 
 
-bool Company::assigningCargos() {
+void Company::assigningCargos() {
 	Cargo* newCargo = NULL;
 	Truck* newTruck = NULL;
 
@@ -334,6 +334,7 @@ bool Company::assigningCargos() {
 					newTruck->assignCargo(*newCargo);
 				}
 				assignedTrucks.enqueue(*newTruck);
+
 			}
 		}
 

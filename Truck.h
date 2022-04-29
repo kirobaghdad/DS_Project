@@ -1,5 +1,7 @@
 #pragma once
-
+#include "Truck.h"
+#include "Cargo.h"
+#include "LinkedQueue.h"
 class Truck
 {
 	char Type;
