@@ -52,7 +52,7 @@ private:
 
 	LinkedQueue<Truck> assignedTrucks;
 
-	Time currentTime;
+	static Time currentTime;
 	// Cargo num
 	static int NC_Num;
 	static int SC_Num;
@@ -84,7 +84,7 @@ private:
 
 	Time CargoAvgWait;
 	int AvgActiveTime;
-	int Avgutilization;
+	int AvgUtilization;
 
 public:
 	Company();
@@ -104,7 +104,7 @@ public:
 	int getST_Num();
 	int getVIPT_Num();
 	int getAvgActiveTime();
-	int getAvgutilization();
+	int getAvgUtilization();
 	static void increaseNC_Num();
 	static void increaseSC_Num();
 	static void increaseVIPC_Num();
@@ -121,7 +121,7 @@ public:
 	void AssignmentOrder();
 
 
-
+	static Time getCurrentTime();
 
 };
 

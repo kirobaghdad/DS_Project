@@ -32,7 +32,7 @@ void Preparation::Execute(Linked_list<Cargo>& cn, LinkedQueue<Cargo>& cs, Priori
 		break;
 	case 'V':
 		ptr = new Cargo(EventTime, LU_Time, deliveryDistance, cost, ID, 'V');
-		cv.enqueue(*ptr, deliveryDistance * cost);
+		cv.enqueue(*ptr, deliveryDistance + cost + Company::getCurrentTime().getTimeInHours());
 		Company::increaseVIPC_Num();
 		break;
 

@@ -1,12 +1,15 @@
 #include "Company.h"
 
-int  Truck::id = 0;
+int Truck::id = 0;
 
 int Cargo::numberofcargos = 0;
+
 int Company::NC_Num = 0;
 int Company::SC_Num = 0;
 int Company::VIPC_Num = 0;
 int Company::PC_Num = 0;
+
+Time Company::currentTime(0 , 0);
 
 Company::Company()
 { 
@@ -16,7 +19,7 @@ Company::Company()
 }
 
 /**
-Returns true if it is off - hours
+Returns true if it is off-hours
 **/
 bool Company::offHours() { 
 	if (currentTime.getHour() < 5 || currentTime.getHour() > 23) {
@@ -75,9 +78,9 @@ int Company::getAvgActiveTime()
 	return AvgActiveTime;
 }
 
-int Company::getAvgutilization()
+int Company::getAvgUtilization()
 {
-	return Avgutilization;
+	return AvgUtilization;
 }
 
 void Company::increaseNC_Num()
@@ -243,7 +246,7 @@ void Company::Print()
 	Out << ", S: " << ST_Num;
 	Out << ", V: " << VIPT_Num << "] \n";
 	Out << "Avg Active time = " << AvgActiveTime << endl;
-	Out << "Avg utilization = " << Avgutilization << "% \n";
+	Out << "Avg utilization = " << AvgUtilization << "% \n";
 }
 
 //==================================Simulator===================================//
@@ -392,8 +395,9 @@ void Company::assigningNormalCargos(Linked_list<Cargo>& NC, LinkedQueue<Truck>& 
 }
 
 
-
-
+Time Company::getCurrentTime() {
+	return currentTime;
+}
 
 
 
