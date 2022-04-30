@@ -114,9 +114,9 @@ public:
 	void assigningCargos();
 
 
-	void AssigningVipCargos (PriorityQueue<Cargo> &VC, LinkedQueue<Truck> &Tr );
-	void AssigningSpecialCargos(LinkedQueue<Cargo>&SC, LinkedQueue<Truck>& Tr);
-	void AssigningNormalCargos(Linked_list<Cargo>&NC, LinkedQueue<Truck>& Tr);
+	void assigningVipCargos (PriorityQueue<Cargo> &VC, LinkedQueue<Truck> &Tr );
+	void assigningSpecialCargos(LinkedQueue<Cargo>&SC, LinkedQueue<Truck>& Tr);
+	void assigningNormalCargos(Linked_list<Cargo>&NC, LinkedQueue<Truck>& Tr);
 
 	void AssignmentOrder();
 

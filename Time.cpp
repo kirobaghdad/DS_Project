@@ -103,3 +103,7 @@ bool Time::isValid() {
 		return true;
 	return false;
 }
+
+int Time::getTimeInHours() const {
+	return Hour + Day * 24;
+}

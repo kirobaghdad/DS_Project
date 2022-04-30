@@ -22,4 +22,5 @@ public:
 
 	bool isValid();
 
+	int getTimeInHours()const;
 };

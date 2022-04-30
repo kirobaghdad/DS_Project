@@ -45,9 +45,9 @@ public:
 		return assignedCargos.enqueue(newCargo);
 	}
 
-	void increaseWaitingTime() {
-		waitingTime++;
-	}
+	//void increaseWaitingTime() {
+	//	waitingTime++;
+	//}
 	bool SetDI(int di)
 	{
 		if (di < 0)

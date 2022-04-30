@@ -18,7 +18,7 @@ void UI::printNow(Time t, Linked_list<Cargo>& cn, LinkedQueue<Cargo>& cs, Priori
 {
 
 
-	cout << "Current Time(Day:Hour) :" << t.getDay() << ":" << t.getHour() << endl;
+	cout << "Current Time(Day:Hour) " << t.getDay() << ":" << t.getHour() << endl;
 	//Waiting Cargos :
 	int sum = cs.GetCount() + cv.GetCount() + cn.getcurrentsize();
 

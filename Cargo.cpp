@@ -86,6 +86,10 @@ Time Cargo::getWaitingTime() const
 	return waitingTime;
 }
 
+void Cargo::increaseWaitingTime() {
+	waitingTime.increase();
+}
+
 bool Cargo::operator==(int x)
 {
 	if (this->ID == x)

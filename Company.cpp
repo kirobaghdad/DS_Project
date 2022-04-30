@@ -278,15 +278,15 @@ void Company::AssignmentOrder()
 	{
 		if (!VTs.isEmpty())
 		{
-			AssigningVipCargos(VC, VTs);
+			assigningVipCargos(VC, VTs);
 		}
 		if (!NTs.isEmpty())
 		{
-			AssigningVipCargos(VC,NTs);
+			assigningVipCargos(VC, NTs);
 		}
 		if (!STs.isEmpty())
 		{
-					AssigningVipCargos(VC, STs);
+			assigningVipCargos(VC, STs);
 		}
 	}
 
@@ -296,55 +296,56 @@ void Company::AssignmentOrder()
 	{
 		if (!STs.isEmpty())
 		{
-		AssigningSpecialCargos(SC,STs);
+		assigningSpecialCargos(SC, STs);
 		}
 	}
 	//================================== Third, assign normal cargos =======================================//
 
     if (NC.isEmpty()) //NC
 		{
-			if (!NTs.isEmpty())
-			{
-				AssigningNormalCargos(NC,NTs);
-			}
+		if (!NTs.isEmpty())
+		{
+			assigningNormalCargos(NC, NTs);
+		}
 			
-			if (!VTs.isEmpty())
-			{
-				AssigningNormalCargos(NC, VTs);
-			}	
+		if (!VTs.isEmpty())
+		{
+			assigningNormalCargos(NC, VTs);
+		}	
 		}
 	//=========================================================================//
 }
 
-void Company::AssigningVipCargos(PriorityQueue<Cargo>& VC, LinkedQueue<Truck>& Tr)
+void Company::assigningVipCargos(PriorityQueue<Cargo>& VC, LinkedQueue<Truck>& Tr)
 {
 	Cargo newCargo  ;
 	Truck newTruck  ;
 	if (!offHours())
 	{
-	    while (VC.GetCount() >= VIPT_Capacity&&!Tr.isEmpty())
+		VC.peek(newCargo);
+	    if (VC.GetCount() >= VIPT_Capacity || (newCargo.getWaitingTime().getTimeInHours() >= MaxW))
 	    {
-				 Tr.dequeue(newTruck);
-					for (int i = 0; i < VIPT_Capacity; i++) //Assigning the cargos to the Truck
-					{ 
-						VC.dequeue(newCargo);
-						newTruck.assignCargo(newCargo);
-						MovingVC.enqueue(newCargo);
-					}
-					assignedTrucks.enqueue(newTruck);
-				//|| newTruck->getWaitingTime() >= MaxW
+			Tr.dequeue(newTruck);
+			for (int i = 0; i < VIPT_Capacity; i++) //Assigning the cargos to the Truck
+			{ 
+				VC.dequeue(newCargo);
+				newTruck.assignCargo(newCargo);
+				MovingVC.enqueue(newCargo);
+			}
+			assignedTrucks.enqueue(newTruck);
 	    }
 	}
 
 }
 
-void Company::AssigningSpecialCargos(LinkedQueue<Cargo>& SC, LinkedQueue<Truck>& Tr)
+void Company::assigningSpecialCargos(LinkedQueue<Cargo>& SC, LinkedQueue<Truck>& Tr)
 {
 	Cargo newCargo ;
 	Truck newTruck ;
 	if (!offHours())
 	{
-		while (SC.GetCount() >= ST_Capacity && !Tr.isEmpty())
+		SC.peek(newCargo);
+		if (SC.GetCount() >= ST_Capacity || (newCargo.getWaitingTime().getTimeInHours() >= MaxW))
 		{
 			Tr.dequeue(newTruck);
 			for (int i = 0; i < ST_Capacity; i++) //Assigning the cargos to the Truck
@@ -354,20 +355,22 @@ void Company::AssigningSpecialCargos(LinkedQueue<Cargo>& SC, LinkedQueue<Truck>&
 				MovingSC.enqueue(newCargo);
 			}
 			assignedTrucks.enqueue(newTruck);
-
-			//|| newTruck->getWaitingTime() >= MaxW
+		}
+		else if (newCargo.getWaitingTime().getTimeInHours() < MaxW) {
+			newCargo.getWaitingTime().increase();
 		}
 	}
 }
 
 
-void Company::AssigningNormalCargos(Linked_list<Cargo>& NC, LinkedQueue<Truck>& Tr)
+void Company::assigningNormalCargos(Linked_list<Cargo>& NC, LinkedQueue<Truck>& Tr)
 {
 	Cargo newCargo ;
 	Truck newTruck ;
 	if (!offHours())
 	{
-		while (NC.getcurrentsize() >= NT_Capacity && !Tr.isEmpty())
+		newCargo = NC.getHead()->getItem();
+		if (NC.getcurrentsize() >= NT_Capacity || (newCargo.getWaitingTime().getTimeInHours() >= MaxW))
 		{
 			Tr.dequeue(newTruck);
 			for (int i = 0; i < NT_Capacity; i++) //Assigning the cargos to the Truck
@@ -378,7 +381,9 @@ void Company::AssigningNormalCargos(Linked_list<Cargo>& NC, LinkedQueue<Truck>& 
 
 			}
 			assignedTrucks.enqueue(newTruck);
-			//|| newTruck->getWaitingTime() >= MaxW
+		}
+		else if ((newCargo.getWaitingTime().getTimeInHours() < MaxW)) {
+			newCargo.getWaitingTime().increase();
 		}
 	}
 }
