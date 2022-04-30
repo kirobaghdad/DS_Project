@@ -323,7 +323,7 @@ void Company::assigningVipCargos(PriorityQueue<Cargo>& VC, LinkedQueue<Truck>& T
 	if (!offHours())
 	{
 		VC.peek(newCargo);
-	    if (VC.GetCount() >= VIPT_Capacity || (newCargo.getWaitingTime().getTimeInHours() >= MaxW))
+	    if (VC.GetCount() >= VIPT_Capacity || (newCargo.getWaitingTime().getTimeInHours() >= MaxW) && !VC.isEmpty())
 	    {
 			Tr.dequeue(newTruck);
 			for (int i = 0; i < VIPT_Capacity; i++) //Assigning the cargos to the Truck
@@ -334,6 +334,9 @@ void Company::assigningVipCargos(PriorityQueue<Cargo>& VC, LinkedQueue<Truck>& T
 			}
 			assignedTrucks.enqueue(newTruck);
 	    }
+		else if (newCargo.getWaitingTime().getTimeInHours() < MaxW) {
+			newCargo.getWaitingTime().increase();
+		}
 	}
 
 }
@@ -345,7 +348,7 @@ void Company::assigningSpecialCargos(LinkedQueue<Cargo>& SC, LinkedQueue<Truck>&
 	if (!offHours())
 	{
 		SC.peek(newCargo);
-		if (SC.GetCount() >= ST_Capacity || (newCargo.getWaitingTime().getTimeInHours() >= MaxW))
+		if (SC.GetCount() >= ST_Capacity || (newCargo.getWaitingTime().getTimeInHours() >= MaxW) && !SC.isEmpty())
 		{
 			Tr.dequeue(newTruck);
 			for (int i = 0; i < ST_Capacity; i++) //Assigning the cargos to the Truck
@@ -370,7 +373,7 @@ void Company::assigningNormalCargos(Linked_list<Cargo>& NC, LinkedQueue<Truck>& 
 	if (!offHours())
 	{
 		newCargo = NC.getHead()->getItem();
-		if (NC.getcurrentsize() >= NT_Capacity || (newCargo.getWaitingTime().getTimeInHours() >= MaxW))
+		if (NC.getcurrentsize() >= NT_Capacity || (newCargo.getWaitingTime().getTimeInHours() >= MaxW) && !VC.isEmpty())
 		{
 			Tr.dequeue(newTruck);
 			for (int i = 0; i < NT_Capacity; i++) //Assigning the cargos to the Truck

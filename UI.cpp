@@ -22,16 +22,16 @@ void UI::printNow(Time t, Linked_list<Cargo>& cn, LinkedQueue<Cargo>& cs, Priori
 	//Waiting Cargos :
 	int sum = cs.GetCount() + cv.GetCount() + cn.getcurrentsize();
 
-	cout << sum << " Waiting Cargos:["; cn.print(); cout << "]  ("; cs.print(); cout << ")   {"; cv.print(); cout << "}" << endl;
+	cout << sum << " Waiting Cargos:  ["; cn.print(); cout << "]  ("; cs.print(); cout << ")   {"; cv.print(); cout << "}" << endl;
 	cout << "---------------------------------------------------------------------------" << endl;
 	sum = Tcn.GetCount() + Tcs.GetCount() + Tcv.GetCount();
 	cout << sum << " Empty Trucks:  ["; Tcn.print(); cout << "] , ("; Tcs.print(); cout << ") , {"; Tcv.print(); cout << "}" << endl;;
 	cout << "---------------------------------------------------------------------------" << endl;
 	sum = Mcs.GetCount() + Mcv.GetCount() + Mcn.GetCount();
-	cout << sum << " Moving Cargos::["; Mcn.print(); cout << "]  ("; Mcs.print(); cout << ")   {";  Mcv.print(); cout << "}" << endl;
+	cout << sum << " Moving Cargos:  ["; Mcn.print(); cout << "]  ("; Mcs.print(); cout << ")   {";  Mcv.print(); cout << "}" << endl;
 	cout << "---------------------------------------------------------------------------" << endl;
 	sum = Dcs.GetCount() + Dcv.GetCount() + Dcn.GetCount();
-	cout << sum << " Delivered Cargos::["; Dcn.print(); cout << "]  ("; Dcs.print(); cout << ")   {"; Dcv.print(); cout << "}" << endl;
+	cout << sum << " Delivered Cargos:  ["; Dcn.print(); cout << "]  ("; Dcs.print(); cout << ")   {"; Dcv.print(); cout << "}" << endl;
 	cout << endl;
 
 
