@@ -249,6 +249,19 @@ void Company::Print()
 	Out << "Avg utilization = " << AvgUtilization << "% \n";
 }
 
+void Company::checkAutoPromotion()
+{
+	Node<Cargo>* ptr = NC.getHead();
+	if (!ptr)
+	{
+		if (ptr->getItem().getPT().getDay() >= AutoPromotionLimit)
+		{
+			Promotion p(ptr->getItem().getPT(), ptr->getItem().getID(), 0);
+			p.Execute(NC, SC, VC);
+		}
+	}
+}
+
 //==================================Simulator===================================//
 void Company::Simulator()
 {   

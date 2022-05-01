@@ -109,6 +109,8 @@ public:
 	static void increaseSC_Num();
 	static void increaseVIPC_Num();
 	static void increasePC_Num();
+	//Auto Promotion
+	void checkAutoPromotion();
 	//Simulator
 	void Simulator();
 	void assigningCargos();

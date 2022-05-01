@@ -101,7 +101,11 @@ void Cargo::setCargoDelivreyTime(Time T)
 {
 	cargoDelivreyTime = T;
 }
-
+
+void Cargo::setCost(int c)
+{
+	cost = c;
+}
 int Cargo::GetNumber()
 {
 	return numberofcargos;

@@ -49,6 +49,7 @@ public:
 	bool operator==(int x);
 	void setCargoDelivreyTime(Time T);
 	static int GetNumber();
+	void setCost(int c);
 
 	friend std::ostream& operator<<(std::ostream& os, const Cargo& c);
 };
