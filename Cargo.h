@@ -37,7 +37,7 @@ public:
 
 	char getCargoType() const; // CargoType Getter
 	int getCost() const; //cost Getter
-	int getdeliveryDistance() const; //deliveryDistance Getter
+	int getDeliveryDistance() const; //deliveryDistance Getter
 	int getLU_Time() const; // 
 	Time getPT() const;
 	int getID() const;
@@ -50,7 +50,7 @@ public:
 	void setCargoDelivreyTime(Time T);
 	static int GetNumber();
 	void setCost(int c);
-
+	void setIsMoving(bool);
 	friend std::ostream& operator<<(std::ostream& os, const Cargo& c);
 };
 

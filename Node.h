@@ -6,7 +6,7 @@ template < typename T>
 class Node
 {
 private:
-	T item; 
+	T item;
 	Node<T>* next;
 public:
 	Node();
@@ -18,7 +18,7 @@ public:
 	void setNext(Node<T>* nextNodePtr);
 	T getItem() const;
 	Node<T>* getNext() const;
-}; 
+};
 
 template < typename T>
 Node<T>::Node()

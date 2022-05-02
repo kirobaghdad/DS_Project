@@ -8,6 +8,9 @@ public:
 	Time();
 	Time(int, int);
 
+
+	explicit Time(int);
+
 	void operator = (const char*&);
 	Time operator + (const Time& T);
 	void operator=(const Time& T);
@@ -19,7 +22,6 @@ public:
 	int getDay() const;
 	int getHour() const;
 	void increase();
-
 	bool isValid();
 
 	int getTimeInHours()const;

@@ -16,6 +16,11 @@ Time::Time(int D, int H) {
 	else Hour = 0;
 }
 
+Time::Time(int t) {
+	Day = t / 24;
+	Hour = t - Day * 24;
+}
+
 void Time::setDay(int D) {
 	if (D > 0)
 		Day = D;

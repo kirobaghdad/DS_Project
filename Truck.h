@@ -2,10 +2,12 @@
 #include "Truck.h"
 #include "Cargo.h"
 #include "LinkedQueue.h"
+#include "PriorityQueue.h"
+
 class Truck
 {
 	char Type;
-	int DI;             //    in hours  The time a truck takes to deliver all its cargos and come back to the company
+	int DI;             //    (In Hours) The time a truck takes to deliver all its cargos and come back to the company
 	int NumofJourneys; //     number of journeys done with this truck  
 	int J;
 	int TC;      // Truck Capacity
@@ -14,7 +16,9 @@ class Truck
 	static int id;
 	int ID;
 
-	LinkedQueue<Cargo> assignedCargos;
+	Time movingTime;
+
+	PriorityQueue<Cargo> assignedCargos;
 	bool isAssigned;
 
 public:
@@ -32,6 +36,11 @@ public:
 	}
 	//============================== Setters ==============================// 
 
+	
+	void setMovingTime(Time t) {
+		movingTime = t;
+	}
+
 	void setIsAssigned(bool assign) {
 		isAssigned = assign;
 	}
@@ -40,9 +49,9 @@ public:
 		return waitingTime;
 	}
 	
-	bool assignCargo(Cargo& newCargo) {
+	bool assignCargo(Cargo& newCargo, float t) {
 
-		return assignedCargos.enqueue(newCargo);
+		return assignedCargos.enqueue(newCargo, t);
 	}
 
 	//void increaseWaitingTime() {
@@ -80,6 +89,11 @@ public:
 	}
 	//============================== Getters ==============================// 
 
+
+
+	PriorityQueue<Cargo>& getCargosQueue() {
+		return assignedCargos;
+	}
 	int GetDI() const
 	{
 		return DI;

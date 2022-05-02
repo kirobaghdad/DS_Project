@@ -1,5 +1,7 @@
 #pragma once
 #include"PriorityNode.h"
+#include "Node.h"
+
 using namespace std;
 
 
@@ -8,17 +10,17 @@ template <typename T>
 class PriorityQueue
 {
 private:
-	int count;
+	float count;
 	PriorityNode<T>* backPtr;
 	PriorityNode<T>* frontPtr;
 public:
 	PriorityQueue();
 	bool isEmpty() const;
-	bool enqueue(const T& newEntry, int p);
+	bool enqueue(const T& newEntry, float p);
 	bool dequeue(T& frntEntry);
 	bool peek(T& frntEntry)  const;
 	~PriorityQueue();
-	int GetCount();
+	float GetCount();
 	PriorityQueue(const PriorityQueue<T>& LQ);
 	void print();
 
@@ -30,15 +32,15 @@ void PriorityQueue<T>::print()
 	PriorityNode<T>* ptr = frontPtr;
 	while (ptr)
 	{
-		cout << ptr->getItem() ;
+		cout << ptr->getItem();
 		if (ptr->getNext() != NULL)
-			cout << ",";
+			cout << ", ";
 		ptr = ptr->getNext();
 	}
 }
 
 template <typename T>
-int PriorityQueue<T>::GetCount()
+float PriorityQueue<T>::GetCount()
 {
 	return count;
 }
@@ -47,7 +49,7 @@ int PriorityQueue<T>::GetCount()
 
 template <typename T>
 PriorityQueue<T>::PriorityQueue()
-{ 
+{
 	count = 0;
 	backPtr = nullptr;
 	frontPtr = nullptr;
@@ -63,7 +65,7 @@ bool PriorityQueue<T>::isEmpty() const
 
 
 template <typename T>
-bool PriorityQueue<T>::enqueue(const T& newEntry, int p)
+bool PriorityQueue<T>::enqueue(const T& newEntry, float p)
 {
 
 	PriorityNode<T>* start = frontPtr;
@@ -72,24 +74,20 @@ bool PriorityQueue<T>::enqueue(const T& newEntry, int p)
 	temp->setItem(newEntry);
 	temp->priority = p;
 
-	// Special Case: The head of list has
-	// lesser priority than new node. So
-	// insert newnode before head node
-	// and change head node.
-
 	if (isEmpty())
 	{
 		frontPtr = temp;
 		count++;
+		temp->setNext(NULL);
 		return true;
 	}
-	
-		if (frontPtr->priority < p)
-		{
-			// Insert New Node before head
-			temp->setNext(frontPtr);
-			frontPtr = temp;
-		}
+
+	if (frontPtr->priority < p)
+	{
+		// Insert New Node before head
+		temp->setNext(frontPtr);
+		frontPtr = temp;
+	}
 	else
 	{
 		// Traverse the list and find a
@@ -103,7 +101,7 @@ bool PriorityQueue<T>::enqueue(const T& newEntry, int p)
 		temp->setNext(start->getNext());
 		start->setNext(temp);
 	}
-		count++;
+	count++;
 	return true;
 }
 

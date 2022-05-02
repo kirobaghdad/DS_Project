@@ -121,7 +121,7 @@ public:
 	void assigningNormalCargos(Linked_list<Cargo>&NC, LinkedQueue<Truck>& Tr);
 
 	void AssignmentOrder();
-
+	void movingToDelivered();
 
 	static Time getCurrentTime();
 

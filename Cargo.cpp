@@ -45,7 +45,7 @@ int Cargo::getCost()const {
 	return cost;
 }
 
-int Cargo::getdeliveryDistance()const {
+int Cargo::getDeliveryDistance()const {
 	return deliveryDistance;
 }
 
@@ -101,7 +101,8 @@ void Cargo::setCargoDelivreyTime(Time T)
 {
 	cargoDelivreyTime = T;
 }
-
+
+
 void Cargo::setCost(int c)
 {
 	cost = c;
@@ -115,4 +116,8 @@ std::ostream& operator<<(std::ostream& os, const Cargo& c)
 {
 	os << c.getID();
 	return os;
+}
+
+void Cargo::setIsMoving(bool isMoving) {
+	this->isMoving = isMoving;
 }

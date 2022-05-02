@@ -6,7 +6,7 @@ class PriorityNode
 	T item;
 	PriorityNode<T>* next;
 public:
-	int priority;
+	float priority;
 	void setItem(const T& r_Item);
 	void setNext(PriorityNode<T>* nextNodePtr);
 	T getItem() const;
