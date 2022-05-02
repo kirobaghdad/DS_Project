@@ -293,7 +293,7 @@ void Company::movingToDelivered() {
 	for (int i = 0; i < assignedTrucks.GetCount(); i++) {
 		assignedTrucks.peek(tempTruck);
 		tempTruck.getCargosQueue().peek(tempCargo);
-		if (tempCargo.getCargoDelivreyTime().getTimeInHours() >= currentTime.getTimeInHours()) {
+		if (tempCargo.getCargoDelivreyTime().getTimeInHours() >= (1 / (currentTime.getTimeInHours() + 0.0))) {
 			tempTruck.getCargosQueue().dequeue(tempCargo);
 			if (tempCargo.getCargoType() == 'N') {
 				deliveredCargoNC.enqueue(tempCargo);
