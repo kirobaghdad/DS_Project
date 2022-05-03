@@ -1,6 +1,6 @@
 #pragma once
 #include"PriorityNode.h"
-#include "Node.h"
+
 
 using namespace std;
 
@@ -146,24 +146,24 @@ PriorityQueue<T>::~PriorityQueue()
 }
 
 
-
 template <typename T>
 PriorityQueue<T>::PriorityQueue(const PriorityQueue<T>& LQ)
 {
 	PriorityNode<T>* NodePtr = LQ.frontPtr;
-	if (!NodePtr)
+	if (!NodePtr) //LQ is empty
 	{
 		frontPtr = backPtr = nullptr;
 		return;
 	}
 
-	PriorityNode<T>* ptr = new Node<T>(NodePtr->getItem());
+	PriorityNode<T>* ptr = new PriorityNode<T>(NodePtr->getItem());
 	frontPtr = backPtr = ptr;
 	NodePtr = NodePtr->getNext();
 
+
 	while (NodePtr)
 	{
-		PriorityNode<T>* ptr = new Node<T>(NodePtr->getItem());
+		PriorityNode<T>* ptr = new PriorityNode<T>(NodePtr->getItem());
 		backPtr->setNext(ptr);
 		backPtr = ptr;
 		NodePtr = NodePtr->getNext();

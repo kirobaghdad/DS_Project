@@ -7,13 +7,36 @@ class PriorityNode
 	PriorityNode<T>* next;
 public:
 	float priority;
+	PriorityNode();
+	PriorityNode(const T& r_Item);
+	PriorityNode(const T& r_Item, PriorityNode<T>* nextNodePtr);
+
+
 	void setItem(const T& r_Item);
 	void setNext(PriorityNode<T>* nextNodePtr);
 	T getItem() const;
 	PriorityNode<T>* getNext() const;
 };
 
+template < typename T>
+PriorityNode<T>::PriorityNode()
+{
+	next = nullptr;
+}
 
+template < typename T>
+PriorityNode<T>::PriorityNode(const T& r_Item)
+{
+	item = r_Item;
+	next = nullptr;
+}
+
+template < typename T>
+PriorityNode<T>::PriorityNode(const T& r_Item, PriorityNode<T>* nextNodePtr)
+{
+	item = r_Item;
+	next = nextNodePtr;
+}
 
 template < typename T>
 void PriorityNode<T>::setItem(const T& r_Item)
