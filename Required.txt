@@ -1,0 +1,26 @@
+1 - assignment counter (Kirollos)
+
+2 - Error 0xdddddddd (runtime error) (Kirollos)
+
+3 - Silent Mode (Mohamed)
+
+4 - console output (Mohamed)
+
+5 - Output File (Mohamed)
+
+6 - MaxW in VIP (Kirollos) page 4
+
+7 - assigningCargos error (Kirollos)
+
+8 - assigned Trucks Priority Queue in trucks (Mostafa)
+
+9 - One DeliveredCargo Queue (Mostafa)
+
+9 - Only one MovingCargo PriorityQueue inside Company (Mostafa)
+
+10 - In-Checkup Priority (Kirollos)
+
+11 - waiting time assignment (Mohamed)
+
+Deadline:
+Monday
