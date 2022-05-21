@@ -4,7 +4,7 @@
 
 UI::UI()
 {
-	cout << "Press I for Interactive Mode or S for Step-By-Step Mode" << endl;
+	cout << "Press I for Interactive Mode or B for Step-By-Step Mode or S for Silent Mode" << endl;
 	cin >> mode;
 	
 }
@@ -56,9 +56,10 @@ void UI::print(Time t, Linked_list<Cargo>& cn, LinkedQueue<Cargo>& cs, PriorityQ
 		Sleep(1);
 		printNow(t, cn, cs, cv, Tcn, Tcs, Tcv, Mcn, Mcs, Mcv, Dcn, Dcs, Dcv);
 		break;
-
 	}
 }
+
+
 
                
 

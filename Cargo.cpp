@@ -121,3 +121,13 @@ std::ostream& operator<<(std::ostream& os, const Cargo& c)
 void Cargo::setIsMoving(bool isMoving) {
 	this->isMoving = isMoving;
 }
+
+void Cargo::setTruckId(int id)
+{
+	truckId = id;
+}
+
+int Cargo::getTruckId()
+{
+	return truckId;
+}

@@ -231,7 +231,7 @@ void Company::Print()
 		Out << T.getDay() << ":" << T.getHour() << " ";
 		T = temp.getWaitingTime();
 		Out << T.getDay() << ":" << T.getHour() << " ";
-		// the id of truck that delivered the cargo
+		Out << temp.getTruckId();
 		Out << endl;
 	}
 	Out << "……………………………………………… \n";
@@ -242,7 +242,7 @@ void Company::Print()
 	Out << ", S: " << SC_Num;
 	Out << ", V: " << VIPC_Num << "] \n";
 	Out << "Cargo Avg Wait = " << CargoAvgWait.getDay() << ":" << CargoAvgWait.getHour() << endl;
-	//Out << "Auto-promoted Cargos:" << (100*PC_Num )/NC_Num << "% \n";
+	Out << "Auto-promoted Cargos:" << (100*PC_Num )/NC_Num << "% \n";
 
 	//get number of each typ of trucks and print it
 	Out << "Trucks: " << NT_Num + ST_Num + VIPT_Num;
@@ -305,12 +305,15 @@ void Company::movingToDelivered() {
 			tempTruck.getCargosQueue().dequeue(tempCargo);
 			if (tempCargo.getCargoType() == 'N') {
 				deliveredCargoNC.enqueue(tempCargo);
+				totalDeliveredCargo.enqueue(tempCargo);
 			}
 			else if (tempCargo.getCargoType() == 'S') {
 				deliveredCargoSC.enqueue(tempCargo);
+				totalDeliveredCargo.enqueue(tempCargo);
 			}
 			else if (tempCargo.getCargoType() == 'V') {
 				deliveredCargoVC.enqueue(tempCargo);
+				totalDeliveredCargo.enqueue(tempCargo);
 			}
 		}
 	}
@@ -458,6 +461,7 @@ bool Company::assigningVipCargos(PriorityQueue<Cargo>& VC, LinkedQueue<Truck>& T
 				MovingVC.enqueue(newCargo);
 				newCargo.setIsMoving(true);
 				newCargo.setCargoDelivreyTime(CDT);
+				newCargo.setTruckId(newTruck.GetID());
 			}
 			assignedTrucks.enqueue(newTruck);
 			newTruck.setMovingTime(currentTime);
@@ -489,6 +493,7 @@ bool Company::assigningSpecialCargos(LinkedQueue<Cargo>& SC, LinkedQueue<Truck>&
 				MovingSC.enqueue(newCargo);
 				newCargo.setIsMoving(true);
 				newCargo.setCargoDelivreyTime(CDT);
+				newCargo.setTruckId(newTruck.GetID());
 			}
 			assignedTrucks.enqueue(newTruck);
 			newTruck.setMovingTime(currentTime);
@@ -522,6 +527,7 @@ bool Company::assigningNormalCargos(Linked_list<Cargo>& NC, LinkedQueue<Truck>& 
 				MovingNC.enqueue(newCargo);
 				newCargo.setIsMoving(true);
 				newCargo.setCargoDelivreyTime(CDT);
+				newCargo.setTruckId(newTruck.GetID());
 			}
 			assignedTrucks.enqueue(newTruck);
 			newTruck.setMovingTime(currentTime);
