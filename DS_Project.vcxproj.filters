@@ -100,5 +100,6 @@
     <Text Include="Output.txt">
       <Filter>I/O Files</Filter>
     </Text>
+    <Text Include="Required.txt" />
   </ItemGroup>
 </Project>

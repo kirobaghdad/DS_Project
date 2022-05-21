@@ -1,4 +1,4 @@
-1 - assignment counter (Kirollos)
+1 - assignment counter (Kirollos)        ---------------------------->  (Done)
 
 2 - Error 0xdddddddd (runtime error) (Kirollos)
 
@@ -8,9 +8,9 @@
 
 5 - Output File (Mohamed)
 
-6 - MaxW in VIP (Kirollos) page 4
+6 - MaxW in VIP (Kirollos) page 4 ---------------------------->  (Done)
 
-7 - assigningCargos error (Kirollos)
+7 - assigningCargos error (Kirollos)  ---------------------------->  (Done)
 
 8 - assigned Trucks Priority Queue in trucks (Mostafa)
 
@@ -18,7 +18,7 @@
 
 9 - Only one MovingCargo PriorityQueue inside Company (Mostafa)
 
-10 - In-Checkup Priority (Kirollos)
+10 - In-Checkup (Kirollos)  ---------------------------->  (Done)
 
 11 - waiting time assignment (Mohamed)
 

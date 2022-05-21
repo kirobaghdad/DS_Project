@@ -83,6 +83,10 @@ void Time::operator=(const Time& T)
 	Hour = T.Hour;
 }
 
+bool Time::operator>=(const Time& T) {
+	return this->getTimeInHours() >= T.getTimeInHours();
+}
+
 bool Time::operator==(const Time& T)
 {
 	if (T.Day == Day && T.Hour == Hour)

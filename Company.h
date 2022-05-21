@@ -52,6 +52,12 @@ private:
 
 	LinkedQueue<Truck> assignedTrucks;
 
+	LinkedQueue<Truck> In_Checkup_N_Trucks;
+
+	LinkedQueue<Truck> In_Checkup_S_Trucks;
+
+	LinkedQueue<Truck> In_Checkup_VIP_Trucks;
+
 	static Time currentTime;
 	// Cargo num
 	static int NC_Num;
@@ -114,11 +120,11 @@ public:
 	//Simulator
 	void Simulator();
 	void assigningCargos();
+	void CheckUp();
 
-
-	void assigningVipCargos (PriorityQueue<Cargo> &VC, LinkedQueue<Truck> &Tr );
-	void assigningSpecialCargos(LinkedQueue<Cargo>&SC, LinkedQueue<Truck>& Tr);
-	void assigningNormalCargos(Linked_list<Cargo>&NC, LinkedQueue<Truck>& Tr);
+	bool assigningVipCargos (PriorityQueue<Cargo> &VC, LinkedQueue<Truck> &Tr );
+	bool assigningSpecialCargos(LinkedQueue<Cargo>&SC, LinkedQueue<Truck>& Tr);
+	bool assigningNormalCargos(Linked_list<Cargo>&NC, LinkedQueue<Truck>& Tr);
 
 	void AssignmentOrder();
 	void movingToDelivered();

@@ -4,12 +4,15 @@
 #include "LinkedQueue.h"
 #include "PriorityQueue.h"
 
+
+
 class Truck
 {
 	char Type;
 	int DI;             //    (In Hours) The time a truck takes to deliver all its cargos and come back to the company
 	int NumofJourneys; //     number of journeys done with this truck  
-	int J;
+	static int J;
+	int checkUpDuration;
 	int TC;      // Truck Capacity
 	int Speed;  //  Speed
 	int waitingTime;
@@ -17,15 +20,16 @@ class Truck
 	int ID;
 
 	Time movingTime;
-
+	Time endCheckUpTime;
 	PriorityQueue<Cargo> assignedCargos;
 	bool isAssigned;
 
 public:
 	Truck() {
 	};
-	Truck(char type, int tc, int speed)
+	Truck(char type, int tc, int speed, int checkUpDuration)
 	{
+		this->checkUpDuration = checkUpDuration;
 		ID = ++id;
 		SetDI(0);
 		NumofJourneys = 0;
@@ -36,7 +40,9 @@ public:
 	}
 	//============================== Setters ==============================// 
 
-	
+	void setEndCheckUpTime(Time t) {
+		endCheckUpTime = t;
+	}
 	void setMovingTime(Time t) {
 		movingTime = t;
 	}
@@ -54,6 +60,12 @@ public:
 		return assignedCargos.enqueue(newCargo, t);
 	}
 
+	bool goToCheckUp() {
+		if (NumofJourneys % J == 0)
+			return true;
+		else return false;
+	}
+
 	//void increaseWaitingTime() {
 	//	waitingTime++;
 	//}
@@ -68,8 +80,7 @@ public:
 	{
 		NumofJourneys++;
 	}
-
-	void SetJ(int j)
+	static void SetJ(int j)
 	{
 		J = j;
 	}
@@ -88,6 +99,11 @@ public:
 		return true;
 	}
 	//============================== Getters ==============================// 
+
+	int getCheckUpDuration()
+	{
+		return checkUpDuration;
+	}
 
 
 
@@ -128,17 +144,9 @@ public:
 		return false;
 	}
 
-
-
-
-
-
-
-
-
-
-
-
+	bool isCheckedUp(Time currentTime) {
+		return (currentTime >= endCheckUpTime);
+	}
 };
 
 
