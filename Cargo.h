@@ -28,6 +28,7 @@ private:
 	bool isMoving;
 	Time cargoDelivreyTime;
 	int Priority;
+	int truckId; //The Id of truck that delivered the cargo
 public:
 	Cargo(Time, int, int, int, int, char); //Non_Default Constructor for the Cargo Class
 	Cargo(); // default Constructor we need it in DS 
@@ -51,6 +52,8 @@ public:
 	static int GetNumber();
 	void setCost(int c);
 	void setIsMoving(bool);
+	void setTruckId(int);
+	int getTruckId();
 	friend std::ostream& operator<<(std::ostream& os, const Cargo& c);
 };
 
