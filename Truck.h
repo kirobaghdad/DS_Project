@@ -37,6 +37,7 @@ public:
 		SetSpeed(speed);
 		waitingTime = 0;
 		isAssigned = false;
+		Type = type;
 	}
 	//============================== Setters ==============================// 
 
@@ -61,7 +62,7 @@ public:
 	}
 
 	bool goToCheckUp() {
-		if (NumofJourneys % J == 0)
+		if (NumofJourneys % J == 0 && NumofJourneys != 0)
 			return true;
 		else return false;
 	}
