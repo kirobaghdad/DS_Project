@@ -55,7 +55,7 @@ public:
 	int getWaitingTime()const {
 		return waitingTime;
 	}
-	
+
 	bool assignCargo(Cargo& newCargo, float t) {
 
 		return assignedCargos.enqueue(newCargo, t);
@@ -147,6 +147,11 @@ public:
 
 	bool isCheckedUp(Time currentTime) {
 		return (currentTime >= endCheckUpTime);
+	}
+
+	char getType()
+	{
+		return Type;
 	}
 };
 

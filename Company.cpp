@@ -251,6 +251,9 @@ void Company::Print()
 	Out << ", V: " << VIPT_Num << "] \n";
 	Out << "Avg Active time = " << AvgActiveTime << endl;
 	Out << "Avg utilization = " << AvgUtilization << "% \n";
+
+	                   ///////////////////////////////////////////////////
+	userinterface.printSilentMode('e');
 }
 
 void Company::checkAutoPromotion()
@@ -269,7 +272,7 @@ void Company::checkAutoPromotion()
 //==================================Simulator===================================//
 void Company::Simulator()
 {   
-
+	userinterface.printSilentMode('s');
 	while (!Events.isEmpty()||!NC.isEmpty()|| !SC.isEmpty()|| !VC.isEmpty()) //On each hour
 	{
 		Event* e = NULL;                      // a. Execute the events that should be executed at that hour
@@ -283,11 +286,11 @@ void Company::Simulator()
 				Events.peek(e);
 			}
 		}
-
+		checkAutoPromotion();
 		CheckUp();
 		AssignmentOrder();
 		movingToDelivered();
-		userinterface.print(currentTime, NC, SC, VC, NTs, STs, VTs, MovingNC, MovingSC, MovingVC, deliveredCargoNC, deliveredCargoSC, deliveredCargoVC);
+		userinterface.print(currentTime, NC, SC, VC, NTs, STs, VTs, MovingNC, MovingSC, MovingVC, deliveredCargoNC, deliveredCargoSC, deliveredCargoVC, assignedTrucks, In_Checkup_N_Trucks, In_Checkup_S_Trucks, In_Checkup_VIP_Trucks);
 		currentTime.increase();
 	}
 }

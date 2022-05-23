@@ -52,10 +52,9 @@ private:
 
 	LinkedQueue<Truck> assignedTrucks;
 
+	//CheckUp lists
 	LinkedQueue<Truck> In_Checkup_N_Trucks;
-
 	LinkedQueue<Truck> In_Checkup_S_Trucks;
-
 	LinkedQueue<Truck> In_Checkup_VIP_Trucks;
 
 	static Time currentTime;
