@@ -106,6 +106,14 @@ Time Time::operator - (const Time& T)
 	return Time(d, h);
 }
 
+Time Time::operator/(const int n)
+{
+	int T = this->getTimeInHours() / n;
+	int d = T / 24;
+	int h = T % 24;
+	return Time(d,h);
+}
+
 
 bool Time::isValid() {
 	if (Hour >= 0 && Day >= 0)

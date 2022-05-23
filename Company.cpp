@@ -220,20 +220,24 @@ void Company::Print()
 	Out.open("Output.txt");  //Open Output File
 
 	Out << "CDT ID PT WT TID \n";
-	Cargo temp;
+	Cargo tempC;
 	Time T;
-	while (totalDeliveredCargo.dequeue(temp))
+	Time totalWait;
+	int Cnum = totalDeliveredCargo.GetCount();
+	while (totalDeliveredCargo.dequeue(tempC))
 	{
-		T = temp.getCargoDelivreyTime();
+		T = tempC.getCargoDelivreyTime();
 		Out << T.getDay() << ":" << T.getHour() << " ";
-		Out << temp.getID() << " ";
-		T = temp.getPT();
+		Out << tempC.getID() << " ";
+		T = tempC.getPT();
 		Out << T.getDay() << ":" << T.getHour() << " ";
-		T = temp.getWaitingTime();
+		T = tempC.getWaitingTime();
 		Out << T.getDay() << ":" << T.getHour() << " ";
-		Out << temp.getTruckId();
+		Out << tempC.getTruckId();
 		Out << endl;
+		totalWait = totalWait + tempC.getWaitingTime();
 	}
+	CargoAvgWait = totalWait / Cnum;
 	Out << "……………………………………………… \n";
 	Out << "……………………………………………… \n";
 	//get number of each typ of cargo and print it
@@ -242,7 +246,23 @@ void Company::Print()
 	Out << ", S: " << SC_Num;
 	Out << ", V: " << VIPC_Num << "] \n";
 	Out << "Cargo Avg Wait = " << CargoAvgWait.getDay() << ":" << CargoAvgWait.getHour() << endl;
-	Out << "Auto-promoted Cargos:" << (100*PC_Num )/NC_Num << "% \n";
+	//Out << "Auto-promoted Cargos:" << (100*PC_Num )/NC_Num << "% \n";
+
+	Truck tempT;
+	int totalActiveTime;
+	while (NTs.dequeue(tempT))
+	{
+		totalActiveTime += tempT.GetDI();
+	}
+	while (STs.dequeue(tempT))
+	{
+		totalActiveTime += tempT.GetDI();
+	}
+	while (VTs.dequeue(tempT))
+	{
+		totalActiveTime += tempT.GetDI();
+	}
+	AvgActiveTime = totalActiveTime / (NT_Num + ST_Num + VIPT_Num);
 
 	//get number of each typ of trucks and print it
 	Out << "Trucks: " << NT_Num + ST_Num + VIPT_Num;

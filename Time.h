@@ -16,6 +16,7 @@ public:
 	void operator=(const Time& T);
 	bool operator==(const Time& T);
 	Time operator - (const Time& T);
+	Time operator / (const int T);
 	bool operator >= (const Time & T);
 
 	void setDay(int D);
