@@ -86,8 +86,9 @@ Time Cargo::getWaitingTime() const
 	return waitingTime;
 }
 
-void Cargo::increaseWaitingTime() {
-	waitingTime.increase();
+void Cargo::setWaitingTime(Time T)
+{
+	waitingTime = T - preparationTime;
 }
 
 bool Cargo::operator==(int x)

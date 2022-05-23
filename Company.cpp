@@ -286,9 +286,9 @@ void Company::Simulator()
 				Events.peek(e);
 			}
 		}
-		checkAutoPromotion();
 		CheckUp();
 		AssignmentOrder();
+		checkAutoPromotion();
 		movingToDelivered();
 		userinterface.print(currentTime, NC, SC, VC, NTs, STs, VTs, MovingNC, MovingSC, MovingVC, deliveredCargoNC, deliveredCargoSC, deliveredCargoVC, assignedTrucks, In_Checkup_N_Trucks, In_Checkup_S_Trucks, In_Checkup_VIP_Trucks);
 		currentTime.increase();
@@ -463,6 +463,7 @@ bool Company::assigningVipCargos(PriorityQueue<Cargo>& VC, LinkedQueue<Truck>& T
 				newTruck.assignCargo(newCargo, (1.0 / CDT.getTimeInHours()));
 				MovingVC.enqueue(newCargo);
 				newCargo.setIsMoving(true);
+				newCargo.setWaitingTime(currentTime);
 				newCargo.setCargoDelivreyTime(CDT);
 				newCargo.setTruckId(newTruck.GetID());
 			}
@@ -495,6 +496,7 @@ bool Company::assigningSpecialCargos(LinkedQueue<Cargo>& SC, LinkedQueue<Truck>&
 				newTruck.assignCargo(newCargo, (1.0 / CDT.getTimeInHours()));
 				MovingSC.enqueue(newCargo);
 				newCargo.setIsMoving(true);
+				newCargo.setWaitingTime(currentTime);
 				newCargo.setCargoDelivreyTime(CDT);
 				newCargo.setTruckId(newTruck.GetID());
 			}
@@ -529,6 +531,7 @@ bool Company::assigningNormalCargos(Linked_list<Cargo>& NC, LinkedQueue<Truck>& 
 				newTruck.assignCargo(newCargo, (1.0 / CDT.getTimeInHours()));
 				MovingNC.enqueue(newCargo);
 				newCargo.setIsMoving(true);
+				newCargo.setWaitingTime(currentTime);
 				newCargo.setCargoDelivreyTime(CDT);
 				newCargo.setTruckId(newTruck.GetID());
 			}

@@ -46,7 +46,7 @@ public:
 	void setCargoTyp(char typ);
 	Time getCargoDelivreyTime()const;
 	Time getWaitingTime()const;
-	void increaseWaitingTime();
+	void setWaitingTime(Time T);
 	bool operator==(int x);
 	void setCargoDelivreyTime(Time T);
 	static int GetNumber();
