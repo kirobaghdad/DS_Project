@@ -92,6 +92,24 @@ bool PriorityQueue<T>::enqueue(const T& newEntry, float p)
 	{
 		// Traverse the list and find a
 		// position to insert new node
+		if (frontPtr==backPtr)
+		{
+			if (frontPtr->priority < p)
+			{
+				temp->setNext(backPtr);
+				frontPtr = temp;
+				count++;
+				return true;
+			}
+			else
+			{
+				backPtr = temp;
+				temp->setNext(nullptr);
+				frontPtr->setNext(backPtr);
+				count++;
+				return true;
+			}
+		}
 		while (start->getNext() != nullptr && start->getNext()->priority >= p)
 		{
 			start = start->getNext();

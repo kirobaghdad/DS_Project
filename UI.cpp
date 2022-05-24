@@ -14,7 +14,7 @@ UI::~UI()
 	
 }
 
-void UI::printNow(Time t, Linked_list<Cargo>& cn, LinkedQueue<Cargo>& cs, PriorityQueue<Cargo>& cv, LinkedQueue<Truck>& Tcn, LinkedQueue<Truck>& Tcs, LinkedQueue<Truck>& Tcv, LinkedQueue<Cargo>& Mcn, LinkedQueue<Cargo>& Mcs, LinkedQueue<Cargo>& Mcv, LinkedQueue<Cargo>& Dcn, LinkedQueue<Cargo>& Dcs, LinkedQueue<Cargo>& Dcv , LinkedQueue<Truck>& assignedTrucks, LinkedQueue<Truck>& In_Checkup_N_Trucks, LinkedQueue<Truck>& In_Checkup_S_Trucks, LinkedQueue<Truck>& In_Checkup_VIP_Trucks)
+void UI::printNow(Time t, Linked_list<Cargo>& cn, LinkedQueue<Cargo>& cs, PriorityQueue<Cargo>& cv, LinkedQueue<Truck>& Tcn, LinkedQueue<Truck>& Tcs, LinkedQueue<Truck>& Tcv, LinkedQueue<Cargo>& Mcn, LinkedQueue<Cargo>& Mcs, LinkedQueue<Cargo>& Mcv, LinkedQueue<Cargo>& Dcn, LinkedQueue<Cargo>& Dcs, LinkedQueue<Cargo>& Dcv , LinkedQueue<Truck> assignedTrucks, LinkedQueue<Truck>& In_Checkup_N_Trucks, LinkedQueue<Truck>& In_Checkup_S_Trucks, LinkedQueue<Truck>& In_Checkup_VIP_Trucks)
 {
 
 
