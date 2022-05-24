@@ -330,6 +330,7 @@ void Company::movingToDelivered() {
 		{
 			(* tempTruck).getCargosQueue().dequeue(*tempCargo);
 		    totalDeliveredCargo.enqueue(*tempCargo);
+			(*tempTruck).getCargosQueue().peek(*tempCargo);
 		}
 		if (tempTruck->getCargosQueue().GetCount()!=0)
 		{
