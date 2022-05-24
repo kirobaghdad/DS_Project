@@ -477,7 +477,7 @@ bool Company::assigningVipCargos(PriorityQueue<Cargo>& VC, LinkedQueue<Truck>& T
 			{ 
 				newCargo = new Cargo;
 				VC.dequeue(*newCargo);
-				CDT = currentTime + (Time)(((*newCargo).getDeliveryDistance() / ((* newTruck).GetSpeed() + 0.0)) + (*newCargo).getLU_Time()+prev);
+				CDT = currentTime + (Time)(((*newCargo).getDeliveryDistance() / ((* newTruck).GetSpeed() + 0.0)) + (*newCargo).getLU_Time()/*+prev*/);
 				(*newCargo).setIsMoving(true);
 			    (*newCargo).setWaitingTime(currentTime);
 				(*newCargo).setCargoDelivreyTime(CDT);
