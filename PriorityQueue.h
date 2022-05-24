@@ -148,6 +148,7 @@ PriorityQueue<T>::~PriorityQueue()
 template <typename T>
 PriorityQueue<T>::PriorityQueue(const PriorityQueue<T>& LQ)
 {
+	count =LQ.count;
 	PriorityNode<T>* NodePtr = LQ.frontPtr;
 	if (!NodePtr) //LQ is empty
 	{
