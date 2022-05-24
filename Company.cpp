@@ -320,15 +320,21 @@ void Company::movingToDelivered() {
 	Truck* tempTruck=new Truck;
 	Cargo* tempCargo=new Cargo;
 
-	for (int i = 0; i < assignedTrucks.GetCount(); i++) {
-		assignedTrucks.peek(*tempTruck);
+	for (int i = 0; i < assignedTrucks.GetCount(); i++)
+	{
+		assignedTrucks.dequeue(*tempTruck);
 
 		(*tempTruck).getCargosQueue().peek(*tempCargo);
-		if ((*tempCargo).getCargoDelivreyTime().getTimeInHours() >= (1 / (currentTime.getTimeInHours() + 0.0)))
+		while ((*tempCargo).getCargoDelivreyTime().getTimeInHours() <= currentTime.getTimeInHours())
 		{
 			(* tempTruck).getCargosQueue().dequeue(*tempCargo);
 		    totalDeliveredCargo.enqueue(*tempCargo);
 		}
+		if (tempTruck->getCargosQueue().GetCount()!=0)
+		{
+			assignedTrucks.enqueue(*tempTruck);
+		}
+		//assignedTrucks.enqueue(*tempTruck);
 	}
 }
 
