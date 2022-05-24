@@ -319,13 +319,14 @@ void Company::Simulator()
 void Company::movingToDelivered() {
 	Truck* tempTruck=new Truck;
 	Cargo* tempCargo=new Cargo;
+	int x = assignedTrucks.GetCount();
 
-	for (int i = 0; i < assignedTrucks.GetCount(); i++)
+	for (int i = 0; i < x; i++)
 	{
 		assignedTrucks.dequeue(*tempTruck);
-
 		(*tempTruck).getCargosQueue().peek(*tempCargo);
-		while ((*tempCargo).getCargoDelivreyTime().getTimeInHours() <= currentTime.getTimeInHours())
+
+		while (!((*tempTruck).getCargosQueue().isEmpty()) && (*tempCargo).getCargoDelivreyTime().getTimeInHours() <= currentTime.getTimeInHours())
 		{
 			(* tempTruck).getCargosQueue().dequeue(*tempCargo);
 		    totalDeliveredCargo.enqueue(*tempCargo);
@@ -334,7 +335,21 @@ void Company::movingToDelivered() {
 		{
 			assignedTrucks.enqueue(*tempTruck);
 		}
-		//assignedTrucks.enqueue(*tempTruck);
+		if (tempTruck->getCargosQueue().GetCount() == 0)
+		{
+			switch (tempTruck->getType())
+			{
+			case'N':
+				NTs.enqueue(*tempTruck);
+				break;
+			case'S':
+				STs.enqueue(*tempTruck);
+				break;
+			case'V':
+				VTs.enqueue(*tempTruck);
+				break;
+			}
+		}
 	}
 }
 
