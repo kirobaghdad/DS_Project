@@ -249,7 +249,7 @@ void Company::Print()
 	//Out << "Auto-promoted Cargos:" << (100*PC_Num )/NC_Num << "% \n";
 
 	Truck tempT;
-	int totalActiveTime;
+	int totalActiveTime = 0;
 	while (NTs.dequeue(tempT))
 	{
 		totalActiveTime += tempT.GetDI();
