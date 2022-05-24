@@ -27,7 +27,7 @@ private:
 	bool isWaiting; 
 	bool isMoving;
 	Time cargoDelivreyTime;
-	int Priority;
+	//int Priority;
 	int truckId; //The Id of truck that delivered the cargo
 public:
 	Cargo(Time, int, int, int, int, char); //Non_Default Constructor for the Cargo Class

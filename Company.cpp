@@ -324,7 +324,7 @@ void Company::movingToDelivered() {
 		assignedTrucks.peek(*tempTruck);
 
 		(*tempTruck).getCargosQueue().peek(*tempCargo);
-
+		(*tempTruck).getCargosQueue().peek(*tempCargo);
 		if ((*tempCargo).getCargoDelivreyTime().getTimeInHours() >= (1 / (currentTime.getTimeInHours() + 0.0)))
 		{
 			(* tempTruck).getCargosQueue().dequeue(*tempCargo);

@@ -76,6 +76,7 @@ bool PriorityQueue<T>::enqueue(const T& newEntry, float p)
 	if (isEmpty())
 	{
 		frontPtr = temp;
+		backPtr =  temp;
 		count++;
 		temp->setNext(NULL);
 		return true;
