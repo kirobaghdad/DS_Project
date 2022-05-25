@@ -540,11 +540,11 @@ bool Company::assigningVipCargos(PriorityQueue<Cargo>& VC, LinkedQueue<Truck*>& 
 				//newCargo = new Cargo;
 				VC.dequeue(newCargo);
 				CDT = currentTime + (Time)(((newCargo).getDeliveryDistance() / (newTruck->GetSpeed() + 0.0)) + (newCargo).getLU_Time());
-				newTruck->assignCargo((newCargo), (1.0 / CDT.getTimeInHours()));
-				totalMoving.enqueue(newCargo, 1.0 / CDT.getTimeInHours());
 				newCargo.setIsMoving(true);
 				newCargo.setCargoDelivreyTime(CDT);
 				newCargo.setTruckId(newTruck->GetID());
+				newTruck->assignCargo((newCargo), (1.0 / CDT.getTimeInHours()));
+				totalMoving.enqueue(newCargo, 1.0 / CDT.getTimeInHours());
 			}
 			newTruck->getCargosQueue().peek(newCargo);
 			assignedTrucks.enqueue(newTruck, 1.0 / newCargo.getCargoDelivreyTime().getTimeInHours());
@@ -601,11 +601,11 @@ bool Company::assigningSpecialCargos(LinkedQueue<Cargo>& SC, LinkedQueue<Truck*>
 			{
 				SC.dequeue(newCargo);
 				CDT = currentTime + (Time)(( newCargo).getDeliveryDistance() / (newTruck->GetSpeed() + 0.0) + newCargo.getLU_Time());
-				newTruck->assignCargo((newCargo), (1.0 / CDT.getTimeInHours()));
-				totalMoving.enqueue(newCargo, 1.0 / CDT.getTimeInHours());
 				newCargo.setIsMoving(true);
 				newCargo.setCargoDelivreyTime(CDT);
 				newCargo.setTruckId(newTruck->GetID());
+				newTruck->assignCargo((newCargo), (1.0 / CDT.getTimeInHours()));
+				totalMoving.enqueue(newCargo, 1.0 / CDT.getTimeInHours());
 			}
 			newTruck->getCargosQueue().peek(newCargo);
 			assignedTrucks.enqueue(newTruck, 1.0 / newCargo.getCargoDelivreyTime().getTimeInHours());
@@ -663,11 +663,12 @@ bool Company::assigningNormalCargos(Linked_list<Cargo>& NC, LinkedQueue<Truck*>&
 			//	newCargo = new Cargo;
 				NC.removeBeg(newCargo);
 				CDT = currentTime + (Time)((( newCargo).getDeliveryDistance() / (newTruck->GetSpeed() + 0.0)) + (newCargo).getLU_Time());
-				newTruck->assignCargo((newCargo), (1.0 / CDT.getTimeInHours()));
-				/*MovingSC*/ totalMoving.enqueue(newCargo, 1.0 / CDT.getTimeInHours());
+				
 				newCargo.setIsMoving(true);
 				newCargo.setCargoDelivreyTime(CDT);
 				newCargo.setTruckId(newTruck->GetID());
+				newTruck->assignCargo((newCargo), (1.0 / CDT.getTimeInHours()));
+				totalMoving.enqueue(newCargo, 1.0 / CDT.getTimeInHours());
 			}
 			newTruck->getCargosQueue().peek(newCargo);
 			assignedTrucks.enqueue(newTruck, 1.0 / newCargo.getCargoDelivreyTime().getTimeInHours());
