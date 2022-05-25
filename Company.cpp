@@ -368,11 +368,10 @@ void Company::AssignmentOrder()
 	{
 		if (!VTs.isEmpty() && !VIP_Cargo && Trucks_Count < 3)
 		{
-
-
 			VIP_Cargo = assigningVipCargos(VC, VTs);
 			Trucks_Count += VIP_Cargo;
 		}
+
 		if (!NTs.isEmpty() && !VIP_Cargo && Trucks_Count < 3)
 		{
 			VIP_Cargo = assigningVipCargos(VC, NTs);
@@ -484,13 +483,15 @@ void Company::CheckUp() {
 bool Company::assigningVipCargos(PriorityQueue<Cargo>& VC, LinkedQueue<Truck*>& Tr)
 {
 	Cargo* newCargo = NULL;
+	Cargo newCargo2 ;
+
 	Truck* newTruck = new Truck;
 	//int prev=0;
 	Time CDT;
 	if (!offHours())
 	{
-
-		if (VC.GetCount() >= VIPT_Capacity && !VC.isEmpty())
+		VC.peek(newCargo2);
+		if (VC.GetCount() >= VIPT_Capacity || (newCargo2.getWaitingTime().getTimeInHours() >= MaxW) && !VC.isEmpty())
 		{
 			Tr.dequeue(newTruck);
 			for (int i = 0; i < VIPT_Capacity; i++) //Assigning the cargos to the Truck
