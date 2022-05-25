@@ -360,6 +360,7 @@ void Company::movingToDelivered() {
 				break;
 			}
 		}
+		i++;
 	}
 }
 

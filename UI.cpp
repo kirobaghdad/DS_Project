@@ -14,13 +14,14 @@ UI::~UI()
 
 }
 
-void UI::printNow(Time t, Linked_list<Cargo>& cn, LinkedQueue<Cargo>& cs, PriorityQueue<Cargo>& cv, LinkedQueue<Truck*> Tcn, LinkedQueue<Truck*> Tcs, LinkedQueue<Truck*> Tcv, PriorityQueue<Cargo>& totalMoving, LinkedQueue<Cargo>& totalDeliveredCargo, PriorityQueue<Truck*> assignedTrucks, LinkedQueue<Truck*> In_Checkup_N_Trucks, LinkedQueue<Truck*> In_Checkup_S_Trucks, LinkedQueue<Truck*> In_Checkup_VIP_Trucks)
+void UI::printNow(Time t, Linked_list<Cargo>& cn, LinkedQueue<Cargo>& cs, PriorityQueue<Cargo>& cv, LinkedQueue<Truck*> Tcn, LinkedQueue<Truck*> Tcs, LinkedQueue<Truck*> Tcv, PriorityQueue<Cargo>& totalMoving, LinkedQueue<Cargo> totalDeliveredCargo, PriorityQueue<Truck*> assignedTrucks, LinkedQueue<Truck*> In_Checkup_N_Trucks, LinkedQueue<Truck*> In_Checkup_S_Trucks, LinkedQueue<Truck*> In_Checkup_VIP_Trucks)
 {
 
 
 	cout << "Current Time(Day:Hour) " << t.getDay() << ":" << t.getHour() << endl;
 	int sum;
 	Truck* tempT;
+	Cargo tempC;
 
 	sum = cs.GetCount() + cv.GetCount() + cn.getcurrentsize();
 	cout << sum << " Waiting Cargos:  ["; cn.print(); cout << "]  ("; cs.print(); cout << ")   {"; cv.print(); cout << "}" << endl;
@@ -37,14 +38,17 @@ void UI::printNow(Time t, Linked_list<Cargo>& cn, LinkedQueue<Cargo>& cs, Priori
 			cout << "[";
 			tempT->getCargosQueue().print();
 			cout << "] ";
+			break;
 		case'S':
 			cout << "(";
 			tempT->getCargosQueue().print();
 			cout << ") ";
+			break;
 		case'V':
 			cout << "{";
 			tempT->getCargosQueue().print();
 			cout << "} ";
+			break;
 		default:
 			break;
 		}
@@ -78,8 +82,25 @@ void UI::printNow(Time t, Linked_list<Cargo>& cn, LinkedQueue<Cargo>& cs, Priori
 	cout << "---------------------------------------------------------------------------" << endl;
 
 	sum = totalMoving.GetCount();
-	cout << sum << " Moving Cargos:  ["; totalMoving.print(); cout << "]  ("; totalMoving.print(); cout << ")   {";  totalMoving.print(); cout << "}" << endl;//need update
-	cout << "---------------------------------------------------------------------------" << endl;
+	cout << sum << " Moving Cargos:  ";
+	while (totalMoving.dequeue(tempC))
+	{
+		switch (tempC.getCargoType())
+		{
+		case'N':
+			cout << "[" << tempC.getID() << "] ";
+			break;
+		case'S':
+			cout << "(" << tempC.getID() << ") ";
+			break;
+		case'V':
+			cout << "{" << tempC.getID() << "} ";
+			break;
+		default:
+			break;
+		}
+	}
+	cout <<endl<< "---------------------------------------------------------------------------" << endl;
 
 	sum = In_Checkup_N_Trucks.GetCount() + In_Checkup_S_Trucks.GetCount() + In_Checkup_VIP_Trucks.GetCount();
 	cout << sum << " In_Checkup Trucks:  [";
@@ -107,8 +128,25 @@ void UI::printNow(Time t, Linked_list<Cargo>& cn, LinkedQueue<Cargo>& cs, Priori
 	cout << "---------------------------------------------------------------------------" << endl;
 
 	sum = totalDeliveredCargo.GetCount();
-	cout << sum << " Delivered Cargos:  ["; totalDeliveredCargo.print(); cout << "]  ("; totalDeliveredCargo.print(); cout << ")   {"; totalDeliveredCargo.print(); cout << "}" << endl;//need update
-	cout << endl;
+	cout << sum << " Delivered Cargos:  "; 
+	while (totalDeliveredCargo.dequeue(tempC))
+	{
+		switch (tempC.getCargoType())
+		{
+		case'N':
+			cout << "[" << tempC.getID() << "] ";
+			break;
+		case'S':
+			cout << "(" << tempC.getID() << ") ";
+			break;
+		case'V':
+			cout << "{" << tempC.getID() << "} ";
+			break;
+		default:
+			break;
+		}
+	}
+	cout << endl<<endl;
 }
 
 
