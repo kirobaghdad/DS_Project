@@ -40,17 +40,18 @@ private:
 
 
 	// Moving Cargos List 	 
-	LinkedQueue<Cargo> MovingNC;
-	LinkedQueue<Cargo> MovingSC;
-	LinkedQueue<Cargo> MovingVC;
+	//LinkedQueue<Cargo> MovingNC;
+	//LinkedQueue<Cargo> MovingSC;
+	//LinkedQueue<Cargo> MovingVC;
+	PriorityQueue<Cargo> totalMoving;
 
 	//Delivered Cargos List
-	LinkedQueue<Cargo> deliveredCargoNC;
-	LinkedQueue<Cargo> deliveredCargoSC;
-	LinkedQueue<Cargo> deliveredCargoVC;
+	//LinkedQueue<Cargo> deliveredCargoNC;
+	//LinkedQueue<Cargo> deliveredCargoSC;
+	//LinkedQueue<Cargo> deliveredCargoVC;
 	LinkedQueue<Cargo> totalDeliveredCargo;
 
-	LinkedQueue<Truck> assignedTrucks;
+	PriorityQueue<Truck> assignedTrucks;
 
 	//CheckUp lists
 	LinkedQueue<Truck> In_Checkup_N_Trucks;
@@ -121,9 +122,9 @@ public:
 	void assigningCargos();
 	void CheckUp();
 
-	bool assigningVipCargos (PriorityQueue<Cargo> &VC, LinkedQueue<Truck> &Tr );
-	bool assigningSpecialCargos(LinkedQueue<Cargo>&SC, LinkedQueue<Truck>& Tr);
-	bool assigningNormalCargos(Linked_list<Cargo>&NC, LinkedQueue<Truck>& Tr);
+	bool assigningVipCargos(PriorityQueue<Cargo>& VC, LinkedQueue<Truck>& Tr);
+	bool assigningSpecialCargos(LinkedQueue<Cargo>& SC, LinkedQueue<Truck>& Tr);
+	bool assigningNormalCargos(Linked_list<Cargo>& NC, LinkedQueue<Truck>& Tr);
 
 	void AssignmentOrder();
 	void movingToDelivered();

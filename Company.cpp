@@ -9,10 +9,10 @@ int Company::SC_Num = 0;
 int Company::VIPC_Num = 0;
 int Company::PC_Num = 0;
 
-Time Company::currentTime(0 , 0);
+Time Company::currentTime(0, 0);
 
 Company::Company()
-{ 
+{
 	currentTime.setDay(0);
 	currentTime.setHour(0);
 	LoadFile();
@@ -21,7 +21,7 @@ Company::Company()
 /**
 Returns true if it is off-hours
 **/
-bool Company::offHours() { 
+bool Company::offHours() {
 	if (currentTime.getHour() < 5 || currentTime.getHour() > 23) {
 		return true;
 	}
@@ -148,7 +148,7 @@ void Company::LoadFile()
 	}
 	//===========================================//
 	//Duration
-	
+
 	//Others_Variables
 	IN >> AutoPromotionLimit;
 	IN >> MaxW;
@@ -272,7 +272,7 @@ void Company::Print()
 	Out << "Avg Active time = " << AvgActiveTime << endl;
 	Out << "Avg utilization = " << AvgUtilization << "% \n";
 
-	                   ///////////////////////////////////////////////////
+	///////////////////////////////////////////////////
 	userinterface.printSilentMode('e');
 }
 
@@ -291,9 +291,9 @@ void Company::checkAutoPromotion()
 
 //==================================Simulator===================================//
 void Company::Simulator()
-{   
+{
 	userinterface.printSilentMode('s');
-	while (!Events.isEmpty()||!NC.isEmpty()|| !SC.isEmpty()|| !VC.isEmpty()) //On each hour
+	while (!Events.isEmpty() || !NC.isEmpty() || !SC.isEmpty() || !VC.isEmpty()) //On each hour
 	{
 		Event* e = NULL;                      // a. Execute the events that should be executed at that hour
 		if (!Events.isEmpty())
@@ -310,31 +310,41 @@ void Company::Simulator()
 		AssignmentOrder();
 		checkAutoPromotion();
 		movingToDelivered();
-		userinterface.print(currentTime, NC, SC, VC, NTs, STs, VTs, MovingNC, MovingSC, MovingVC, deliveredCargoNC, deliveredCargoSC, deliveredCargoVC, assignedTrucks, In_Checkup_N_Trucks, In_Checkup_S_Trucks, In_Checkup_VIP_Trucks);
+		userinterface.print(currentTime, NC, SC, VC, NTs, STs, VTs, totalMoving, totalDeliveredCargo, assignedTrucks, In_Checkup_N_Trucks, In_Checkup_S_Trucks, In_Checkup_VIP_Trucks);
 		currentTime.increase();
 	}
 }
 
 
 void Company::movingToDelivered() {
-	Truck* tempTruck=new Truck;
-	Cargo* tempCargo=new Cargo;
+	Truck* tempTruck = new Truck;
+	Cargo* tempCargo = new Cargo;
 	int x = assignedTrucks.GetCount();
 
 	for (int i = 0; i < x; i++)
 	{
 		assignedTrucks.dequeue(*tempTruck);
-		(*tempTruck).getCargosQueue().peek(*tempCargo);
 
-		while (!((*tempTruck).getCargosQueue().isEmpty()) && (*tempCargo).getCargoDelivreyTime().getTimeInHours() <= currentTime.getTimeInHours())
+		while (!((*tempTruck).getCargosQueue().isEmpty()))
 		{
-			(* tempTruck).getCargosQueue().dequeue(*tempCargo);
-		    totalDeliveredCargo.enqueue(*tempCargo);
-			(*tempTruck).getCargosQueue().peek(*tempCargo);
+			(*tempTruck).getCargosQueue().dequeue(*tempCargo);
+
+			if ((*tempCargo).getCargoDelivreyTime().getTimeInHours() <= currentTime.getTimeInHours())
+			{
+				totalDeliveredCargo.enqueue(*tempCargo);
+			}
+			else
+
+				break;
+
 		}
-		if (tempTruck->getCargosQueue().GetCount()!=0)
+
+
+
+
+		if (tempTruck->getCargosQueue().GetCount() != 0)
 		{
-			assignedTrucks.enqueue(*tempTruck);
+			assignedTrucks.enqueue(*tempTruck, 8);
 		}
 		if (tempTruck->getCargosQueue().GetCount() == 0)
 		{
@@ -362,7 +372,7 @@ void Company::AssignmentOrder()
 	bool N_Cargo = 0;
 	bool S_Cargo = 0;
 	//=================================== First, assign VIP cargos ======================================//
-	if (!VC.isEmpty()) 
+	if (!VC.isEmpty())
 	{
 		if (!VTs.isEmpty() && !VIP_Cargo && Trucks_Count < 3)
 		{
@@ -385,30 +395,30 @@ void Company::AssignmentOrder()
 
 
 	//=================================== Second, assign special cargos ======================================//
-    if (!SC.isEmpty())
+	if (!SC.isEmpty())
 	{
 		if (!STs.isEmpty() && !S_Cargo && Trucks_Count < 3)
 		{
-		S_Cargo = assigningSpecialCargos(SC, STs);
-		Trucks_Count += S_Cargo;
+			S_Cargo = assigningSpecialCargos(SC, STs);
+			Trucks_Count += S_Cargo;
 		}
 	}
 	//================================== Third, assign normal cargos =======================================//
 
-    if (NC.isEmpty()) //NC
-		{
+	if (NC.isEmpty()) //NC
+	{
 		if (!NTs.isEmpty() && !N_Cargo && Trucks_Count < 3)
 		{
 			N_Cargo = assigningNormalCargos(NC, NTs);
 			Trucks_Count += N_Cargo;
 		}
-			
+
 		if (!VTs.isEmpty() && !N_Cargo && Trucks_Count < 3)
 		{
 			N_Cargo = assigningNormalCargos(NC, VTs);
 			Trucks_Count += N_Cargo;
-		}	
 		}
+	}
 	//=========================================================================//
 }
 
@@ -445,7 +455,7 @@ void Company::CheckUp() {
 	}
 
 	//Moving from waiting list to checkup lists
-	
+
 	if (!NTs.isEmpty()) {
 		NTs.peek(T);
 		while (T.goToCheckUp()) {
@@ -482,33 +492,33 @@ void Company::CheckUp() {
 bool Company::assigningVipCargos(PriorityQueue<Cargo>& VC, LinkedQueue<Truck>& Tr)
 {
 	Cargo* newCargo = NULL;
-	Truck* newTruck=new Truck;
+	Truck* newTruck = new Truck;
 	//int prev=0;
 	Time CDT;
 	if (!offHours())
 	{
-		
-	    if (VC.GetCount() >= VIPT_Capacity && !VC.isEmpty())
-	    {
+
+		if (VC.GetCount() >= VIPT_Capacity && !VC.isEmpty())
+		{
 			Tr.dequeue(*newTruck);
 			for (int i = 0; i < VIPT_Capacity; i++) //Assigning the cargos to the Truck
-			{ 
+			{
 				newCargo = new Cargo;
 				VC.dequeue(*newCargo);
-				CDT = currentTime + (Time)(((*newCargo).getDeliveryDistance() / ((* newTruck).GetSpeed() + 0.0)) + (*newCargo).getLU_Time()/*+prev*/);
+				CDT = currentTime + (Time)(((*newCargo).getDeliveryDistance() / ((*newTruck).GetSpeed() + 0.0)) + (*newCargo).getLU_Time()/*+prev*/);
 				(*newCargo).setIsMoving(true);
-			    (*newCargo).setWaitingTime(currentTime);
+				(*newCargo).setWaitingTime(currentTime);
 				(*newCargo).setCargoDelivreyTime(CDT);
 				(*newCargo).setTruckId((*newTruck).GetID());
 				(*newTruck).assignCargo((*newCargo), (1.0 / CDT.getTimeInHours()));
-				MovingVC.enqueue((*newCargo));
+				totalMoving.enqueue((*newCargo), 8888);
 				//prev = (*newCargo).getLU_Time();
 			}
 			(*newTruck).setMovingTime(currentTime);
 			(*newTruck).increaseJourneys();
-			assignedTrucks.enqueue((*newTruck));
+			assignedTrucks.enqueue((*newTruck), 8);
 			return true;
-	    }
+		}
 		return false;
 	}
 
@@ -516,8 +526,8 @@ bool Company::assigningVipCargos(PriorityQueue<Cargo>& VC, LinkedQueue<Truck>& T
 
 bool Company::assigningSpecialCargos(LinkedQueue<Cargo>& SC, LinkedQueue<Truck>& Tr)
 {
-	Cargo newCargo ;
-	Truck newTruck ;
+	Cargo newCargo;
+	Truck newTruck;
 	Time CDT;
 	if (!offHours())
 	{
@@ -530,13 +540,13 @@ bool Company::assigningSpecialCargos(LinkedQueue<Cargo>& SC, LinkedQueue<Truck>&
 				SC.dequeue(newCargo);
 				CDT = currentTime + (Time)((newCargo.getDeliveryDistance() / (newTruck.GetSpeed() + 0.0)) + newCargo.getLU_Time());
 				newTruck.assignCargo(newCargo, (1.0 / CDT.getTimeInHours()));
-				MovingSC.enqueue(newCargo);
+				/*MovingSC*/ totalMoving.enqueue(newCargo, 888);
 				newCargo.setIsMoving(true);
 				newCargo.setWaitingTime(currentTime);
 				newCargo.setCargoDelivreyTime(CDT);
 				newCargo.setTruckId(newTruck.GetID());
 			}
-			assignedTrucks.enqueue(newTruck);
+			assignedTrucks.enqueue(newTruck, 8);
 			newTruck.setMovingTime(currentTime);
 			newTruck.increaseJourneys();
 			return true;
@@ -551,8 +561,8 @@ bool Company::assigningSpecialCargos(LinkedQueue<Cargo>& SC, LinkedQueue<Truck>&
 
 bool Company::assigningNormalCargos(Linked_list<Cargo>& NC, LinkedQueue<Truck>& Tr)
 {
-	Cargo newCargo ;
-	Truck newTruck ;
+	Cargo newCargo;
+	Truck newTruck;
 	Time CDT;
 	if (!offHours())
 	{
@@ -565,13 +575,13 @@ bool Company::assigningNormalCargos(Linked_list<Cargo>& NC, LinkedQueue<Truck>& 
 				NC.removeBeg(newCargo);
 				CDT = currentTime + (Time)((newCargo.getDeliveryDistance() / (newTruck.GetSpeed() + 0.0)) + newCargo.getLU_Time());
 				newTruck.assignCargo(newCargo, (1.0 / CDT.getTimeInHours()));
-				MovingNC.enqueue(newCargo);
+				totalMoving.enqueue(newCargo, 8888);
 				newCargo.setIsMoving(true);
 				newCargo.setWaitingTime(currentTime);
 				newCargo.setCargoDelivreyTime(CDT);
 				newCargo.setTruckId(newTruck.GetID());
 			}
-			assignedTrucks.enqueue(newTruck);
+			assignedTrucks.enqueue(newTruck, 8);
 			newTruck.setMovingTime(currentTime);
 			newTruck.increaseJourneys();
 			return true;
