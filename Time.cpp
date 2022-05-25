@@ -122,5 +122,6 @@ bool Time::isValid() {
 }
 
 int Time::getTimeInHours() const {
+
 	return Hour + Day * 24;
 }

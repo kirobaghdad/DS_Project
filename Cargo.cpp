@@ -1,9 +1,13 @@
 #include "Cargo.h"
 #include <cctype>
 
-Cargo::Cargo(Time pt, int LU, int DD, int C, int id, char CT){
+Cargo::Cargo(Time pt, int LU, int DD, int C, int id, char CT) {
 
 	numberofcargos++;
+
+	waitingTime.setDay(0);
+	waitingTime.setHour(0);
+
 
 	preparationTime = pt;
 

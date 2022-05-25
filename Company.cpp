@@ -595,7 +595,6 @@ bool Company::assigningSpecialCargos(LinkedQueue<Cargo>& SC, LinkedQueue<Truck*>
 
 					CDT = currentTime + (Time)(((*newCargo).getDeliveryDistance() / (newTruck->GetSpeed() + 0.0)) + (*newCargo).getLU_Time());
 					newCargo->setIsMoving(true);
-					newCargo->setWaitingTime(currentTime);
 					newCargo->setCargoDelivreyTime(CDT);
 					newCargo->setTruckId(newTruck->GetID());
 					newTruck->assignCargo((*newCargo), (1.0 / CDT.getTimeInHours()));
@@ -645,7 +644,6 @@ bool Company::assigningNormalCargos(Linked_list<Cargo>& NC, LinkedQueue<Truck*>&
 				newTruck->assignCargo((*newCargo), (1.0 / CDT.getTimeInHours()));
 				/*MovingSC*/ totalMoving.enqueue(*newCargo, 888);
 				newCargo->setIsMoving(true);
-				newCargo->setWaitingTime(currentTime);
 				newCargo->setCargoDelivreyTime(CDT);
 				newCargo->setTruckId(newTruck->GetID());
 			}
