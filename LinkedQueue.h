@@ -129,6 +129,7 @@ LinkedQueue<T>::LinkedQueue(const LinkedQueue<T>& LQ)
 	if (!NodePtr) //LQ is empty
 	{
 		frontPtr = backPtr = nullptr;
+		count = 0;
 		return;
 	}
 
@@ -144,5 +145,6 @@ LinkedQueue<T>::LinkedQueue(const LinkedQueue<T>& LQ)
 		backPtr = ptr;
 		NodePtr = NodePtr->getNext();
 	}
+	count = LQ.count;
 }
 

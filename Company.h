@@ -34,9 +34,9 @@ private:
 	PriorityQueue<Cargo> VC;
 
 	//Truck List 
-	LinkedQueue<Truck> NTs;
-	LinkedQueue<Truck> STs;
-	LinkedQueue<Truck> VTs;
+	LinkedQueue<Truck*> NTs;
+	LinkedQueue<Truck*> STs;
+	LinkedQueue<Truck*> VTs;
 
 
 	// Moving Cargos List 	 
@@ -51,12 +51,12 @@ private:
 	//LinkedQueue<Cargo> deliveredCargoVC;
 	LinkedQueue<Cargo> totalDeliveredCargo;
 
-	PriorityQueue<Truck> assignedTrucks;
+	PriorityQueue<Truck*> assignedTrucks;
 
 	//CheckUp lists
-	LinkedQueue<Truck> In_Checkup_N_Trucks;
-	LinkedQueue<Truck> In_Checkup_S_Trucks;
-	LinkedQueue<Truck> In_Checkup_VIP_Trucks;
+	LinkedQueue<Truck*> In_Checkup_N_Trucks;
+	LinkedQueue<Truck*> In_Checkup_S_Trucks;
+	LinkedQueue<Truck*> In_Checkup_VIP_Trucks;
 
 	static Time currentTime;
 	// Cargo num
@@ -122,9 +122,9 @@ public:
 	void assigningCargos();
 	void CheckUp();
 
-	bool assigningVipCargos(PriorityQueue<Cargo>& VC, LinkedQueue<Truck>& Tr);
-	bool assigningSpecialCargos(LinkedQueue<Cargo>& SC, LinkedQueue<Truck>& Tr);
-	bool assigningNormalCargos(Linked_list<Cargo>& NC, LinkedQueue<Truck>& Tr);
+	bool assigningVipCargos(PriorityQueue<Cargo>& VC, LinkedQueue<Truck*>& Tr);
+	bool assigningSpecialCargos(LinkedQueue<Cargo>& SC, LinkedQueue<Truck*>& Tr);
+	bool assigningNormalCargos(Linked_list<Cargo>& NC, LinkedQueue<Truck*>& Tr);
 
 	void AssignmentOrder();
 	void movingToDelivered();

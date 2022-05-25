@@ -1,3 +1,9 @@
+max waiting time ------>(infinit loop)
+print update
+
+
+
+
 1 - assignment counter (Kirollos)        ---------------------------->  (Done)
 
 2 - Error 0xdddddddd (runtime error) (Kirollos)

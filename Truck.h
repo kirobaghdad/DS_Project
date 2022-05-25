@@ -9,7 +9,7 @@
 class Truck
 {
 	char Type;
-	int DI;             //    (In Hours) The time a truck takes to deliver all its cargos and come back to the company
+	int AT;             //    (In Hours) The time a truck takes to deliver all its cargos and come back to the company
 	int NumofJourneys; //     number of journeys done with this truck  
 	static int J;
 	int checkUpDuration;
@@ -31,7 +31,7 @@ public:
 	{
 		this->checkUpDuration = checkUpDuration;
 		ID = ++id;
-		SetDI(0);
+		SetAT(0);
 		NumofJourneys = 0;
 		SetTC(tc);
 		SetSpeed(speed);
@@ -70,11 +70,11 @@ public:
 	//void increaseWaitingTime() {
 	//	waitingTime++;
 	//}
-	bool SetDI(int di)
+	bool SetAT(int at)
 	{
-		if (di < 0)
+		if (at < 0)
 			return false;
-		DI = di;
+		AT = at;
 		return true;
 	}
 	void increaseJourneys()
@@ -111,9 +111,9 @@ public:
 	PriorityQueue<Cargo>& getCargosQueue() {
 		return assignedCargos;
 	}
-	int GetDI() const
+	int GetAT() const
 	{
-		return DI;
+		return AT;
 	}
 	int GetID() const
 	{
