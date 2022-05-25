@@ -22,7 +22,7 @@ Time::Time(int t) {
 }
 
 void Time::setDay(int D) {
-	if (D > 0)
+	if (D >= 0)
 		Day = D;
 	else Day = 1;
 }

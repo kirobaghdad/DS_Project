@@ -127,6 +127,7 @@ void Cargo::setIsMoving(bool isMoving) {
 	this->isMoving = isMoving;
 }
 
+
 void Cargo::setTruckId(int id)
 {
 	truckId = id;

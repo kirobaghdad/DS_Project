@@ -13,7 +13,7 @@ Time Company::currentTime(0, 0);
 
 Company::Company()
 {
-	currentTime.setDay(0);
+	currentTime.setDay(1);
 	currentTime.setHour(0);
 	LoadFile();
 }
@@ -439,9 +439,9 @@ void Company::AssignmentOrder()
 		while (i < size)
 		{
 			NC.removeBeg(newCargo);
-			Time t = newCargo.getWaitingTime();
-			t.increase();
-			newCargo.setWaitingTime(t);
+			//Time t = newCargo.getWaitingTime();
+			//t.increase();
+			newCargo.setWaitingTime(currentTime);
 			NC.add(newCargo);
 			i++;
 		}
