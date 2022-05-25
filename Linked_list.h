@@ -18,8 +18,18 @@ public:
 	int getfrequencyof(const T& Item);
 	bool contain(const T& Item);
 	Node<T>* getHead()const;
+	bool peek(T& Item);//  const;
 	void print();
 };
+
+template <typename T>
+bool Linked_list<T>::peek(T& Item) //const
+{
+	if (isEmpty())
+		return false;
+	Item = Head->getItem();
+	return true;
+}
 
 
 template<typename T>
