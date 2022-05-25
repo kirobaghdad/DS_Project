@@ -324,23 +324,14 @@ void Company::movingToDelivered() {
 	for (int i = 0; i < x; i++)
 	{
 		assignedTrucks.dequeue(*tempTruck);
+		(*tempTruck).getCargosQueue().peek(*tempCargo);
 
-		while (!((*tempTruck).getCargosQueue().isEmpty()))
+		while (!((*tempTruck).getCargosQueue().isEmpty()) && (*tempCargo).getCargoDelivreyTime().getTimeInHours() <= currentTime.getTimeInHours())
 		{
 			(*tempTruck).getCargosQueue().dequeue(*tempCargo);
-
-			if ((*tempCargo).getCargoDelivreyTime().getTimeInHours() <= currentTime.getTimeInHours())
-			{
-				totalDeliveredCargo.enqueue(*tempCargo);
-			}
-			else
-
-				break;
-
+			totalDeliveredCargo.enqueue(*tempCargo);
+			(*tempTruck).getCargosQueue().peek(*tempCargo);
 		}
-
-
-
 
 		if (tempTruck->getCargosQueue().GetCount() != 0)
 		{

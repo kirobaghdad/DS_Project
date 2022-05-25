@@ -96,7 +96,7 @@ bool LinkedQueue<T>::dequeue(T& frntEntry)
 	if (nodeToDeletePtr == backPtr)
 		backPtr = nullptr;
 
-	//delete nodeToDeletePtr;
+	delete nodeToDeletePtr;
 	count--;
 	return true;
 

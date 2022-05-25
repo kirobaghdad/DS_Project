@@ -14,7 +14,7 @@ public:
 
 	void setItem(const T& r_Item);
 	void setNext(PriorityNode<T>* nextNodePtr);
-	T getItem() const;
+	T& getItem() ;
 	PriorityNode<T>* getNext() const;
 };
 
@@ -51,7 +51,7 @@ void PriorityNode<T>::setNext(PriorityNode<T>* nextNodePtr)
 }
 
 template < typename T>
-T PriorityNode<T>::getItem() const
+T& PriorityNode<T>::getItem() 
 {
 	return item;
 }
