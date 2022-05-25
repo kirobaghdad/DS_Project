@@ -7,7 +7,7 @@ Time::Time() {
 }
 
 Time::Time(int D, int H) {
-	if (D > 0)
+	if (D >= 0)
 		Day = D;
 	else Day = 1;
 
