@@ -310,6 +310,7 @@ void Company::Simulator()
 		AssignmentOrder();
 		checkAutoPromotion();
 		movingToDelivered();
+
 		userinterface.print(currentTime, NC, SC, VC, NTs, STs, VTs, totalMoving, totalDeliveredCargo, assignedTrucks, In_Checkup_N_Trucks, In_Checkup_S_Trucks, In_Checkup_VIP_Trucks);
 		currentTime.increase();
 	}
@@ -363,6 +364,7 @@ void Company::AssignmentOrder()
 	bool VIP_Cargo = 0;
 	bool N_Cargo = 0;
 	bool S_Cargo = 0;
+	Cargo newCargo;
 	//=================================== First, assign VIP cargos ======================================//
 	if (!VC.isEmpty())
 	{
@@ -382,6 +384,18 @@ void Company::AssignmentOrder()
 			VIP_Cargo = assigningVipCargos(VC, STs);
 			Trucks_Count += VIP_Cargo;
 		}
+		int i = 0;
+		int size = VC.GetCount();
+		while (i < size)
+		{
+
+			VC.dequeue(newCargo);
+			Time t = newCargo.getWaitingTime();
+			t.increase();
+			newCargo.setWaitingTime(t);
+			VC.enqueue(newCargo, newCargo.getDeliveryDistance() + newCargo.getCost());
+			i++;
+		}
 	}
 
 
@@ -392,6 +406,17 @@ void Company::AssignmentOrder()
 		{
 			S_Cargo = assigningSpecialCargos(SC, STs);
 			Trucks_Count += S_Cargo;
+		}
+		int i = 0;
+		int size = SC.GetCount();
+		while (i < size)
+		{
+			SC.dequeue(newCargo);
+			Time t = newCargo.getWaitingTime();
+			t.increase();
+			newCargo.setWaitingTime(t);
+			SC.enqueue(newCargo);
+			i++;
 		}
 	}
 	//================================== Third, assign normal cargos =======================================//
@@ -408,6 +433,17 @@ void Company::AssignmentOrder()
 		{
 			N_Cargo = assigningNormalCargos(NC, VTs);
 			Trucks_Count += N_Cargo;
+		}
+		int i = 0;
+		int size = NC.getcurrentsize();
+		while (i < size)
+		{
+			NC.removeBeg(newCargo);
+			Time t = newCargo.getWaitingTime();
+			t.increase();
+			newCargo.setWaitingTime(t);
+			NC.add(newCargo);
+			i++;
 		}
 	}
 	//=========================================================================//
@@ -534,20 +570,6 @@ bool Company::assigningVipCargos(PriorityQueue<Cargo>& VC, LinkedQueue<Truck*>& 
 				done = true;
 			}
 		}
-
-		int i = 0;
-		int size = VC.GetCount();
-		while (i < size)
-		{
-			
-			VC.dequeue(newCargo2);
-			Time t = newCargo2.getWaitingTime();
-			t.increase();
-			newCargo2.setWaitingTime(t);
-			VC.enqueue(newCargo2, newCargo2.getDeliveryDistance()+newCargo2.getCost());
-			i++;
-		}
-
 	}
 	return done;
 }
@@ -604,18 +626,6 @@ bool Company::assigningSpecialCargos(LinkedQueue<Cargo>& SC, LinkedQueue<Truck*>
 			
 				done = true;
 			}
-		}
-
-		int i = 0;
-		int size = SC.GetCount();
-		while (i < size)
-		{
-			SC.dequeue(newCargo2);
-			Time t = newCargo2.getWaitingTime();
-			t.increase();
-			newCargo2.setWaitingTime(t);
-			SC.enqueue(newCargo2);
-			i++;
 		}
 
 	}
@@ -676,19 +686,6 @@ bool Company::assigningNormalCargos(Linked_list<Cargo>& NC, LinkedQueue<Truck*>&
 				done = true;
 			}
 		}
-
-		int i = 0;
-		int size = NC.getcurrentsize();
-		while (i < size)
-		{
-			NC.removeBeg(newCargo2);
-			Time t = newCargo2.getWaitingTime();
-			t.increase();
-			newCargo2.setWaitingTime(t);
-			NC.add(newCargo2);
-			i++;
-		}
-
 	}
 	return done;
 }
