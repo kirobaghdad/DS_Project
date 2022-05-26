@@ -25,11 +25,11 @@ void UI::printNow(Time t, Linked_list<Cargo>& cn, LinkedQueue<Cargo>& cs, Priori
 	Cargo tempC;
 
 	sum = cs.GetCount() + cv.GetCount() + cn.getcurrentsize();
-	SetConsoleTextAttribute(hConsole, 2);
+	SetConsoleTextAttribute(hConsole, 7);
 	cout << sum << " Waiting Cargos:  ["; cn.print(); cout << "]  ("; cs.print(); cout << ")   {"; cv.print(); cout << "}" << endl;
 	SetConsoleTextAttribute(hConsole, 1);
 	cout << "---------------------------------------------------------------------------" << endl;
-	SetConsoleTextAttribute(hConsole, 2);
+	SetConsoleTextAttribute(hConsole, 7);
 	sum = assignedTrucks.GetCount();
 	cout << sum << " Loading Trucks:  ";
 	while (assignedTrucks.dequeue(tempT))
@@ -60,7 +60,7 @@ void UI::printNow(Time t, Linked_list<Cargo>& cn, LinkedQueue<Cargo>& cs, Priori
 	SetConsoleTextAttribute(hConsole, 1);
 	cout << "---------------------------------------------------------------------------" << endl;
 
-	SetConsoleTextAttribute(hConsole, 2);
+	SetConsoleTextAttribute(hConsole, 7);
 	sum = Tcn.GetCount() + Tcs.GetCount() + Tcv.GetCount();
 	cout << sum << " Empty Trucks:  [";
 	while (Tcn.dequeue(tempT))
@@ -86,7 +86,7 @@ void UI::printNow(Time t, Linked_list<Cargo>& cn, LinkedQueue<Cargo>& cs, Priori
 	cout << "}" << endl;
 	SetConsoleTextAttribute(hConsole, 1);
 	cout << "---------------------------------------------------------------------------" << endl;
-	SetConsoleTextAttribute(hConsole, 2);
+	SetConsoleTextAttribute(hConsole, 7);
 	sum = MovingTrucks.GetCount();
 	cout << sum << " Moving Trucks:  ";
 	while (MovingTrucks.dequeue(tempT))
@@ -115,7 +115,7 @@ void UI::printNow(Time t, Linked_list<Cargo>& cn, LinkedQueue<Cargo>& cs, Priori
 	}
 	SetConsoleTextAttribute(hConsole, 1);
 	cout <<endl<< "---------------------------------------------------------------------------" << endl;
-	SetConsoleTextAttribute(hConsole, 2);
+	SetConsoleTextAttribute(hConsole, 7);
 	sum = In_Checkup_N_Trucks.GetCount() + In_Checkup_S_Trucks.GetCount() + In_Checkup_VIP_Trucks.GetCount();
 	cout << sum << " In_Checkup Trucks:  [";
 	while (In_Checkup_N_Trucks.dequeue(tempT))
@@ -141,7 +141,7 @@ void UI::printNow(Time t, Linked_list<Cargo>& cn, LinkedQueue<Cargo>& cs, Priori
 	cout << "}" << endl;
 	SetConsoleTextAttribute(hConsole, 1);
 	cout << "---------------------------------------------------------------------------" << endl;
-	SetConsoleTextAttribute(hConsole, 2);
+	SetConsoleTextAttribute(hConsole, 7);
 	sum = totalDeliveredCargo.GetCount();
 	cout << sum << " Delivered Cargos:  "; 
 	while (totalDeliveredCargo.dequeue(tempC))

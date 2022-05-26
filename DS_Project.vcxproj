@@ -167,9 +167,14 @@
     <ClInclude Include="UI.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="1.txt" />
+    <Text Include="2.txt" />
+    <Text Include="3.txt" />
+    <Text Include="4.txt" />
+    <Text Include="5.txt" />
+    <Text Include="6.txt" />
     <Text Include="Input.txt" />
     <Text Include="Output.txt" />
-    <Text Include="Required.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

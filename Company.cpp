@@ -323,6 +323,7 @@ void Company::Simulator()
 			}
 		}
 		CheckUp();
+
 		checkAutoPromotion();
 		AssignmentOrder();
 		loadingtoMoving();

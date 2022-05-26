@@ -100,6 +100,23 @@
     <Text Include="Output.txt">
       <Filter>I/O Files</Filter>
     </Text>
-    <Text Include="Required.txt" />
+    <Text Include="1.txt">
+      <Filter>I/O Files</Filter>
+    </Text>
+    <Text Include="2.txt">
+      <Filter>I/O Files</Filter>
+    </Text>
+    <Text Include="3.txt">
+      <Filter>I/O Files</Filter>
+    </Text>
+    <Text Include="4.txt">
+      <Filter>I/O Files</Filter>
+    </Text>
+    <Text Include="5.txt">
+      <Filter>I/O Files</Filter>
+    </Text>
+    <Text Include="6.txt">
+      <Filter>I/O Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>
