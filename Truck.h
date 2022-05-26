@@ -67,7 +67,7 @@ public:
 	}
 
 	Time getreturnTime() {
-		return movingTime;
+		return returnTime;
 	}
 
 

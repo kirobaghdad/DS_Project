@@ -82,34 +82,36 @@ bool PriorityQueue<T>::enqueue(const T& newEntry, float p)
 		return true;
 	}
 
+	if (frontPtr == backPtr)
+	{
+		if (frontPtr->priority < p)
+		{
+			temp->setNext(backPtr);
+			frontPtr = temp;
+			count++;
+			return true;
+		}
+		else
+		{
+			backPtr = temp;
+			temp->setNext(nullptr);
+			frontPtr->setNext(backPtr);
+			count++;
+			return true;
+		}
+	}
 	if (frontPtr->priority < p)
 	{
 		// Insert New Node before head
 		temp->setNext(frontPtr);
 		frontPtr = temp;
+		count++;
+		return true;
 	}
 	else
 	{
 		// Traverse the list and find a
 		// position to insert new node
-		if (frontPtr==backPtr)
-		{
-			if (frontPtr->priority < p)
-			{
-				temp->setNext(backPtr);
-				frontPtr = temp;
-				count++;
-				return true;
-			}
-			else
-			{
-				backPtr = temp;
-				temp->setNext(nullptr);
-				frontPtr->setNext(backPtr);
-				count++;
-				return true;
-			}
-		}
 		while (start->getNext() != nullptr && start->getNext()->priority >= p)
 		{
 			start = start->getNext();
@@ -118,9 +120,13 @@ bool PriorityQueue<T>::enqueue(const T& newEntry, float p)
 		// or at required position
 		temp->setNext(start->getNext());
 		start->setNext(temp);
+		if (temp->getNext() == NULL)
+			backPtr = temp;
+		count++;
+		return true;
 	}
-	count++;
-	return true;
+
+
 }
 
 

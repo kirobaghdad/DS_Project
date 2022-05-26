@@ -15,7 +15,6 @@ Company::Company()
 {
 	currentTime.setDay(1);
 	currentTime.setHour(0);
-	LoadFile();
 }
 
 bool Company::offHours() {
@@ -339,13 +338,14 @@ void Company::loadingtoMoving()
 	Cargo tempC;
 	Truck* tempT;
 	assignedTrucks.peek(tempT);
-	while (!assignedTrucks.isEmpty() && tempT->getMovingTime() >= currentTime)
-	{
-		assignedTrucks.dequeue(tempT);
-		tempT->getCargosQueue().peek(tempC);
-		MovingTrucks.enqueue(tempT, 1.0 / tempC.getCargoDelivreyTime().getTimeInHours());
-		assignedTrucks.peek(tempT);
-	}
+	
+		while (!assignedTrucks.isEmpty() && tempT->getMovingTime().getTimeInHours() <= currentTime.getTimeInHours())
+		{
+			assignedTrucks.dequeue(tempT);
+			tempT->getCargosQueue().peek(tempC);
+			MovingTrucks.enqueue(tempT, 1.0 / tempC.getCargoDelivreyTime().getTimeInHours());
+			assignedTrucks.peek(tempT);
+		}
 }
 
 
@@ -357,6 +357,8 @@ void Company::movingToDelivered() {
 	int i = 0;
 	while (finish && i < x)
 	{
+		if (MovingTrucks.isEmpty())
+			return;
 		MovingTrucks.dequeue(tempTruck);
 		if ((tempTruck)->getCargosQueue().peek(tempCargo) && tempCargo.getCargoDelivreyTime().getTimeInHours() > currentTime.getTimeInHours())
 		{
@@ -375,7 +377,7 @@ void Company::movingToDelivered() {
 			tempTruck->getCargosQueue().peek(tempCargo);
 			MovingTrucks.enqueue(tempTruck, 1.0 / tempCargo.getCargoDelivreyTime().getTimeInHours());
 		}
-		else
+		else  
 		{
 			if (tempTruck->getreturnTime().getTimeInHours() <= currentTime.getTimeInHours())
 			{
@@ -416,15 +418,18 @@ void Company::AssignmentOrder()
 	//=================================== First, assign VIP cargos ======================================//
 	if (!VC.isEmpty())
 	{
-		int i = 0;
-		int size = VC.GetCount();
-		while (i < size)
-		{
+		LinkedQueue<Cargo> tempQ;
 
+		while (!VC.isEmpty())
+		{
 			VC.dequeue(newCargo);
 			newCargo.setWaitingTime(currentTime);
+			tempQ.enqueue(newCargo);
+		}
+	
+		while (!tempQ.isEmpty()) {
+			tempQ.dequeue(newCargo);
 			VC.enqueue(newCargo, newCargo.getDeliveryDistance() + newCargo.getCost());
-			i++;
 		}
 		if (!VTs.isEmpty() && !VIP_Cargo)
 		{
