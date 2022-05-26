@@ -63,7 +63,7 @@ public:
 
 	void setreturnTime(Time t) 
 	{
-		movingTime = t;
+		returnTime = t;
 	}
 
 	Time getreturnTime() {

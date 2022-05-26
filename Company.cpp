@@ -377,7 +377,7 @@ void Company::movingToDelivered() {
 		}
 		else
 		{
-			if (tempTruck->getreturnTime()>=currentTime)
+			if (tempTruck->getreturnTime().getTimeInHours() <= currentTime.getTimeInHours())
 			{
 				tempTruck->increaseJourneys();
 				if (!TruckCheckUp(tempTruck))
@@ -622,7 +622,7 @@ bool Company::assigningVipCargos(PriorityQueue<Cargo>& VC, LinkedQueue<Truck*>& 
 				}
 				while (!tempQ.isEmpty())
 				{
-					VC.dequeue(newCargo);
+					tempQ.dequeue(newCargo);
 					CDT = currentTime + (Time)LU_Sum + (Time)(ceil((newCargo).getDeliveryDistance() / (newTruck->GetSpeed() + 0.0)) + (newCargo).getLU_Time());
 					if ((ceil((newCargo).getDeliveryDistance() / (newTruck->GetSpeed() + 0.0))) > maxDT)
 						maxDT = (ceil((newCargo).getDeliveryDistance() / (newTruck->GetSpeed() + 0.0)));
@@ -800,7 +800,7 @@ bool Company::assigningNormalCargos(Linked_list<Cargo>& NC, LinkedQueue<Truck*>&
 				}
 				while (!tempL.isEmpty())
 				{
-					NC.removeBeg(newCargo);
+					tempL.removeBeg(newCargo);
 					CDT = currentTime + (Time)LU_Sum + (Time)(ceil((newCargo).getDeliveryDistance() / (newTruck->GetSpeed() + 0.0)) + (newCargo).getLU_Time());
 					if ((ceil((newCargo).getDeliveryDistance() / (newTruck->GetSpeed() + 0.0))) > maxDT)
 						maxDT = (ceil((newCargo).getDeliveryDistance() / (newTruck->GetSpeed() + 0.0)));
