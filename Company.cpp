@@ -123,10 +123,11 @@ void Company::LoadFile()
 	IN >> VIPT_Capacity;
 
 
+	IN >> J;
 	IN >> NT_Checkup_Duration;
 	IN >> ST_Checkup_Duration;
 	IN >> VIPT_Checkup_Duration;
-	IN >> J;
+	
 	Truck::SetJ(J);
 
 	//===========================================//
@@ -347,18 +348,27 @@ void Company::movingToDelivered() {
 		}
 		else
 		{
-			switch (tempTruck->getType())
+
+			tempTruck->increaseJourneys();
+			if (!TruckCheckUp(tempTruck))
 			{
-			case'N':
-				NTs.enqueue(tempTruck);
-				break;
-			case'S':
-				STs.enqueue(tempTruck);
-				break;
-			case'V':
-				VTs.enqueue(tempTruck);
-				break;
+				switch (tempTruck->getType())
+				{
+				case'N':
+
+					NTs.enqueue(tempTruck);
+					break;
+				case'S':
+					STs.enqueue(tempTruck);
+					break;
+				case'V':
+					VTs.enqueue(tempTruck);
+					break;
+				}
+
 			}
+
+
 		}
 		i++;
 	}
@@ -455,72 +465,71 @@ void Company::AssignmentOrder()
 }
 
 
-void Company::CheckUp() {
-	Truck* T;
+void Company::CheckUp()
+{
+	Truck* T = NULL;
 
 	//Moving from CheckUp lists to waiting lists
 	if (!In_Checkup_N_Trucks.isEmpty()) {
 		In_Checkup_N_Trucks.peek(T);
-		while (T->isCheckedUp(currentTime)) {
+		while (!In_Checkup_N_Trucks.isEmpty() && T->isCheckedUp(currentTime)) {
 			In_Checkup_N_Trucks.dequeue(T);
 			NTs.enqueue(T);
-			NTs.peek(T);
+			In_Checkup_N_Trucks.peek(T);
 		}
 	}
 
 	if (!In_Checkup_S_Trucks.isEmpty()) {
 		In_Checkup_S_Trucks.peek(T);
-		while (T->isCheckedUp(currentTime)) {
+		while (!In_Checkup_S_Trucks.isEmpty() && T->isCheckedUp(currentTime)) {
 			In_Checkup_S_Trucks.dequeue(T);
 			STs.enqueue(T);
-			STs.peek(T);
+			In_Checkup_S_Trucks.peek(T);
 		}
 	}
 
 	if (!In_Checkup_VIP_Trucks.isEmpty()) {
 		In_Checkup_VIP_Trucks.peek(T);
-		while (T->isCheckedUp(currentTime)) {
+		while (!In_Checkup_VIP_Trucks.isEmpty() && T->isCheckedUp(currentTime)) {
 			In_Checkup_VIP_Trucks.dequeue(T);
 			VTs.enqueue(T);
-			VTs.peek(T);
+			In_Checkup_VIP_Trucks.peek(T);
 		}
 	}
 
-	//Moving from waiting list to checkup lists
+	
 
-	if (!NTs.isEmpty()) {
-		NTs.peek(T);
-		while (T->goToCheckUp()) {
-			NTs.dequeue(T);
-			In_Checkup_N_Trucks.enqueue(T);
-			T->setEndCheckUpTime(currentTime + (Time)T->getCheckUpDuration());
-			NTs.peek(T);
-		}
-	}
-
-	if (!STs.isEmpty())
-	{
-		STs.peek(T);
-		while (T->goToCheckUp()) {
-			STs.dequeue(T);
-			In_Checkup_S_Trucks.enqueue(T);
-			T->setEndCheckUpTime(currentTime + (Time)T->getCheckUpDuration());
-			STs.peek(T);
-		}
-	}
-
-	if (!VTs.isEmpty())
-	{
-		VTs.peek(T);
-		while (T->goToCheckUp()) {
-			VTs.dequeue(T);
-			In_Checkup_VIP_Trucks.enqueue(T);
-			T->setEndCheckUpTime(currentTime + (Time)T->getCheckUpDuration());
-			VTs.peek(T);
-		}
-	}
 
 }
+
+bool Company::TruckCheckUp(Truck* tempTruck) {
+
+	if (tempTruck->GetNumofJourneys() >= J)
+	{
+		tempTruck->setEndCheckUpTime(currentTime + (Time)tempTruck->getCheckUpDuration());
+		switch (tempTruck->getType())
+		{
+		case'N':
+			In_Checkup_N_Trucks.enqueue(tempTruck);
+			break;
+		case'S':
+			In_Checkup_S_Trucks.enqueue(tempTruck);
+			break;
+		case'V':
+			In_Checkup_VIP_Trucks.enqueue(tempTruck);
+			break;
+		}
+		return true;
+	}
+	return false;
+}
+
+
+
+
+
+
+
 bool Company::assigningVipCargos(PriorityQueue<Cargo>& VC, LinkedQueue<Truck*>& Tr)
 {
 	//Cargo* newCargo = NULL;

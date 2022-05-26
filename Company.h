@@ -119,9 +119,8 @@ public:
 	void checkAutoPromotion();
 	//Simulator
 	void Simulator();
-	void assigningCargos();
 	void CheckUp();
-
+	bool TruckCheckUp(Truck*);
 	bool assigningVipCargos(PriorityQueue<Cargo>& VC, LinkedQueue<Truck*>& Tr);
 	bool assigningSpecialCargos(LinkedQueue<Cargo>& SC, LinkedQueue<Truck*>& Tr);
 	bool assigningNormalCargos(Linked_list<Cargo>& NC, LinkedQueue<Truck*>& Tr);
