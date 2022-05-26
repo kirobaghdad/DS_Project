@@ -1,12 +1,9 @@
 max waiting time ------>(infinit loop)
 print update
 
-
-
-
 1 - assignment counter (Kirollos)        ---------------------------->  (Done)
 
-2 - Error 0xdddddddd (runtime error) (Kirollos)
+2 - Error 0xdddddddd (runtime error) (Kirollos)    ---------------------------->  (Done)
 
 3 - Silent Mode (Mohamed) ------------------------> (Done)
 
@@ -28,5 +25,3 @@ print update
 
 11 - waiting time assignment (Mohamed) ------------------------> (Done)
 
-Deadline:
-Monday
