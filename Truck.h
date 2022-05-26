@@ -20,10 +20,10 @@ class Truck
 	int ID;
 	int TDC;      //total delivered cargos
 	Time movingTime;
+	Time returnTime;
 	Time endCheckUpTime;
 	PriorityQueue<Cargo> assignedCargos;
 	bool isAssigned;
-	bool isloaded;
 
 public:
 	Truck() {
@@ -40,17 +40,6 @@ public:
 		waitingTime = 0;
 		isAssigned = false;
 		Type = type;
-	}
-	//============================== Setters ==============================//
-
-	bool getisloaded()
-	{
-		return isloaded;
-	}
-
-	void Setisloaded(bool x)
-	{
-		isloaded = x;
 	}
 
 
@@ -72,6 +61,14 @@ public:
 		return movingTime;
 	}
 
+	void setreturnTime(Time t) 
+	{
+		movingTime = t;
+	}
+
+	Time getreturnTime() {
+		return movingTime;
+	}
 
 
 
@@ -121,7 +118,6 @@ public:
 		Speed = sp;
 		return true;
 	}
-	//============================== Getters ==============================// 
 
 	int getCheckUpDuration()
 	{

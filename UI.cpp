@@ -14,7 +14,7 @@ UI::~UI()
 
 }
 
-void UI::printNow(Time t, Linked_list<Cargo>& cn, LinkedQueue<Cargo>& cs, PriorityQueue<Cargo>& cv, LinkedQueue<Truck*> Tcn, LinkedQueue<Truck*> Tcs, LinkedQueue<Truck*> Tcv, PriorityQueue<Cargo> totalMoving, LinkedQueue<Cargo> totalDeliveredCargo, PriorityQueue<Truck*> assignedTrucks, LinkedQueue<Truck*> In_Checkup_N_Trucks, LinkedQueue<Truck*> In_Checkup_S_Trucks, LinkedQueue<Truck*> In_Checkup_VIP_Trucks)
+void UI::printNow(Time t, Linked_list<Cargo>& cn, LinkedQueue<Cargo>& cs, PriorityQueue<Cargo>& cv, LinkedQueue<Truck*> Tcn, LinkedQueue<Truck*> Tcs, LinkedQueue<Truck*> Tcv, PriorityQueue<Cargo> totalMoving, LinkedQueue<Cargo> totalDeliveredCargo, PriorityQueue<Truck*> assignedTrucks, LinkedQueue<Truck*> In_Checkup_N_Trucks, LinkedQueue<Truck*> In_Checkup_S_Trucks, LinkedQueue<Truck*> In_Checkup_VIP_Trucks,PriorityQueue<Truck*> MovingTrucks)
 {
 
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -87,20 +87,27 @@ void UI::printNow(Time t, Linked_list<Cargo>& cn, LinkedQueue<Cargo>& cs, Priori
 	SetConsoleTextAttribute(hConsole, 1);
 	cout << "---------------------------------------------------------------------------" << endl;
 	SetConsoleTextAttribute(hConsole, 2);
-	sum = totalMoving.GetCount();
-	cout << sum << " Moving Cargos:  ";
-	while (totalMoving.dequeue(tempC))
+	sum = MovingTrucks.GetCount();
+	cout << sum << " Moving Trucks:  ";
+	while (MovingTrucks.dequeue(tempT))
 	{
-		switch (tempC.getCargoType())
+		cout << tempT->GetID();
+		switch (tempT->getType())
 		{
 		case'N':
-			cout << "[" << tempC.getID() << "] ";
+			cout << "[";
+			tempT->getCargosQueue().print();
+			cout << "] ";
 			break;
 		case'S':
-			cout << "(" << tempC.getID() << ") ";
+			cout << "(";
+			tempT->getCargosQueue().print();
+			cout << ") ";
 			break;
 		case'V':
-			cout << "{" << tempC.getID() << "} ";
+			cout << "{";
+			tempT->getCargosQueue().print();
+			cout << "} ";
 			break;
 		default:
 			break;
@@ -160,17 +167,17 @@ void UI::printNow(Time t, Linked_list<Cargo>& cn, LinkedQueue<Cargo>& cs, Priori
 
 
 
-void UI::print(Time t, Linked_list<Cargo>& cn, LinkedQueue<Cargo>& cs, PriorityQueue<Cargo>& cv, LinkedQueue<Truck*>& Tcn, LinkedQueue<Truck*>& Tcs, LinkedQueue<Truck*>& Tcv, PriorityQueue<Cargo>& totalMoving, LinkedQueue<Cargo>& totalDeliveredCargo, PriorityQueue<Truck*>& assignedTrucks, LinkedQueue<Truck*>& In_Checkup_N_Trucks, LinkedQueue<Truck*>& In_Checkup_S_Trucks, LinkedQueue<Truck*>& In_Checkup_VIP_Trucks)
+void UI::print(Time t, Linked_list<Cargo>& cn, LinkedQueue<Cargo>& cs, PriorityQueue<Cargo>& cv, LinkedQueue<Truck*>& Tcn, LinkedQueue<Truck*>& Tcs, LinkedQueue<Truck*>& Tcv, PriorityQueue<Cargo>& totalMoving, LinkedQueue<Cargo>& totalDeliveredCargo, PriorityQueue<Truck*>& assignedTrucks, LinkedQueue<Truck*>& In_Checkup_N_Trucks, LinkedQueue<Truck*>& In_Checkup_S_Trucks, LinkedQueue<Truck*>& In_Checkup_VIP_Trucks, PriorityQueue<Truck*> MovingTrucks)
 {
 	switch (mode)
 	{
 	case'I':
 		std::cin.ignore();
-		printNow(t, cn, cs, cv, Tcn, Tcs, Tcv, totalMoving, totalDeliveredCargo, assignedTrucks, In_Checkup_N_Trucks, In_Checkup_S_Trucks, In_Checkup_VIP_Trucks);
+		printNow(t, cn, cs, cv, Tcn, Tcs, Tcv, totalMoving, totalDeliveredCargo, assignedTrucks, In_Checkup_N_Trucks, In_Checkup_S_Trucks, In_Checkup_VIP_Trucks, MovingTrucks);
 		break;
 	case 'B':
 		Sleep(1);
-		printNow(t, cn, cs, cv, Tcn, Tcs, Tcv, totalMoving, totalDeliveredCargo, assignedTrucks, In_Checkup_N_Trucks, In_Checkup_S_Trucks, In_Checkup_VIP_Trucks);
+		printNow(t, cn, cs, cv, Tcn, Tcs, Tcv, totalMoving, totalDeliveredCargo, assignedTrucks, In_Checkup_N_Trucks, In_Checkup_S_Trucks, In_Checkup_VIP_Trucks, MovingTrucks);
 		break;
 	}
 }
