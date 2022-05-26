@@ -553,7 +553,7 @@ bool Company::assigningVipCargos(PriorityQueue<Cargo>& VC, LinkedQueue<Truck*>& 
 				CDT = currentTime + (Time)(ceil((newCargo).getDeliveryDistance() / (newTruck->GetSpeed() + 0.0)) + (newCargo).getLU_Time());
 				LU_Sum += newCargo.getLU_Time();
 				if (CDT.getTimeInHours() - (newCargo).getLU_Time() > maxDT)
-					maxDT = CDT.getTimeInHours() - (newCargo).getLU_Time();
+					maxDT = (ceil((newCargo).getDeliveryDistance() / (newTruck->GetSpeed() + 0.0)));
 				newCargo.setIsMoving(true);
 				newCargo.setCargoDelivreyTime(CDT);
 				newCargo.setTruckId(newTruck->GetID());
@@ -562,7 +562,7 @@ bool Company::assigningVipCargos(PriorityQueue<Cargo>& VC, LinkedQueue<Truck*>& 
 			}
 			newTruck->getCargosQueue().peek(newCargo);
 			assignedTrucks.enqueue(newTruck, 1.0 / newCargo.getCargoDelivreyTime().getTimeInHours());
-			newTruck->SetAT(maxDT - currentTime.getTimeInHours() + LU_Sum);
+			newTruck->SetAT(maxDT + LU_Sum);
 			newTruck->setMovingTime(currentTime);
 			newTruck->increaseJourneys();
 			done = true;
@@ -581,7 +581,7 @@ bool Company::assigningVipCargos(PriorityQueue<Cargo>& VC, LinkedQueue<Truck*>& 
 					CDT = currentTime + (Time)(ceil((newCargo).getDeliveryDistance() / (newTruck->GetSpeed() + 0.0)) + (newCargo).getLU_Time());
 					LU_Sum += newCargo.getLU_Time();
 					if (CDT.getTimeInHours() - (newCargo).getLU_Time() > maxDT)
-						maxDT = CDT.getTimeInHours() - (newCargo).getLU_Time();
+						maxDT = (ceil((newCargo).getDeliveryDistance() / (newTruck->GetSpeed() + 0.0)));
 					newCargo.setIsMoving(true);
 					newCargo.setCargoDelivreyTime(CDT);
 					newCargo.setTruckId(newTruck->GetID());
@@ -592,7 +592,7 @@ bool Company::assigningVipCargos(PriorityQueue<Cargo>& VC, LinkedQueue<Truck*>& 
 				}
 				newTruck->getCargosQueue().peek(newCargo);
 				assignedTrucks.enqueue(newTruck, 1.0 / newCargo.getCargoDelivreyTime().getTimeInHours());
-				newTruck->SetAT(maxDT - currentTime.getTimeInHours() + LU_Sum);
+				newTruck->SetAT(maxDT + LU_Sum);
 				newTruck->setMovingTime(currentTime);
 				newTruck->increaseJourneys();
 				done = true;
@@ -624,7 +624,7 @@ bool Company::assigningSpecialCargos(LinkedQueue<Cargo>& SC, LinkedQueue<Truck*>
 				CDT = currentTime + (Time)(ceil((newCargo).getDeliveryDistance() / (newTruck->GetSpeed() + 0.0)) + newCargo.getLU_Time());
 				LU_Sum += newCargo.getLU_Time();
 				if (CDT.getTimeInHours() - (newCargo).getLU_Time() > maxDT)
-					maxDT = CDT.getTimeInHours() - (newCargo).getLU_Time();
+					maxDT = (ceil((newCargo).getDeliveryDistance() / (newTruck->GetSpeed() + 0.0)));
 				newCargo.setIsMoving(true);
 				newCargo.setCargoDelivreyTime(CDT);
 				newCargo.setTruckId(newTruck->GetID());
@@ -633,7 +633,7 @@ bool Company::assigningSpecialCargos(LinkedQueue<Cargo>& SC, LinkedQueue<Truck*>
 			}
 			newTruck->getCargosQueue().peek(newCargo);
 			assignedTrucks.enqueue(newTruck, 1.0 / newCargo.getCargoDelivreyTime().getTimeInHours());
-			newTruck->SetAT(maxDT - currentTime.getTimeInHours() + LU_Sum);
+			newTruck->SetAT(maxDT + LU_Sum);
 			newTruck->setMovingTime(currentTime);
 			newTruck->increaseJourneys();
 			done = true;
@@ -650,7 +650,7 @@ bool Company::assigningSpecialCargos(LinkedQueue<Cargo>& SC, LinkedQueue<Truck*>
 					CDT = currentTime + (Time)(ceil((newCargo).getDeliveryDistance() / (newTruck->GetSpeed() + 0.0)) + (newCargo).getLU_Time());
 					LU_Sum += newCargo.getLU_Time();
 					if (CDT.getTimeInHours() - (newCargo).getLU_Time() > maxDT)
-						maxDT = CDT.getTimeInHours() - (newCargo).getLU_Time();
+						maxDT = (ceil((newCargo).getDeliveryDistance() / (newTruck->GetSpeed() + 0.0)));
 					newCargo.setIsMoving(true);
 					newCargo.setCargoDelivreyTime(CDT);
 					newCargo.setTruckId(newTruck->GetID());
@@ -661,7 +661,7 @@ bool Company::assigningSpecialCargos(LinkedQueue<Cargo>& SC, LinkedQueue<Truck*>
 				}
 				newTruck->getCargosQueue().peek(newCargo);
 				assignedTrucks.enqueue(newTruck, 1.0 / newCargo.getCargoDelivreyTime().getTimeInHours());
-				newTruck->SetAT(maxDT - currentTime.getTimeInHours() + LU_Sum);
+				newTruck->SetAT(maxDT + LU_Sum);
 				newTruck->setMovingTime(currentTime);
 				newTruck->increaseJourneys();
 				done = true;
@@ -696,7 +696,7 @@ bool Company::assigningNormalCargos(Linked_list<Cargo>& NC, LinkedQueue<Truck*>&
 				CDT = currentTime + (Time)(ceil(( newCargo).getDeliveryDistance() / (newTruck->GetSpeed() + 0.0)) + (newCargo).getLU_Time());
 				LU_Sum += newCargo.getLU_Time();
 				if (CDT.getTimeInHours() - (newCargo).getLU_Time() > maxDT)
-					maxDT = CDT.getTimeInHours() - (newCargo).getLU_Time();
+					maxDT = (ceil((newCargo).getDeliveryDistance() / (newTruck->GetSpeed() + 0.0)));
 				newCargo.setIsMoving(true);
 				newCargo.setCargoDelivreyTime(CDT);
 				newCargo.setTruckId(newTruck->GetID());
@@ -705,7 +705,7 @@ bool Company::assigningNormalCargos(Linked_list<Cargo>& NC, LinkedQueue<Truck*>&
 			}
 			newTruck->getCargosQueue().peek(newCargo);
 			assignedTrucks.enqueue(newTruck, 1.0 / newCargo.getCargoDelivreyTime().getTimeInHours());
-			newTruck->SetAT(maxDT - currentTime.getTimeInHours() + LU_Sum);
+			newTruck->SetAT(maxDT + LU_Sum);
 			newTruck->setMovingTime(currentTime);
 			newTruck->increaseJourneys();
 			done = true;
@@ -722,7 +722,7 @@ bool Company::assigningNormalCargos(Linked_list<Cargo>& NC, LinkedQueue<Truck*>&
 					CDT = currentTime + (Time)(ceil((newCargo).getDeliveryDistance() / (newTruck->GetSpeed() + 0.0)) + (newCargo).getLU_Time());
 					LU_Sum += newCargo.getLU_Time();
 					if (CDT.getTimeInHours() - (newCargo).getLU_Time() > maxDT)
-						maxDT = CDT.getTimeInHours() - (newCargo).getLU_Time();
+						maxDT = (ceil((newCargo).getDeliveryDistance() / (newTruck->GetSpeed() + 0.0)));
 					newCargo.setIsMoving(true);
 					newCargo.setCargoDelivreyTime(CDT);
 					newCargo.setTruckId(newTruck->GetID());
@@ -732,7 +732,7 @@ bool Company::assigningNormalCargos(Linked_list<Cargo>& NC, LinkedQueue<Truck*>&
 				}
 				newTruck->getCargosQueue().peek(newCargo);
 				assignedTrucks.enqueue(newTruck, 1.0 / newCargo.getCargoDelivreyTime().getTimeInHours());
-				newTruck->SetAT(maxDT - currentTime.getTimeInHours() + LU_Sum);
+				newTruck->SetAT(maxDT  + LU_Sum);
 				newTruck->setMovingTime(currentTime);
 				newTruck->increaseJourneys();
 				done = true;
