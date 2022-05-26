@@ -251,6 +251,7 @@ void Company::Print()
 
 	Truck* tempT;
 	int totalActiveTime = 0;
+
 	while (NTs.dequeue(tempT))
 	{
 		totalActiveTime += tempT->GetAT();
@@ -263,8 +264,9 @@ void Company::Print()
 	{
 		totalActiveTime += tempT->GetAT();
 	}
-	AvgActiveTime = totalActiveTime / currentTime.getTimeInHours();
+	AvgActiveTime = totalActiveTime / (NT_Num + ST_Num + VIPT_Num + 0.0);
 
+	//AvgUtilization = 
 	//get number of each typ of trucks and print it
 	Out << "Trucks: " << NT_Num + ST_Num + VIPT_Num;
 	Out << "[N: " << NT_Num;
