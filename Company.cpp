@@ -102,7 +102,7 @@ void Company::increasePC_Num()
 //============================== Get from Input File ==============================//
 void Company::LoadFile()
 {
-	IN.open("Input.txt");  //Open Input File
+	IN.open("1.txt");  //Open Input File
 
 	// Trucks num 
 	IN >> NT_Num;
