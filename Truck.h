@@ -31,7 +31,7 @@ public:
 	{
 		this->checkUpDuration = checkUpDuration;
 		ID = ++id;
-		SetAT(0);
+		AT = 0;
 		NumofJourneys = 0;
 		SetTC(tc);
 		SetSpeed(speed);
@@ -72,9 +72,7 @@ public:
 	//}
 	bool SetAT(int at)
 	{
-		if (at < 0)
-			return false;
-		AT = at;
+		AT += at;
 		return true;
 	}
 	void increaseJourneys()
