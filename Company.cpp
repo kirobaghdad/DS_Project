@@ -220,7 +220,7 @@ void Company::Print()
 {
 	Out.open("Output.txt");  //Open Output File
 
-	Out << "CDT ID PT WT TID \n";
+	Out << "CDT \tID \t PT  \tWT  \tTID \n";
 	Cargo tempC;
 	Time T;
 	Time totalWait;
@@ -228,12 +228,12 @@ void Company::Print()
 	while (totalDeliveredCargo.dequeue(tempC))
 	{
 		T = tempC.getCargoDelivreyTime();
-		Out << T.getDay() << ":" << T.getHour() << " ";
-		Out << tempC.getID() << " ";
+		Out << T.getDay() << ":" << T.getHour() << " \t";
+		Out << tempC.getID() << " \t ";
 		T = tempC.getPT();
-		Out << T.getDay() << ":" << T.getHour() << " ";
+		Out << T.getDay() << ":" << T.getHour() << " \t";
 		T = tempC.getWaitingTime();
-		Out << T.getDay() << ":" << T.getHour() << " ";
+		Out << T.getDay() << ":" << T.getHour() << " \t";
 		Out << tempC.getTruckId();
 		Out << endl;
 		totalWait = totalWait + tempC.getWaitingTime();
@@ -251,22 +251,38 @@ void Company::Print()
 
 	Truck* tempT;
 	int totalActiveTime = 0;
-
+	float TruckUtilization = 0;
+	float totalUtilization = 0;
 	while (NTs.dequeue(tempT))
 	{
 		totalActiveTime += tempT->GetAT();
+		if (tempT->GetNumofJourneys() != 0)
+		{
+			TruckUtilization = ((tempT->getTDC() + 0.0) / (tempT->GetTC() * tempT->GetNumofJourneys())) * ((tempT->GetAT() + 0.0) / currentTime.getTimeInHours());
+			totalUtilization += TruckUtilization;
+		}
 	}
 	while (STs.dequeue(tempT))
 	{
 		totalActiveTime += tempT->GetAT();
+		if (tempT->GetNumofJourneys() != 0)
+		{
+			TruckUtilization = ((tempT->getTDC() + 0.0) / (tempT->GetTC() * tempT->GetNumofJourneys())) * ((tempT->GetAT() + 0.0) / currentTime.getTimeInHours());
+			totalUtilization += TruckUtilization;
+		}
 	}
 	while (VTs.dequeue(tempT))
 	{
 		totalActiveTime += tempT->GetAT();
+		if (tempT->GetNumofJourneys() != 0)
+		{
+			TruckUtilization = ((tempT->getTDC() + 0.0) / (tempT->GetTC() * tempT->GetNumofJourneys())) * ((tempT->GetAT() + 0.0) / currentTime.getTimeInHours());
+			totalUtilization += TruckUtilization;
+		}
 	}
 	AvgActiveTime = totalActiveTime / (NT_Num + ST_Num + VIPT_Num + 0.0);
+	AvgUtilization = totalUtilization / (NT_Num + ST_Num + VIPT_Num + 0.0) * 100;
 
-	//AvgUtilization = 
 	//get number of each typ of trucks and print it
 	Out << "Trucks: " << NT_Num + ST_Num + VIPT_Num;
 	Out << "[N: " << NT_Num;
@@ -561,7 +577,9 @@ bool Company::assigningVipCargos(PriorityQueue<Cargo>& VC, LinkedQueue<Truck*>& 
 				newCargo.setTruckId(newTruck->GetID());
 				newTruck->assignCargo((newCargo), (1.0 / CDT.getTimeInHours()));
 				totalMoving.enqueue(newCargo, 1.0 / CDT.getTimeInHours());
+				newTruck->increaseTDC();
 			}
+			
 			newTruck->getCargosQueue().peek(newCargo);
 			assignedTrucks.enqueue(newTruck, 1.0 / newCargo.getCargoDelivreyTime().getTimeInHours());
 			newTruck->SetAT(maxDT + LU_Sum);
@@ -590,6 +608,7 @@ bool Company::assigningVipCargos(PriorityQueue<Cargo>& VC, LinkedQueue<Truck*>& 
 					newTruck->assignCargo((newCargo), (1.0 / CDT.getTimeInHours()));
 					totalMoving.enqueue( newCargo, 1.0 / CDT.getTimeInHours());
 					VC.peek(newCargo);
+					newTruck->increaseTDC();
 
 				}
 				newTruck->getCargosQueue().peek(newCargo);
@@ -632,6 +651,8 @@ bool Company::assigningSpecialCargos(LinkedQueue<Cargo>& SC, LinkedQueue<Truck*>
 				newCargo.setTruckId(newTruck->GetID());
 				newTruck->assignCargo((newCargo), (1.0 / CDT.getTimeInHours()));
 				totalMoving.enqueue(newCargo, 1.0 / CDT.getTimeInHours());
+				newTruck->increaseTDC();
+
 			}
 			newTruck->getCargosQueue().peek(newCargo);
 			assignedTrucks.enqueue(newTruck, 1.0 / newCargo.getCargoDelivreyTime().getTimeInHours());
@@ -659,7 +680,8 @@ bool Company::assigningSpecialCargos(LinkedQueue<Cargo>& SC, LinkedQueue<Truck*>
 					newTruck->assignCargo((newCargo), (1.0 / CDT.getTimeInHours()));
 					totalMoving.enqueue(newCargo, 1.0 / CDT.getTimeInHours());
 					SC.peek(newCargo);
-					
+					newTruck->increaseTDC();
+
 				}
 				newTruck->getCargosQueue().peek(newCargo);
 				assignedTrucks.enqueue(newTruck, 1.0 / newCargo.getCargoDelivreyTime().getTimeInHours());
@@ -704,6 +726,8 @@ bool Company::assigningNormalCargos(Linked_list<Cargo>& NC, LinkedQueue<Truck*>&
 				newCargo.setTruckId(newTruck->GetID());
 				newTruck->assignCargo((newCargo), (1.0 / CDT.getTimeInHours()));
 				totalMoving.enqueue(newCargo, 1.0 / CDT.getTimeInHours());
+				newTruck->increaseTDC();
+
 			}
 			newTruck->getCargosQueue().peek(newCargo);
 			assignedTrucks.enqueue(newTruck, 1.0 / newCargo.getCargoDelivreyTime().getTimeInHours());
@@ -730,6 +754,7 @@ bool Company::assigningNormalCargos(Linked_list<Cargo>& NC, LinkedQueue<Truck*>&
 					newCargo.setTruckId(newTruck->GetID());
 					newTruck->assignCargo((newCargo), (1.0 / CDT.getTimeInHours()));
 					totalMoving.enqueue(newCargo, 1.0 / CDT.getTimeInHours());
+					newTruck->increaseTDC();
 
 				}
 				newTruck->getCargosQueue().peek(newCargo);

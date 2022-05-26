@@ -18,7 +18,7 @@ class Truck
 	int waitingTime;
 	static int id;
 	int ID;
-
+	int TDC;      //total delivered cargos
 	Time movingTime;
 	Time endCheckUpTime;
 	PriorityQueue<Cargo> assignedCargos;
@@ -32,6 +32,7 @@ public:
 		this->checkUpDuration = checkUpDuration;
 		ID = ++id;
 		AT = 0;
+		TDC = 0;
 		NumofJourneys = 0;
 		SetTC(tc);
 		SetSpeed(speed);
@@ -40,7 +41,14 @@ public:
 		Type = type;
 	}
 	//============================== Setters ==============================// 
-
+	void increaseTDC()
+	{
+		TDC++;
+	}
+	int getTDC()
+	{
+		return TDC;
+	}
 	void setEndCheckUpTime(Time t) {
 		endCheckUpTime = t;
 	}
