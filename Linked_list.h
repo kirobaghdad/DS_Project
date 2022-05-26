@@ -12,18 +12,17 @@ public:
 	int getcurrentsize()const;
 	bool isEmpty();
 	bool add(const T& newItem);
-	bool removeID(const int ID);
+	bool removeID(const int ID, T& Item);
 	bool removeBeg(T& frntEntry);
 	void clear();
 	int getfrequencyof(const T& Item);
 	bool contain(const T& Item);
-	Node<T>* getHead()const;
-	bool peek(T& Item);//  const;
+	bool peek(T& Item);
 	void print();
 };
 
 template <typename T>
-bool Linked_list<T>::peek(T& Item) //const
+bool Linked_list<T>::peek(T& Item) 
 {
 	if (isEmpty())
 		return false;
@@ -100,7 +99,7 @@ bool Linked_list<T>::add(const T& newItem)
 }
 
 template<typename T>
-bool Linked_list<T>::removeID(const int ID)
+bool Linked_list<T>::removeID(const int ID,T& Item)
 {
 	if (isEmpty())
 	{
@@ -110,6 +109,7 @@ bool Linked_list<T>::removeID(const int ID)
 	if (Head->getItem() == ID)
 	{
 		Node<Cargo>* todelete = Head;
+		Item = Head->getItem();
 		Head = Head->getNext();
 		delete todelete;
 		count--;
@@ -124,6 +124,7 @@ bool Linked_list<T>::removeID(const int ID)
 	{
 		if (ptr->getItem().getID() == ID)
 		{
+			Item = ptr->getItem();
 			found = true;
 		}
 		else
@@ -205,10 +206,4 @@ bool Linked_list<T>::contain(const T& Item)
 		}
 	}
 	return (found);
-}
-
-template<typename T>
-inline Node<T>* Linked_list<T>::getHead() const
-{
-	return Head;
 }

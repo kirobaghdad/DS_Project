@@ -75,9 +75,6 @@ public:
 		else return false;
 	}
 
-	//void increaseWaitingTime() {
-	//	waitingTime++;
-	//}
 	bool SetAT(int at)
 	{
 		AT += at;
