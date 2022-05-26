@@ -51,7 +51,9 @@ private:
 	//LinkedQueue<Cargo> deliveredCargoVC;
 	LinkedQueue<Cargo> totalDeliveredCargo;
 
-	PriorityQueue<Truck*> assignedTrucks;
+	PriorityQueue<Truck*> assignedTrucks; //loading Trucks 
+	
+	PriorityQueue<Truck*> MovingTrucks;
 
 	//CheckUp lists
 	LinkedQueue<Truck*> In_Checkup_N_Trucks;

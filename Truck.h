@@ -23,6 +23,7 @@ class Truck
 	Time endCheckUpTime;
 	PriorityQueue<Cargo> assignedCargos;
 	bool isAssigned;
+	bool isloaded;
 
 public:
 	Truck() {
@@ -40,7 +41,19 @@ public:
 		isAssigned = false;
 		Type = type;
 	}
-	//============================== Setters ==============================// 
+	//============================== Setters ==============================//
+
+	bool getisloaded()
+	{
+		return isloaded;
+	}
+
+	void Setisloaded(bool x)
+	{
+		isloaded = x;
+	}
+
+
 	void increaseTDC()
 	{
 		TDC++;
@@ -55,6 +68,12 @@ public:
 	void setMovingTime(Time t) {
 		movingTime = t;
 	}
+	Time getMovingTime() {
+		return movingTime;
+	}
+
+
+
 
 	void setIsAssigned(bool assign) {
 		isAssigned = assign;
